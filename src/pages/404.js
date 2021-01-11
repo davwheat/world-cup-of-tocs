@@ -1,14 +1,43 @@
-import React from "react"
+import React from 'react'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import { makeStyles } from '@material-ui/styles'
 
-const NotFoundPage = () => (
-  <Layout>
-    <SEO title="404: Not found" />
-    <h1>404: Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-)
+import { Paragraph, Shout } from '../typography'
+import Layout from '../components/layout'
+import Link from '../components/Link'
+import BodySection from '../components/section'
+import SEO from '../components/seo'
 
-export default NotFoundPage
+const useStyles = makeStyles({
+  heading: {
+    textAlign: 'center',
+    marginTop: 8,
+    marginBottom: 16,
+  },
+})
+
+const IndexPage = () => {
+  const classes = useStyles()
+
+  return (
+    <Layout>
+      <SEO title="Page not found" />
+
+      <Shout noPadding className={classes.heading}>
+        World Cup of TOCs
+      </Shout>
+
+      <BodySection>
+        <Shout>This page doesn't exist</Shout>
+
+        <Paragraph>
+          <Link internal className={classes.linkOrBtn} url="/">
+            Go to home page
+          </Link>
+        </Paragraph>
+      </BodySection>
+    </Layout>
+  )
+}
+
+export default IndexPage

@@ -1,22 +1,34 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react'
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import { makeStyles } from '@material-ui/styles'
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import { Paragraph } from '../typography'
+import BodySection from '../components/section'
+import isTouchDevice from '../functions/isTouchDevice'
+import AlertBanner from '../components/AlertBanner'
+
+const useStyles = makeStyles({
+  wider: {
+    maxWidth: 1200,
+  },
+})
+
+const IndexPage = () => {
+  const classes = useStyles()
+
+  return (
+    <Layout>
+      <SEO />
+
+      <BodySection>
+        <Paragraph>Watch the results for Geoff Marshall's World Cup of Tube Lines in real time.</Paragraph>
+
+        {(isTouchDevice() || true) && <AlertBanner title="Warning" message="This page is best viewed on a laptop or desktop." />}
+      </BodySection>
+    </Layout>
+  )
+}
 
 export default IndexPage
