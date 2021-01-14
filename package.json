@@ -3,7 +3,11 @@
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": {
+    "name": "David Wheatley",
+    "email": "hi@davwheat.dev",
+    "url": "https://davwheat.dev/"
+  },
   "dependencies": {
     "@fontsource/jost": "^4.1.0",
     "@material-ui/styles": "^4.11.2",
@@ -36,19 +40,22 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "cross-env": "^7.0.3",
+    "gh-pages": "^3.1.0"
   },
   "keywords": [
     "gatsby"
   ],
-  "license": "0BSD",
+  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "deploy:pages": "cross-env IS_GITHUB_PAGES_BUILD=true yarn build --prefix-paths && gh-pages -b prod -d public -m \"Deploy website\""
   },
   "repository": {
     "type": "git",
