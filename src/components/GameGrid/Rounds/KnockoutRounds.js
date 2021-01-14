@@ -42,7 +42,7 @@ export default function KnockoutRounds({ knockoutRoundData }) {
               {FormatDate(round.date)}
             </Whisper>
             <PollGame teamInfo={teamInfo} />
-            <Graph />
+            {/*<Graph />*/}
           </div>
         )
       })}
