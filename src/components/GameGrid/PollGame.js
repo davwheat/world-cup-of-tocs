@@ -14,8 +14,8 @@ const useStyles = makeStyles({
     overflow: 'visible',
   },
   rect: {
-    '&:hover': {
-      outline: '2px solid #fff',
+    '&:hover, &:focus, &:focus-within': {
+      outline: '2px solid #ffd1dc',
       boxShadow: '0 0 0 2px #000',
     },
   },
