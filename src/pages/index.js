@@ -17,8 +17,8 @@ const IndexPage = () => {
       <SEO />
 
       <BodySection>
-        <Megaphone>World Cup of TOCs</Megaphone>
-        <Paragraph>Watch the results for Geoff Marshall's World Cup of TOCs in real time.</Paragraph>
+        <Megaphone>World Cup of Train Operators</Megaphone>
+        <Paragraph>Watch the results for Geoff Marshall's World Cup of Train Operators in real time.</Paragraph>
 
         <NoScriptMessage />
 
