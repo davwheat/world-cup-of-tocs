@@ -1,32 +1,31 @@
 import React from 'react'
 
-import { makeStyles } from '@material-ui/styles'
+import isSmallViewport from '../functions/isSmallViewport'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { Paragraph } from '../typography'
-import BodySection from '../components/section'
-import isTouchDevice from '../functions/isTouchDevice'
 import AlertBanner from '../components/AlertBanner'
+import BodySection from '../components/section'
+import NoScriptMessage from '../components/NoScriptMessage'
+import Game from '../components/GameGrid/Game'
 
-const useStyles = makeStyles({
-  wider: {
-    maxWidth: 1200,
-  },
-})
+import { Megaphone, Paragraph } from '../typography'
 
 const IndexPage = () => {
-  const classes = useStyles()
-
   return (
     <Layout>
       <SEO />
 
       <BodySection>
-        <Paragraph>Watch the results for Geoff Marshall's World Cup of Tube Lines in real time.</Paragraph>
+        <Megaphone>World Cup of TOCs</Megaphone>
+        <Paragraph>Watch the results for Geoff Marshall's World Cup of TOCs in real time.</Paragraph>
 
-        {(isTouchDevice() || true) && <AlertBanner title="Warning" message="This page is best viewed on a laptop or desktop." />}
+        <NoScriptMessage />
+
+        {isSmallViewport() && <AlertBanner title="Warning" message="This page is best viewed on a larger device." />}
       </BodySection>
+
+      <Game />
     </Layout>
   )
 }

@@ -4,20 +4,20 @@ import PropTypes from 'prop-types'
 import '@fontsource/jost/400.css'
 import '@fontsource/jost/600.css'
 import '@fontsource/jost/700.css'
-
 import '../css/baseline.less'
+
 import ErrorBoundary from './ErrorBoundary'
 import Footer from './footer'
-import Header from './header'
+
+import Twemoji from 'react-twemoji'
 
 const Layout = ({ children }) => {
   return (
     <ErrorBoundary>
-      <main>
-        <Header />
-        {children}
-      </main>
-      <Footer />
+      <Twemoji options={{ className: 'twemoji' }}>
+        <main>{children}</main>
+        <Footer />
+      </Twemoji>
     </ErrorBoundary>
   )
 }

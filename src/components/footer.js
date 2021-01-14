@@ -10,7 +10,9 @@ import { version } from '../../package.json'
 export default function Footer() {
   return (
     <BodySection>
-      <Paragraph>Made with love by David Wheatley - &copy; {new Date().getFullYear()} All Rights Reserved</Paragraph>
+      <Paragraph>
+        Made with <span>❤️</span> by David Wheatley - &copy; {new Date().getFullYear()} All Rights Reserved
+      </Paragraph>
       <Paragraph>
         <Link target="_blank" url="https://github.com/davwheat">
           GitHub
@@ -27,16 +29,10 @@ export default function Footer() {
         <Link target="_blank" url="mailto:hi@davwheat.dev">
           Email me
         </Link>
-
-        {/* <BulletSeparator /> */}
-
-        {/* <Link onClick={() => window.cookiehub.openSettings()}>
-          Cookie settings
-        </Link> */}
       </Paragraph>
       <Whisper>
         {/* Version {version} - last updated {buildDateString} */}
-        Version {version}
+        Website version {version}
       </Whisper>
     </BodySection>
   )

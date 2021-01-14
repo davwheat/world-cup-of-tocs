@@ -14,13 +14,19 @@ const Breakpoints = Object.freeze({
   upTo: {
     large: '(max-width: 767px)',
     medium: '(max-width: 579px)',
-    playingFieldScrollBarShown: '(max-width: 985px)',
   },
   downTo: {
     medium: '(min-width: 768px)',
     small: '(min-width: 580px)',
-    playingFieldScrollBarShown: '(min-width: 986px)',
   },
 })
 
-export { Colors, Breakpoints, Values }
+const Sizing = Object.freeze({
+  pollGame: {
+    width: 250,
+    height: 65,
+    barHeight: 30,
+  },
+})
+
+export { Colors, Breakpoints, Values, Sizing }

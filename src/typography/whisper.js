@@ -12,10 +12,20 @@ const useStyles = makeStyles({
   noPad: {
     paddingBottom: 0,
   },
+  bold: {
+    fontWeight: 600,
+  },
+  centered: {
+    textAlign: 'center',
+  },
 })
 
-export default function Whisper({ children, className, noPadding }) {
+export default function Whisper({ children, className, noPadding, bold, center }) {
   const classes = useStyles()
 
-  return <p className={clsx(classes.root, noPadding && classes.noPad, className)}>{children}</p>
+  const props = {
+    className: clsx(classes.root, noPadding && classes.noPad, bold && classes.bold, center && classes.centered, className),
+  }
+
+  return <p {...props}>{children}</p>
 }
