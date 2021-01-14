@@ -35,9 +35,7 @@ module.exports = {
         icon: `icon.png`, // This path is relative to the root of the site.
       },
     },
-    {
-      resolve: 'gatsby-plugin-htaccess',
-    },
+    `gatsby-plugin-less`,
     `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-webpack-bundle-analyser-v2`,
     `gatsby-plugin-webpack-size`,

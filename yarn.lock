@@ -5552,14 +5552,6 @@ gatsby-plugin-google-analytics-gdpr@^0.0.5:
     js-cookie "^2.2.1"
     react-ga "^2.7.0"
 
-gatsby-plugin-htaccess@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-htaccess/-/gatsby-plugin-htaccess-1.4.0.tgz#e7629cfca0e6cf12e714c6ad29162a12b0c60e89"
-  integrity sha512-CaUQ3SPkV8khTk2MvY58KJAGAQFLxrlSb9ysxB+BeOgdruI2F0hWsQQI5/A94VtZsdB/5CbJcZVNmCyDJ+SJqg==
-  dependencies:
-    fs-extra "^8.1.0"
-    lodash "^4.17.15"
-
 gatsby-plugin-less@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-less/-/gatsby-plugin-less-4.5.0.tgz#066b49f683f70d75959891548dd7618f412b6767"

@@ -17,7 +17,6 @@
     "gatsby": "^2.30.2",
     "gatsby-plugin-cookiehub-banner": "^0.1.0",
     "gatsby-plugin-google-analytics-gdpr": "^0.0.5",
-    "gatsby-plugin-htaccess": "^1.4.0",
     "gatsby-plugin-less": "^4.5.0",
     "gatsby-plugin-manifest": "^2.10.0",
     "gatsby-plugin-preact": "^4.5.0",
