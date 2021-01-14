@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import GameBoard from './GameBoard'
 import { Whisper } from '../../typography'
@@ -13,6 +13,31 @@ import { Whisper } from '../../typography'
 
 export default function Game() {
   const countdownElRef = useRef(null)
+  const countdownSecsRef = useRef(60)
+
+  const [gameData, setGameData] = useState(0)
+
+  function RefreshData() {
+    countdownSecsRef.current = 60
+    setGameData(gameData + 1)
+  }
+
+  useEffect(() => {
+    const updateInterval = setInterval(() => {
+      countdownSecsRef.current--
+      countdownElRef.current.innerText = countdownSecsRef.current
+
+      if (countdownSecsRef.current === 0) {
+        clearInterval(updateInterval)
+        RefreshData()
+        return
+      }
+    }, 1000)
+
+    return () => {
+      clearInterval(updateInterval)
+    }
+  })
 
   return (
     <article>
