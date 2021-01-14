@@ -1,6 +1,7 @@
 import React from "react";
 import { VictoryChart, VictoryTheme, VictoryBar, VictoryLabel, VictoryAxis, VictoryLine, VictoryTooltip, VictoryContainer, createContainer } from "victory";
 //import { colours, ResultHistories, StateInfo } from "./constants";
+import { GetTocColor, GetTocName } from '../../../data/TocData'
 
 
 const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
@@ -26,7 +27,18 @@ export default function Graph({ voteHistory, teamInfo, tweetId, hasStarted, long
 
   // TODO: Calculate!
   const isClose = false;
+  // Vote diff
+  const differences = [{ x: "x", y: "y" }];
+  const oneVotes = [{ x: "x", y: "y" }];
+  const twoVotes = [{ x: "x", y: "y" }];
+  const result = {
+    one: {
 
+    },
+    two: {
+
+    }
+  }
   // Ok, so we need to line graphs:
   return (
     <VictoryChart
@@ -78,24 +90,24 @@ export default function Graph({ voteHistory, teamInfo, tweetId, hasStarted, long
           data: { stroke: "rgb(65, 75, 86)", strokeWidth: 2 },
           parent: { border: "1px solid #ccc" },
         }}
-        data={difference}
+        data={differences}
       />
       <VictoryLine
         style={{
-          data: { stroke: colours[result.one.name], strokeWidth: isClose ? 2.5 : 4 },
+          data: { stroke: GetTocColor(result.one.name), strokeWidth: isClose ? 2.5 : 4 },
           parent: { border: "1px solid #ccc" },
           labels: {
-            fill: colours[result.one.name]
+            fill: GetTocColor(result.one.name)
           }
         }}
         data={oneVotes}
       />
       <VictoryLine
         style={{
-          data: { stroke: colours[result.two.name], strokeWidth: isClose ? 2.5 : 4 },
+          data: { stroke: GetTocColor(result.two.name), strokeWidth: isClose ? 2.5 : 4 },
           parent: { border: "1px solid #ccc" },
           labels: {
-            fill: colours[result.two.name]
+            fill: GetTocColor(result.two.name)
           }
         }}
         data={twoVotes}
@@ -105,7 +117,7 @@ export default function Graph({ voteHistory, teamInfo, tweetId, hasStarted, long
 
 };
 
-const Graphs = (props) => {
+`const Graphs = (props) => {
   return (
     <>
       {
@@ -173,7 +185,7 @@ const Graphs = (props) => {
                 <VictoryZoomVoronoiContainer voronoiDimension="x"
                   radius={100000}
                   // @ts-ignore
-                  labels={({ datum }) => `${datum.y}`}
+                  labels={({ datum }) => \`\${datum.y}\`}
                   labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{ fill: "white", fontSize: 20 }} />}
                 />
               }
@@ -279,6 +291,6 @@ const Graphs = (props) => {
       }
     </>
   )
-}
+}`
 
 //export default Graphs;

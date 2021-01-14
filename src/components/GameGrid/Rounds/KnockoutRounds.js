@@ -6,6 +6,7 @@ import FormatDate from '../../../functions/formatDate'
 import { makeStyles } from '@material-ui/styles'
 import { Whisper } from '../../../typography'
 import PollGame from '../PollGame'
+import Graph from "../Graph";
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
