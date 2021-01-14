@@ -11,7 +11,11 @@ export default function Footer() {
   return (
     <BodySection>
       <Whisper bold>
-        Made with <span>❤️</span> by David Wheatley - &copy; {new Date().getFullYear()} All Rights Reserved
+        Made with{' '}
+        <span role="img" aria-label="love">
+          ❤️
+        </span>{' '}
+        by David Wheatley - &copy; {new Date().getFullYear()} All Rights Reserved
       </Whisper>
       <Whisper>
         <Link target="_blank" url="https://github.com/davwheat">
