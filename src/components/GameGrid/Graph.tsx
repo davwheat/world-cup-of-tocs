@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { VictoryChart, VictoryTheme, VictoryBar, VictoryLabel, VictoryAxis, VictoryLine, VictoryTooltip, VictoryContainer, createContainer } from "victory";
 //import { colours, ResultHistories, StateInfo } from "./constants";
@@ -13,6 +14,8 @@ export enum VoteStates {
   IN_PROGRESS = "IN_PROGRESS",
   DONE = "DONE",
 }
+
+
 
 /**
  * Defines how a **single** poll should look
@@ -48,6 +51,7 @@ export interface SinglePoll {
   }[] // As long as options
 }
 
+
 /** What is receiveds by server */
 export interface NewAPI {
   apiVersion: string,
@@ -66,6 +70,14 @@ interface NewGraphProps {
   useLongGraph?: boolean;
 }
 
+
+const useStyles = makeStyles({
+  graphContainer: {
+    paddingTop: "30px",
+  }
+})
+
+
 /**
  * Create a single graph for one poll
  * @param props Props
@@ -74,6 +86,8 @@ const Graph: React.FunctionComponent<NewGraphProps> =  function Graph (props) {
   if (props.poll.votingStatus === VoteStates.UPCOMING) {
     return null; // As the vote is not yet open
   }
+
+  const classes = useStyles()
 
   // Get votes
   let oneVotes = props.poll.votesInfo[0].votingHistory.map((thisResult) => {
@@ -112,10 +126,11 @@ const Graph: React.FunctionComponent<NewGraphProps> =  function Graph (props) {
   
   // Ok, so we need to line graphs:
   return (
+    <div className={classes.graphContainer}>
     <VictoryChart
       theme={VictoryTheme.material}
-      height={350 * 1.5 - 50}
-      width={props.useLongGraph ? 750 * LONG_PROP_SCALE_FACTOR : 750}
+      height={300}
+      width={props.useLongGraph ? 500 * LONG_PROP_SCALE_FACTOR : 500 }
       domainPadding={{ y: 100 }}
       padding={{
         top: 0,
@@ -139,7 +154,7 @@ const Graph: React.FunctionComponent<NewGraphProps> =  function Graph (props) {
         fixLabelOverlap
         style={{
           axis: { stroke: "#756f6a" },
-          axisLabel: { fontSize: 20, padding: 70 },
+          axisLabel: { fontSize: 20, padding: 55 },
           tickLabels: { fontSize: 20, padding: 5 },
           grid: { stroke: "grey" },
           ticks: { stroke: "grey" },
@@ -184,6 +199,7 @@ const Graph: React.FunctionComponent<NewGraphProps> =  function Graph (props) {
         data={twoVotes}
       />
     </VictoryChart>
+    </div>
   )
 
 };

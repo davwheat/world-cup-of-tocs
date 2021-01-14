@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/styles'
 import { Whisper } from '../../../typography'
 import PollGame from '../PollGame'
 import Graph from "../Graph";
+import { mockGraph } from './mockGraph'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
@@ -42,7 +43,7 @@ export default function KnockoutRounds({ knockoutRoundData }) {
               {FormatDate(round.date)}
             </Whisper>
             <PollGame teamInfo={teamInfo} />
-            {/*<Graph />*/}
+            {/*<Graph poll={"Insert poll data here"} />*/}
           </div>
         )
       })}

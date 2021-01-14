@@ -12,6 +12,9 @@ const pollGameSizing = Sizing.pollGame
 const useStyles = makeStyles({
   root: {
     overflow: 'visible',
+    /** Centre align */
+    display: "block",
+    margin: "auto"
   },
   rect: {
     '&:hover, &:focus, &:focus-within': {
