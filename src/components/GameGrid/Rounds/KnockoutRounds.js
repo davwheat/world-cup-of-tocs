@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { GetTocColor, GetTocName } from '../../data/TocData'
+import { GetTocColor, GetTocName } from '../../../data/TocData'
 
-import FormatDate from '../../functions/formatDate'
+import FormatDate from '../../../functions/formatDate'
 import { makeStyles } from '@material-ui/styles'
 import { Whisper } from '../../../typography'
 import PollGame from '../PollGame'
@@ -27,7 +27,7 @@ export default function KnockoutRounds({ knockoutRoundData }) {
 
   return (
     <section className={classes.knockoutRoundsContainer}>
-      {KnownGameData.KnockoutRounds.map((round, i) => {
+      {knockoutRoundData.map((round, i) => {
         const teamInfo = {
           team1: GetTocName(round.team1),
           team2: GetTocName(round.team2),

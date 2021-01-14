@@ -4,6 +4,7 @@ import { Paragraph, Shout } from '../../typography'
 import TextContainer from '../TextContainer'
 
 import KnownGameData from '../../data/GameData'
+import KnockoutRounds from './Rounds/KnockoutRounds'
 
 export default function GameBoard({}) {
   return (
