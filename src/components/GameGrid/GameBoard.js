@@ -5,7 +5,7 @@ import TextContainer from '../TextContainer'
 
 import KnownGameData from '../../data/GameData'
 
-export default function GameBoard() {
+export default function GameBoard({}) {
   return (
     <>
       <TextContainer>
@@ -13,7 +13,7 @@ export default function GameBoard() {
         <Paragraph>Knockout rounds begin on Friday 15 January and end on Saturday 30 January.</Paragraph>
       </TextContainer>
 
-      <KnockoutRounds />
+      <KnockoutRounds knockoutRoundData={KnownGameData.KnockoutRounds} />
     </>
   )
 }

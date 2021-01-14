@@ -4,31 +4,43 @@ module.exports = {
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-head`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-cookiehub-banner`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        cookieHubId: '4ab9b9d7',
+        cookieHubV2Api: true,
+        categories: [
+          {
+            categoryName: 'analytics', // Unique id of the category which is set by Cookiehub.
+            cookieName: 'gatsby-plugin-google-analytics-gdpr_cookies-enabled', // Your custom cookie name
+          },
+        ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-google-analytics-gdpr`,
+      options: {
+        // The property ID; the tracking code won't be generated without it.
+        trackingId: 'UA-20362245-9',
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `World Cup of TOCs`,
+        name: `World Cup of Train Operators`,
         short_name: `TOC Cup`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#E04303`,
+        theme_color: `#E04303`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `icon.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-less`,
     {
       resolve: 'gatsby-plugin-htaccess',
     },
     `gatsby-plugin-preload-fonts`,
+    `gatsby-plugin-webpack-bundle-analyser-v2`,
+    `gatsby-plugin-webpack-size`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

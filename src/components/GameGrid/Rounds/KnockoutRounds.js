@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function KnockoutRounds() {
+export default function KnockoutRounds({ knockoutRoundData }) {
   const classes = useStyles()
 
   return (
