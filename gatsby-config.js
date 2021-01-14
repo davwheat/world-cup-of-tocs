@@ -27,7 +27,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `World Cup of Train Operators`,
-        short_name: `TOC Cup`,
+        short_name: `Train Cup`,
         start_url: `/`,
         background_color: `#E04303`,
         theme_color: `#E04303`,
