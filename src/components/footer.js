@@ -29,6 +29,10 @@ export default function Footer() {
         <Link target="_blank" url="mailto:hi@davwheat.dev">
           Email me
         </Link>
+
+        <BulletSeparator />
+
+        <Link onClick={() => window.cookiehub.openSettings()}>Cookie settings</Link>
       </Paragraph>
       <Whisper>
         {/* Version {version} - last updated {buildDateString} */}

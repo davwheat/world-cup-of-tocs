@@ -6,7 +6,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-cookiehub-banner`,
       options: {
-        cookieHubId: '4ab9b9d7',
+        cookieHubId: '39632385',
         cookieHubV2Api: true,
         categories: [
           {
@@ -17,7 +17,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics-gdpr`,
+      resolve: `gatsby-plugin-google-analytics`,
       options: {
         // The property ID; the tracking code won't be generated without it.
         trackingId: 'UA-20362245-9',
@@ -39,6 +39,7 @@ module.exports = {
     `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-webpack-bundle-analyser-v2`,
     `gatsby-plugin-webpack-size`,
+    `gatsby-plugin-material-ui`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
