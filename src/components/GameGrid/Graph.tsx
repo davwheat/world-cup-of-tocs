@@ -24,17 +24,17 @@ export interface SinglePoll {
   /** Set to the midnight unix epoch of the day of the poll */
   scheduledStartDay: number,
 
-  votingStatus: VoteStates /*"UPCOMING" | "IN_PROGRESS" | "DONE";*/ // Will move to enum
+  votingStatus: VoteStates /*"UPCOMING" | "IN_PROGRESS" | "DONE";*/
 
   twitterInfo ?: {
-    /** Twitter ID, with https://twitter.com...ect */
+    /** Tweet ID (not URL) */
     tweetId: string;
     /** Actual UNIX epoch of poll start */
     startTime: number;
     /** Actual UNIX epoch of poll end */
     endTime: number,
     /** Time duration of poll */
-    durinationMinutes: number;
+    durationMinutes: number;
   };
 
   /** Actual votes for each. Index 0 is the first option, Index 1 the other, etc */
