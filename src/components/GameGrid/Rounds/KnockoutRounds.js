@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/styles'
 import { GetTocColor, GetTocName } from '../../../data/TocData'
 
 import FormatDate from '../../../functions/formatDate'
-import SinglePoll from '../../../models/SinglePoll'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
   },
   gameContainer: {
     marginTop: 8,
-    width: 300,
+    width: 500,
     maxWidth: '100%',
   },
 })
@@ -36,7 +35,7 @@ export default function KnockoutRounds(props) {
   const classes = useStyles()
 
   /**
-   * @type {SinglePoll[]}
+   * @type {import("../../../models/SinglePoll")[]}
    */
   const knockoutRoundData = props.knockoutRoundData
 
@@ -44,7 +43,7 @@ export default function KnockoutRounds(props) {
     <section className={classes.knockoutRoundsContainer}>
       {Object.keys(knockoutRoundData).map(key => {
         /**
-         * @type {SinglePoll}
+         * @type {import("../../../models/SinglePoll")}
          */
         const gamePoll = knockoutRoundData[key]
 

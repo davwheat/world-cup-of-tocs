@@ -73,7 +73,6 @@ interface NewGraphProps {
 const useStyles = makeStyles({
   graphContainer: {
     padding: 8,
-    minWidth: 300,
     width: '100%',
   },
 })

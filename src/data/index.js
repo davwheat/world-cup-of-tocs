@@ -23,7 +23,7 @@ const Breakpoints = Object.freeze({
 
 const Sizing = Object.freeze({
   pollGame: {
-    width: 250,
+    width: 350,
     height: 65,
     barHeight: 30,
   },
