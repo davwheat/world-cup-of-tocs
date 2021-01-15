@@ -34,7 +34,7 @@ export default function Game() {
         })
         .catch(e => {
           console.error(e)
-          setError('Failed to fetch poll data from the API. Please contact David on Twitter via the link at the bottom of this site.')
+          setError("Failed to fetch poll data from the API. We'll try again in a few seconds.")
           reject()
         })
     )
@@ -78,7 +78,18 @@ export default function Game() {
   }
 
   if (error) {
-    return <AlertBanner title="Error" message={error} />
+    let x = setTimeout(() => {
+      setGameData(null)
+      setError(null)
+
+      RefreshData()
+    }, 5000)
+
+    return (
+      <>
+        <AlertBanner title="Error" message={error} />
+      </>
+    )
   }
 
   if (typeof window === 'undefined' || !gameData) {
