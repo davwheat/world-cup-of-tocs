@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
 
-export default function FormatDate(dateString) {
-  return dayjs(dateString).format('ddd D MMM')
+export default function FormatDate(unixTimestamp) {
+  return dayjs(new Date(unixTimestamp)).format('ddd D MMM')
 }
