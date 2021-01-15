@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Paragraph, Whisper } from '../typography'
+import { Whisper } from '../typography'
 import BulletSeparator from './BulletSeparator'
 import Link from './Link'
 import BodySection from './section'
@@ -10,11 +10,17 @@ import { version } from '../../package.json'
 export default function Footer() {
   return (
     <BodySection>
-      <Paragraph>
-        Made with <span>❤️</span> by David Wheatley & Kishan Singh - &copy; {new Date().getFullYear()} All Rights Reserved
-      </Paragraph>
-      <Paragraph>
-        <h4>Find David here:</h4>
+      <Whisper bold>
+        Made with{' '}
+        <span role="img" aria-label="love">
+          ❤️
+        </span>{' '}
+        by David Wheatley & Kishan Singh - &copy; {new Date().getFullYear()} All Rights Reserved
+      </Whisper>
+
+      <Whisper>
+        <Paragraph inline>Find David here:</Paragraph>
+
         <Link target="_blank" url="https://github.com/davwheat">
           GitHub
         </Link>
@@ -30,11 +36,11 @@ export default function Footer() {
         <Link target="_blank" url="mailto:hi@davwheat.dev">
           Email me
         </Link>
+      </Whisper>
 
-        
-      </Paragraph>
-      <Paragraph>
-        <h4>Find Kishan here:</h4>
+      <Whisper>
+        <Paragraph inline>Find Kishan here:</Paragraph>
+
         <Link target="_blank" url="https://github.com/Gum-Joe">
           GitHub
         </Link>
@@ -50,10 +56,12 @@ export default function Footer() {
         <Link target="_blank" url="mailto:jaskishansaran@gmail.com">
           Email me
         </Link>
-      </Paragraph>
-      <Paragraph>
+      </Whisper>
+
+      <Whisper>
         <Link onClick={() => window.cookiehub.openSettings()}>Cookie settings</Link>
-      </Paragraph>
+      </Whisper>
+
       <Whisper>
         {/* Version {version} - last updated {buildDateString} */}
         Website version {version}

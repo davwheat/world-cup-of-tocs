@@ -92,4 +92,4 @@ function GetTocColor(code) {
   return TocColors[c] || '#000'
 }
 
-export { TocColors, TocCodeToNameMap, GetTocName, GetTocColor }
+export { GetTocName, GetTocColor }

@@ -1,28 +1,37 @@
+const __IS_DEV__ = process.env.NODE_ENV !== 'production'
+
+// These plugins will only be used in production builds
+const prodPlugins = !__IS_DEV__
+  ? [
+      {
+        resolve: `gatsby-plugin-cookiehub-banner`,
+        options: {
+          cookieHubId: '39632385',
+          cookieHubV2Api: true,
+          categories: [
+            {
+              categoryName: 'analytics', // Unique id of the category which is set by Cookiehub.
+              cookieName: 'gatsby-plugin-google-analytics-gdpr_cookies-enabled', // Your custom cookie name
+            },
+          ],
+        },
+      },
+      {
+        resolve: `gatsby-plugin-google-analytics`,
+        options: {
+          // The property ID; the tracking code won't be generated without it.
+          trackingId: 'UA-20362245-9',
+        },
+      },
+    ]
+  : []
+
 module.exports = {
   siteMetadata: {},
   plugins: [
+    ...prodPlugins,
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-head`,
-    {
-      resolve: `gatsby-plugin-cookiehub-banner`,
-      options: {
-        cookieHubId: '39632385',
-        cookieHubV2Api: true,
-        categories: [
-          {
-            categoryName: 'analytics', // Unique id of the category which is set by Cookiehub.
-            cookieName: 'gatsby-plugin-google-analytics-gdpr_cookies-enabled', // Your custom cookie name
-          },
-        ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        // The property ID; the tracking code won't be generated without it.
-        trackingId: 'UA-20362245-9',
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
