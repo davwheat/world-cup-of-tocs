@@ -23,6 +23,12 @@ const prodPlugins = !__IS_DEV__
           trackingId: 'UA-20362245-9',
         },
       },
+      {
+        resolve: 'gatsby-plugin-remove-console',
+        options: {
+          exclude: ['error', 'warn'],
+        },
+      },
     ]
   : []
 
