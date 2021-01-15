@@ -1,13 +1,15 @@
 import React from 'react'
 
-import { GetTocColor, GetTocName } from '../../../data/TocData'
-
-import FormatDate from '../../../functions/formatDate'
-import { makeStyles } from '@material-ui/styles'
 import { Whisper } from '../../../typography'
 import PollGame from '../PollGame'
 import Graph from '../Graph'
-import { mockGraph } from './mockGraph'
+
+import { makeStyles } from '@material-ui/styles'
+
+import { GetTocColor, GetTocName } from '../../../data/TocData'
+
+import FormatDate from '../../../functions/formatDate'
+import SinglePoll from '../../../models/SinglePoll'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
@@ -20,7 +22,8 @@ const useStyles = makeStyles({
   },
   gameContainer: {
     marginTop: 8,
-    width: 'max-content',
+    width: 300,
+    maxWidth: '100%',
   },
 })
 
@@ -31,11 +34,18 @@ const useStyles = makeStyles({
  */
 export default function KnockoutRounds(props) {
   const classes = useStyles()
-  const { knockoutRoundData } = props
+
+  /**
+   * @type {SinglePoll[]}
+   */
+  const knockoutRoundData = props.knockoutRoundData
 
   return (
     <section className={classes.knockoutRoundsContainer}>
       {Object.keys(knockoutRoundData).map(key => {
+        /**
+         * @type {SinglePoll}
+         */
         const gamePoll = knockoutRoundData[key]
 
         const teamInfo = {
@@ -50,7 +60,15 @@ export default function KnockoutRounds(props) {
             <Whisper center bold>
               {FormatDate(gamePoll.scheduledStartDay)}
             </Whisper>
-            <PollGame teamInfo={teamInfo} />
+            <PollGame
+              teamInfo={teamInfo}
+              hasStarted={gamePoll.votingStatus !== 'UPCOMING'}
+              voteInfo={{
+                votes1: gamePoll.votesInfo[0].votes,
+                votes2: gamePoll.votesInfo[1].votes,
+              }}
+              tweetId={gamePoll.twitterInfo && gamePoll.twitterInfo.tweetId}
+            />
             <Graph poll={gamePoll} />
           </div>
         )
