@@ -13,8 +13,8 @@ const useStyles = makeStyles({
   root: {
     overflow: 'visible',
     /** Centre align */
-    display: "block",
-    margin: "auto"
+    display: 'block',
+    margin: 'auto',
   },
   rect: {
     '&:hover, &:focus, &:focus-within': {
@@ -121,8 +121,8 @@ export default function PollGame({ voteInfo, teamInfo, tweetId, hasStarted }) {
   }
 
   // Create alt colours
-  colors[0].alt = colors[0].isLight ? Color(colors[0].normal).darken(0.15) : Color(colors[0].normal).lighten(0.15)
-  colors[1].alt = colors[1].isLight ? Color(colors[1].normal).darken(0.15) : Color(colors[1].normal).lighten(0.15)
+  colors[0].alt = colors[0].isLight ? Color(colors[0].normal).darken(0.2) : Color(colors[0].normal).lighten(0.2)
+  colors[1].alt = colors[1].isLight ? Color(colors[1].normal).darken(0.2) : Color(colors[1].normal).lighten(0.2)
 
   return (
     <svg viewBox={`0 0 ${pollGameSizing.width} ${pollGameSizing.height}`} width={pollGameSizing.width} className={classes.root}>
