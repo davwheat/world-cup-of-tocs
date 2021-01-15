@@ -1980,8 +1980,8 @@ alphanum-sort@^1.0.0:
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
 "amazing-react-charts@https://github.com/davwheat/amazing-react-charts":
-  version "0.3.6"
-  resolved "https://github.com/davwheat/amazing-react-charts#8d66acdb05ae5966f9423acbf83bfac2c0b7a9c7"
+  version "0.3.7"
+  resolved "https://github.com/davwheat/amazing-react-charts#0994aa10768edd45a77755491d4d0eeb1b9ce21f"
   dependencies:
     date-fns "2.16.1"
     echarts "4.9.0"
