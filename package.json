@@ -11,7 +11,7 @@
   "dependencies": {
     "@fontsource/jost": "^4.1.0",
     "@material-ui/styles": "^4.11.2",
-    "amazing-react-charts": "^0.3.6",
+    "amazing-react-charts": "https://github.com/davwheat/amazing-react-charts",
     "brazilian-values": "npm:noop-package@1.0.0",
     "clsx": "^1.1.1",
     "color": "^3.1.3",
