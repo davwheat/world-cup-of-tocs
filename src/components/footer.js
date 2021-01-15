@@ -1,13 +1,29 @@
 import React from 'react'
 
-import { Whisper } from '../typography'
+import { Paragraph, Whisper } from '../typography'
 import BulletSeparator from './BulletSeparator'
 import Link from './Link'
 import BodySection from './section'
+import { makeStyles } from '@material-ui/styles'
 
 import { version } from '../../package.json'
 
+const useStyles = makeStyles({
+  contactLinks: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    marginTop: 24,
+    paddingBottom: 16,
+    '& > div > p': {
+      textAlign: 'center',
+      paddingBottom: 4,
+    },
+  },
+})
+
 export default function Footer() {
+  const classes = useStyles()
+
   return (
     <BodySection>
       <Whisper bold>
@@ -18,54 +34,59 @@ export default function Footer() {
         by David Wheatley & Kishan Singh - &copy; {new Date().getFullYear()} All Rights Reserved
       </Whisper>
 
-      <Whisper>
-        <Paragraph inline>Find David here:</Paragraph>
-
-        <Link target="_blank" url="https://github.com/davwheat">
-          GitHub
-        </Link>
-
-        <BulletSeparator />
-
-        <Link target="_blank" url="https://twitter.com/davwheat_">
-          Twitter
-        </Link>
-
-        <BulletSeparator />
-
-        <Link target="_blank" url="mailto:hi@davwheat.dev">
-          Email me
-        </Link>
-      </Whisper>
+      <Whisper>All train operating company names listed above are trademarks of their respective owners.</Whisper>
 
       <Whisper>
-        <Paragraph inline>Find Kishan here:</Paragraph>
-
-        <Link target="_blank" url="https://github.com/Gum-Joe">
-          GitHub
-        </Link>
-
+        Website version {version}
         <BulletSeparator />
-
-        <Link target="_blank" url="https://twitter.com/official_gumjoe">
-          Twitter
-        </Link>
-
-        <BulletSeparator />
-
-        <Link target="_blank" url="mailto:jaskishansaran@gmail.com">
-          Email me
-        </Link>
-      </Whisper>
-
-      <Whisper>
         <Link onClick={() => window.cookiehub.openSettings()}>Cookie settings</Link>
       </Whisper>
 
-      <Whisper>
-        {/* Version {version} - last updated {buildDateString} */}
-        Website version {version}
-      </Whisper>
+      <div className={classes.contactLinks}>
+        <div>
+          <Paragraph noPadding>Find David</Paragraph>
+
+          <Whisper>
+            <Link target="_blank" url="https://github.com/davwheat">
+              GitHub
+            </Link>
+
+            <BulletSeparator />
+
+            <Link target="_blank" url="https://twitter.com/davwheat_">
+              Twitter
+            </Link>
+
+            <BulletSeparator />
+
+            <Link target="_blank" url="mailto:hi@davwheat.dev">
+              Email
+            </Link>
+          </Whisper>
+        </div>
+
+        <div>
+          <Paragraph noPadding>Find Kishan</Paragraph>
+
+          <Whisper>
+            <Link target="_blank" url="https://github.com/Gum-Joe">
+              GitHub
+            </Link>
+
+            <BulletSeparator />
+
+            <Link target="_blank" url="https://twitter.com/official_gumjoe">
+              Twitter
+            </Link>
+
+            <BulletSeparator />
+
+            <Link target="_blank" url="mailto:jaskishansaran@gmail.com">
+              Email
+            </Link>
+          </Whisper>
+        </div>
+      </div>
     </BodySection>
   )
 }
