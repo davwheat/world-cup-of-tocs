@@ -5,7 +5,14 @@ import TextContainer from '../TextContainer'
 
 import KnockoutRounds from './Rounds/KnockoutRounds'
 
-export default function GameBoard({ gameData }) {
+/**
+ *
+ * @param {object} props
+ * @param {import('./Graph').GameData} props.gameData
+ */
+export default function GameBoard(props) {
+  const { gameData } = props
+
   return (
     <>
       <TextContainer>
