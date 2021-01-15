@@ -6,7 +6,7 @@ import FormatDate from '../../../functions/formatDate'
 import { makeStyles } from '@material-ui/styles'
 import { Whisper } from '../../../typography'
 import PollGame from '../PollGame'
-import Graph from "../Graph";
+import Graph from '../Graph'
 import { mockGraph } from './mockGraph'
 
 const useStyles = makeStyles({
@@ -24,26 +24,34 @@ const useStyles = makeStyles({
   },
 })
 
-export default function KnockoutRounds({ knockoutRoundData }) {
+/**
+ *
+ * @param {object} props
+ * @param {import("../../../models/SinglePoll")[]} props.knockoutRoundData
+ */
+export default function KnockoutRounds(props) {
   const classes = useStyles()
+  const { knockoutRoundData } = props
 
   return (
     <section className={classes.knockoutRoundsContainer}>
-      {knockoutRoundData.map((round, i) => {
+      {Object.keys(knockoutRoundData).map(key => {
+        const gamePoll = knockoutRoundData[key]
+
         const teamInfo = {
-          team1: GetTocName(round.team1),
-          team2: GetTocName(round.team2),
-          team1color: GetTocColor(round.team1),
-          team2color: GetTocColor(round.team2),
+          team1: GetTocName(gamePoll.votesInfo[0].tocReportingMark),
+          team2: GetTocName(gamePoll.votesInfo[1].tocReportingMark),
+          team1color: GetTocColor(gamePoll.votesInfo[0].tocReportingMark),
+          team2color: GetTocColor(gamePoll.votesInfo[1].tocReportingMark),
         }
 
         return (
-          <div className={classes.gameContainer} key={i}>
+          <div className={classes.gameContainer} key={key}>
             <Whisper center bold>
-              {FormatDate(round.date)}
+              {FormatDate(gamePoll.scheduledStartDay)}
             </Whisper>
             <PollGame teamInfo={teamInfo} />
-            {/*<Graph poll={"Insert poll data here"} />*/}
+            <Graph poll={gamePoll} />
           </div>
         )
       })}
