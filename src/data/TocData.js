@@ -3,9 +3,9 @@
  */
 const TocColors = Object.freeze({
   vt: '#004354',
-  em: '#ffa500',
+  em: '#4c2f48',
   me: '#f1bc1e',
-  aw: '#ff4500',
+  aw: '#e20000',
   ln: '#014133',
   cc: '#b7007c',
   cs: '#1d2e35',
