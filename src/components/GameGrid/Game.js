@@ -18,8 +18,6 @@ export default function Game() {
   const [gameData, setGameData] = useState(null)
   const [error, setError] = useState(null)
 
-  console.log(gameData)
-
   async function handleResponse(response) {
     const jsonData = await response.json()
 
