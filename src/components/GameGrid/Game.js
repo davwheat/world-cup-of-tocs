@@ -6,17 +6,11 @@ import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
 
-// import { makeStyles } from '@material-ui/styles'
-
-// const useStyles = makeStyles({
-//   refreshPara: {
-//     textAlign: 'center',
-//   },
-// })
+const DataRefreshInterval = 60
 
 export default function Game() {
   const countdownElRef = useRef(null)
-  const countdownSecsRef = useRef(60)
+  const countdownSecsRef = useRef(DataRefreshInterval)
 
   /**
    * @type {[import('./Graph').GameData, function]}
@@ -32,18 +26,27 @@ export default function Game() {
     setGameData(createSinglePollsFromApiData(jsonData))
   }
 
+  function RefreshData(abortController) {
+    return new Promise((resolve, reject) =>
+      fetch(`https://toc-api.davwheat.dev/v1/all_polls`, { signal: abortController && abortController.signal })
+        .then(r => {
+          handleResponse(r).then(resolve)
+        })
+        .catch(e => {
+          console.error(e)
+          setError('Failed to fetch poll data from the API. Please contact David on Twitter via the link at the bottom of this site.')
+          reject()
+        })
+    )
+  }
+
   useEffect(() => {
     if (typeof window === 'undefined') return
 
     if (!gameData) {
       // Fetch data
       var controller = new AbortController()
-      fetch(`https://toc-api.davwheat.dev/v1/all_polls`, { signal: controller.signal })
-        .then(handleResponse)
-        .catch(e => {
-          console.error(e)
-          setError('Failed to fetch poll data from the API. Please contact David on Twitter via the link at the bottom of this site.')
-        })
+      RefreshData(controller)
 
       return () => {
         controller.abort()
@@ -55,8 +58,9 @@ export default function Game() {
       countdownElRef.current.innerText = countdownSecsRef.current
 
       if (countdownSecsRef.current === 0) {
+        countdownElRef.current.innerText = DataRefreshInterval
         clearInterval(updateInterval)
-        RefreshData()
+        BeginTimeoutRefreshData()
         return
       }
     }, 1000)
@@ -66,9 +70,11 @@ export default function Game() {
     }
   })
 
-  function RefreshData() {
-    countdownSecsRef.current = 60
-    setGameData(gameData + 1)
+  function BeginTimeoutRefreshData() {
+    RefreshData().then(() => {
+      countdownSecsRef.current = DataRefreshInterval
+      countdownElRef.current.innerText = DataRefreshInterval
+    })
   }
 
   if (error) {
@@ -82,7 +88,7 @@ export default function Game() {
   return (
     <article>
       <Whisper center bold>
-        Refreshing in <span ref={countdownElRef}>60</span> seconds.
+        Refreshing in <span ref={countdownElRef}>{countdownSecsRef.current}</span> seconds.
       </Whisper>
 
       <section id="game-board">
