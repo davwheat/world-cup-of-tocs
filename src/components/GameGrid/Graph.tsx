@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/styles'
+import dayjs from 'dayjs'
+import dayjsUtc from 'dayjs/plugin/utc'
 import React from 'react'
-import { VictoryChart, VictoryTheme, VictoryBar, VictoryLabel, VictoryAxis, VictoryLine, VictoryTooltip, VictoryContainer, createContainer } from 'victory'
-//import { colours, ResultHistories, StateInfo } from "./constants";
 import { GetTocColor, GetTocName } from '../../data/TocData'
+import { LineChart } from 'amazing-react-charts'
+// import { mockGraph } from './Rounds/mockGraph'
 
-const VictoryZoomVoronoiContainer = createContainer('zoom', 'voronoi')
-
-const LONG_PROP_SCALE_FACTOR = 1.35
+dayjs.extend(dayjsUtc)
 
 export enum VoteStates {
   UPCOMING = 'UPCOMING',
@@ -72,7 +72,9 @@ interface NewGraphProps {
 
 const useStyles = makeStyles({
   graphContainer: {
-    paddingTop: '30px',
+    padding: 8,
+    minWidth: 300,
+    width: '100%',
   },
 })
 
@@ -81,121 +83,57 @@ const useStyles = makeStyles({
  * @param props Props
  */
 const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
-  if (props.poll.votingStatus === VoteStates.UPCOMING) {
+  const { poll } = props
+  // const poll = mockGraph
+
+  if (poll.votingStatus === VoteStates.UPCOMING) {
     return null // As the vote is not yet open
   }
 
   const classes = useStyles()
 
-  // Get votes
-  let oneVotes = props.poll.votesInfo[0].votingHistory.map(thisResult => {
-    //console.log(resultHere.time - historydata.startTime);
-    return {
-      x: (thisResult.timestamp - props.poll.votesInfo[0].votingHistory[0].timestamp) / 1000 / 60 / 60,
-      y: thisResult.votes,
-    }
-  })
-  let twoVotes = props.poll.votesInfo[1].votingHistory.map(thisResult => {
-    //console.log(resultHere.time - historydata.startTime);
-    return {
-      x: (thisResult.timestamp - props.poll.votesInfo[1].votingHistory[0].timestamp) / 1000 / 60 / 60,
-      y: thisResult.votes,
-    }
-  })
+  const data = [
+    {
+      name: GetTocName(poll.votesInfo[0].tocReportingMark),
+      values: poll.votesInfo[0].votingHistory.map(thisResult => ({
+        label: dayjs(new Date(thisResult.timestamp - poll.votesInfo[0].votingHistory[0].timestamp))
+          .utc()
+          .format('H:mm'),
+        result: thisResult.votes,
+      })),
+    },
+    {
+      name: GetTocName(poll.votesInfo[1].tocReportingMark),
+      values: poll.votesInfo[1].votingHistory.map(thisResult => ({
+        label: dayjs(new Date(thisResult.timestamp - poll.votesInfo[1].votingHistory[0].timestamp))
+          .utc()
+          .format('H:mm'),
+        result: thisResult.votes,
+      })),
+    },
+    {
+      name: 'Difference',
+      values: poll.votesInfo[0].votingHistory.map((thisResult, index) => {
+        console.log(thisResult.timestamp - poll.votesInfo[0].votingHistory[0].timestamp)
 
-  let differences = props.poll.votesInfo[0].votingHistory.reduce(function (currentArray, resultHere, index) {
-    const voteResult1 = resultHere
-    const voteResult2 = props.poll.votesInfo[1].votingHistory[index]
-
-    if (typeof voteResult2 === 'undefined') {
-      // We can;t map this to one in the other array
-      return
-    }
-
-    // Add new diff
-    currentArray.push({
-      x: (resultHere.timestamp - props.poll.votesInfo[0].votingHistory[0].timestamp) / 1000 / 60 / 60,
-      y: voteResult1.votes > voteResult2.votes ? voteResult1.votes - voteResult2.votes : voteResult2.votes - voteResult1.votes,
-    })
-    return currentArray
-  }, [])
+        return {
+          label: dayjs(thisResult.timestamp - poll.votesInfo[0].votingHistory[0].timestamp)
+            .utc()
+            .format('H:mm'),
+          result: Math.abs(thisResult.votes - poll.votesInfo[1].votingHistory[index].votes),
+        }
+      }),
+    },
+  ]
 
   // Ok, so we need to line graphs:
   return (
     <div className={classes.graphContainer}>
-      <VictoryChart
-        theme={VictoryTheme.material}
-        height={300}
-        width={props.useLongGraph ? 500 * LONG_PROP_SCALE_FACTOR : 500}
-        domainPadding={{ y: 100 }}
-        padding={{
-          top: 0,
-          bottom: 80,
-          left: 100,
-        }}
-        containerComponent={
-          // @ts-ignore
-          <VictoryZoomVoronoiContainer
-            voronoiDimension="x"
-            radius={100000}
-            // @ts-ignore
-            labels={({ datum }) => `${datum.y}`}
-            labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{ fill: 'white', fontSize: 20 }} />}
-          />
-        }
-      >
-        <VictoryAxis
-          dependentAxis
-          key={0}
-          label="Votes"
-          fixLabelOverlap
-          style={{
-            axis: { stroke: '#756f6a' },
-            axisLabel: { fontSize: 20, padding: 55 },
-            tickLabels: { fontSize: 20, padding: 5 },
-            grid: { stroke: 'grey' },
-            ticks: { stroke: 'grey' },
-          }}
-        />
-        <VictoryAxis
-          label="Time (hrs)"
-          fixLabelOverlap
-          style={{
-            axis: { stroke: '#756f6a' },
-            axisLabel: { fontSize: 20, padding: 40 },
-            tickLabels: { fontSize: 20, padding: 5 },
-            grid: { stroke: 'grey' },
-            ticks: { stroke: 'grey' },
-          }}
-        />
-        <VictoryLine
-          style={{
-            data: { stroke: 'rgb(65, 75, 86)', strokeWidth: 2 },
-            parent: { border: '1px solid #ccc' },
-          }}
-          data={differences}
-        />
-        <VictoryLine
-          style={{
-            data: { stroke: GetTocColor(props.poll.votesInfo[0].tocReportingMark), strokeWidth: props.isClose ? 2.5 : 4 },
-            parent: { border: '1px solid #ccc' },
-            labels: {
-              fill: GetTocColor(props.poll.votesInfo[0].tocReportingMark),
-            },
-          }}
-          data={oneVotes}
-        />
-        <VictoryLine
-          style={{
-            data: { stroke: GetTocColor(props.poll.votesInfo[1].tocReportingMark), strokeWidth: props.isClose ? 2.5 : 4 },
-            parent: { border: '1px solid #ccc' },
-            labels: {
-              fill: GetTocColor(props.poll.votesInfo[1].tocReportingMark),
-            },
-          }}
-          data={twoVotes}
-        />
-      </VictoryChart>
+      <LineChart
+        data={data}
+        axisNames={{ x: 'Hours:mins', y: 'Votes' }}
+        colors={[GetTocColor(poll.votesInfo[0].tocReportingMark), GetTocColor(poll.votesInfo[1].tocReportingMark), '#444']}
+      />
     </div>
   )
 }
