@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import GameBoard from './GameBoard'
 import { Whisper } from '../../typography'
+import LoadingSpinner from '../LoadingSpinner'
 
 // import { makeStyles } from '@material-ui/styles'
 
@@ -15,14 +16,11 @@ export default function Game() {
   const countdownElRef = useRef(null)
   const countdownSecsRef = useRef(60)
 
-  const [gameData, setGameData] = useState(0)
-
-  function RefreshData() {
-    countdownSecsRef.current = 60
-    setGameData(gameData + 1)
-  }
+  const [gameData, setGameData] = useState(null)
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !gameData) return
+
     const updateInterval = setInterval(() => {
       countdownSecsRef.current--
       countdownElRef.current.innerText = countdownSecsRef.current
@@ -39,6 +37,15 @@ export default function Game() {
     }
   })
 
+  function RefreshData() {
+    countdownSecsRef.current = 60
+    setGameData(gameData + 1)
+  }
+
+  if (typeof window === 'undefined' || !gameData) {
+    return <LoadingSpinner loadingText />
+  }
+
   return (
     <article>
       <Whisper center bold>
@@ -46,7 +53,7 @@ export default function Game() {
       </Whisper>
 
       <section id="game-board">
-        <GameBoard />
+        <GameBoard gameData={gameData} />
       </section>
     </article>
   )

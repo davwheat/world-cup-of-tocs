@@ -3,10 +3,9 @@ import React from 'react'
 import { Paragraph, Shout } from '../../typography'
 import TextContainer from '../TextContainer'
 
-import KnownGameData from '../../data/GameData'
 import KnockoutRounds from './Rounds/KnockoutRounds'
 
-export default function GameBoard({}) {
+export default function GameBoard({ gameData }) {
   return (
     <>
       <TextContainer>
@@ -14,7 +13,7 @@ export default function GameBoard({}) {
         <Paragraph>Knockout rounds begin on Friday 15 January and end on Saturday 30 January.</Paragraph>
       </TextContainer>
 
-      <KnockoutRounds knockoutRoundData={KnownGameData.KnockoutRounds} />
+      <KnockoutRounds knockoutRoundData={gameData.knockout} />
     </>
   )
 }
