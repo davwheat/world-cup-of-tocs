@@ -34,7 +34,7 @@ export const mockGraph = {
       },
       {
         timestamp: 2 * 60 * 60 * 1000,
-        votes: 50,
+        votes: 200,
       },
     ],
   },
@@ -62,7 +62,7 @@ export const mockGraph = {
       },
       {
         timestamp: 2 * 60 * 60 * 1000,
-        votes: 30,
+        votes: 250,
       },
     ],
   }] // As long as options
