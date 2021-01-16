@@ -87,7 +87,7 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
       </div>
 
       {/* Don't try to SSR graph */}
-      {typeof window !== 'undefined' && <Graph poll={data} />}
+      {typeof window !== 'undefined' && <Graph poll={data} large={large} />}
     </div>
   )
 }
