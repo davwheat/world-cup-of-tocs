@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
   rect: {
     '&:hover, &:focus, &:focus-within': {
-      outline: '2px solid #ffd1dc',
+      outline: '2px solid #f00',
       boxShadow: '0 0 0 2px #000',
     },
   },
