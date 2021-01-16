@@ -190,7 +190,7 @@ const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
   const commonLineProps: CommonLinePropsInterface = {
     // Disables point rendering: we have too many data points to enable this
     dot: false,
-    type: 'monotone',
+    type: 'linear',
     strokeWidth: 1,
   }
 
