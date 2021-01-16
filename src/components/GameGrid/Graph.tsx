@@ -9,6 +9,8 @@ import { GetTocColor, GetTocName } from '../../data/TocData'
 import dayjs from 'dayjs'
 import dayjsUtc from 'dayjs/plugin/utc'
 import FormatDate from '../../functions/formatDate'
+import { AxisInterval, AxisType } from 'recharts/types/util/types'
+import { CurveType } from 'recharts/types/shape/Curve'
 
 /***************************************************
  ***************** CONFIG SETTINGS *****************
@@ -92,6 +94,18 @@ interface NewGraphProps {
   useLongGraph?: boolean
 }
 
+interface CommonAxisPropsInterface {
+  type: 'number' | 'category'
+  fontSize: number
+  interval: AxisInterval
+}
+
+interface CommonLinePropsInterface {
+  dot: boolean
+  type: CurveType
+  strokeWidth: number
+}
+
 const useStyles = makeStyles({
   graphContainer: {
     marginTop: 8,
@@ -167,6 +181,22 @@ const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
 
   let hoursElapsed = Math.floor(timeElapsed / 1000 / 60 / 60)
 
+  const commonAxisProps: CommonAxisPropsInterface = {
+    type: 'number',
+    fontSize: 12,
+    interval: 0,
+  }
+
+  const commonLineProps: CommonLinePropsInterface = {
+    // Disables point rendering: we have too many data points to enable this
+    dot: false,
+    type: 'monotone',
+    strokeWidth: 1,
+  }
+
+  const tooltipVoteCountFormatter = value => `${value} votes`
+  const tooltipTimeElapsedFormatter = value => `${FormatDate.HoursMins.Long(value)} elapsed`
+
   return (
     <ResponsiveContainer width="100%" height={300} className={classes.graphContainer}>
       <LineChart throttleDelay={50} data={data} margin={{ top: 5, right: 20, bottom: 12, left: 0 }}>
@@ -181,29 +211,24 @@ const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
             const hour = value / 1000 / 60 / 60
             return `${hour}h`
           }}
-          fontSize={12}
           domain={[0, 'dataMax']}
-          type="number"
           dataKey="x"
-          interval={0}
-        >
-          <Label value="Time elapsed" position="insideBottom" offset={-8} />
-        </XAxis>
+          label={{ value: 'Time elapsed', position: 'insideBottom', offset: -8 }}
+          {...commonAxisProps}
+        />
 
         <YAxis
           ticks={[...Array(Math.ceil((maxVotes + 100) / yAxisTickGap))].map((_, i) => i * yAxisTickGap)}
-          type="number"
-          fontSize={12}
           domain={[0, (dataMax: number) => Math.ceil((dataMax + 100) / yAxisTickGap) * yAxisTickGap]}
-          interval={0}
           label={{ value: 'Votes', position: 'insideLeft', angle: -90 }}
+          {...commonAxisProps}
         />
 
-        <Tooltip separator=" - " formatter={value => `${value} votes`} labelFormatter={value => `${FormatDate.HoursMins.Long(value)} elapsed`} />
+        <Tooltip separator=" - " formatter={tooltipVoteCountFormatter} labelFormatter={tooltipTimeElapsedFormatter} />
 
-        <Line dot={false} name={team1Name} type="monotone" dataKey="team1Result" stroke={team1Color} strokeWidth={1} />
-        <Line dot={false} name={team2Name} type="monotone" dataKey="team2Result" stroke={team2Color} strokeWidth={1} />
-        <Line dot={false} name={'Difference'} type="monotone" dataKey="difference" stroke={differenceColor} strokeWidth={1} />
+        <Line name={team1Name} dataKey="team1Result" stroke={team1Color} {...commonLineProps} />
+        <Line name={team2Name} dataKey="team2Result" stroke={team2Color} {...commonLineProps} />
+        <Line name={'Difference'} dataKey="difference" stroke={differenceColor} {...commonLineProps} />
       </LineChart>
     </ResponsiveContainer>
   )
