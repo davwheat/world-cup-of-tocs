@@ -94,11 +94,15 @@ export interface GameData {
 }
 
 interface NewGraphProps {
-  /** Poll for this graph */
+  /**
+   * Poll for this graph
+   */
   poll: SinglePoll
   isClose?: boolean
-  /** Explicitly use a longer graph */
-  useLongGraph?: boolean
+  /**
+   * Use a taller graph
+   */
+  large?: boolean
 }
 
 interface CommonAxisPropsInterface {
@@ -137,8 +141,7 @@ const useStyles = makeStyles({
  * Create a single graph for one poll
  * @param props Props
  */
-const Graph: React.FC<NewGraphProps> = function Graph(props) {
-  const { poll } = props
+const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
   // const poll = mockGraph
 
   if (poll.votingStatus === VoteStates.UPCOMING) {
@@ -217,7 +220,7 @@ const Graph: React.FC<NewGraphProps> = function Graph(props) {
   const createArrayOfLengthAndMultiplier = (length: number, multiplier: number): number[] => [...Array(Math.ceil(length))].map((_, i) => i * multiplier)
 
   return (
-    <ResponsiveContainer width="100%" height={300} className={classes.graphContainer}>
+    <ResponsiveContainer width="100%" height={large ? 400 : 300} className={classes.graphContainer}>
       <LineChart
         throttleDelay={50} // Delays tooltip showing to prevent insane CPU usage when hovering
         data={data}
