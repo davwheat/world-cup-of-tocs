@@ -1,13 +1,12 @@
 import React from 'react'
 
 import GameRound from './GameRound'
-import { Shout } from '../../../typography'
 
 import { makeStyles } from '@material-ui/styles'
 
-import { SinglePoll } from '../Graph'
 import TextContainer from '../../TextContainer'
 import Loud from '../../../typography/loud'
+import SinglePoll from '../../../models/SinglePoll'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {

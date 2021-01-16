@@ -4,7 +4,7 @@
  * @export
  * @class TwitterInfo
  */
-module.exports = class TwitterInfo {
+export default class TwitterInfo {
   /**
    * ID of the poll's tweet
    *

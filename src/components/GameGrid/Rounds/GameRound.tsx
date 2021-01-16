@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SinglePoll, default as Graph } from '../Graph'
+import Graph from '../Graph'
 import PollGame from '../PollGame'
 import { Paragraph, Whisper } from '../../../typography'
 
@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/styles'
 import { GetTocColor, GetTocName } from '../../../data/TocData'
 import FormatDate from '../../../functions/formatDate'
 import clsx from 'clsx'
+import SinglePoll from '../../../models/SinglePoll'
 
 interface Props {
   data: SinglePoll
