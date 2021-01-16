@@ -22,7 +22,21 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Shout({ children, className, noPadding }) {
+interface Props {
+  children: React.ReactNode
+  /**
+   * Extra classes to add in addition to those supplied by this component
+   * @default undefined
+   */
+  className?: string
+  /**
+   * Should remove top and bottom padding
+   * @default false
+   */
+  noPadding?: boolean
+}
+
+export default function Shout({ children, className, noPadding }: Props) {
   const classes = useStyles()
 
   return <h1 className={clsx(classes.root, noPadding && classes.noPad, className)}>{children}</h1>

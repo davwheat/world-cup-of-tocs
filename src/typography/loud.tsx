@@ -25,7 +25,26 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Loud({ children, className, noPadding, center }) {
+interface Props {
+  children: React.ReactNode
+  /**
+   * Extra classes to add in addition to those supplied by this component
+   * @default undefined
+   */
+  className?: string
+  /**
+   * Should remove top and bottom padding
+   * @default false
+   */
+  noPadding?: boolean
+  /**
+   * Should paragraph be centred
+   * @default false
+   */
+  center?: boolean
+}
+
+export default function Loud({ children, className, noPadding, center }: Props) {
   const classes = useStyles()
 
   return <h1 className={clsx(classes.root, noPadding && classes.noPad, center && classes.center, className)}>{children}</h1>

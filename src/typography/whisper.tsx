@@ -20,7 +20,31 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Whisper({ children, className, noPadding, bold, center }) {
+interface Props {
+  children: React.ReactNode
+  /**
+   * Extra classes to add in addition to those supplied by this component
+   * @default undefined
+   */
+  className?: string
+  /**
+   * Should remove top and bottom padding
+   * @default false
+   */
+  noPadding?: boolean
+  /**
+   * Should paragraph be centred
+   * @default false
+   */
+  center?: boolean
+  /**
+   * Should text be bold
+   * @default false
+   */
+  bold?: boolean
+}
+
+export default function Whisper({ children, className, noPadding, bold, center }: Props) {
   const classes = useStyles()
 
   const props = {
