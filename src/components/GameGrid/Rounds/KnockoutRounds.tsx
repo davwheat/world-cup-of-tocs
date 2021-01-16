@@ -58,7 +58,7 @@ export default function KnockoutRounds(props: Props) {
         <TextContainer className={classes.latestGame}>
           <Loud center>Active game</Loud>
           <div className={classes.latestGameContainer}>
-            <GameRound noDate data={latestGame} />
+            <GameRound large noDate data={latestGame} />
           </div>
         </TextContainer>
       )}
