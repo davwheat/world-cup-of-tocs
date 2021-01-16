@@ -51,7 +51,7 @@ export default function createSinglePollsFromApiData(jsonData) {
       ],
       twitterInfo: thisJsonItem.twitterInfo
         ? new TwitterInfo({
-            tweetId: thisJsonItem.twitterInfo.twitterId,
+            tweetId: thisJsonItem.twitterInfo.tweetId,
             startTime: thisJsonItem.twitterInfo.startTime,
             endTime: thisJsonItem.twitterInfo.endTime,
             durationMinutes: thisJsonItem.twitterInfo.durationMinutes,
