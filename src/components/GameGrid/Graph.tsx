@@ -130,7 +130,7 @@ const useStyles = makeStyles({
  * Create a single graph for one poll
  * @param props Props
  */
-const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
+const Graph: React.FC<NewGraphProps> = function Graph(props) {
   const { poll } = props
   // const poll = mockGraph
 

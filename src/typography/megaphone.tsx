@@ -28,7 +28,6 @@ const useStyles = makeStyles({
 })
 
 interface Props {
-  children: React.ReactNode
   /**
    * Extra classes to add in addition to those supplied by this component
    * @default undefined
@@ -41,8 +40,10 @@ interface Props {
   noPadding?: boolean
 }
 
-export default function Megaphone({ children, className, noPadding }: Props) {
+const Megaphone: React.FC<Props> = ({ children, className, noPadding }) => {
   const classes = useStyles()
 
   return <h1 className={clsx(classes.root, noPadding && classes.noPad, className)}>{children}</h1>
 }
+
+export default Megaphone

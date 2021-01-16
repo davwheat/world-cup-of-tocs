@@ -15,13 +15,12 @@ const useStyles = makeStyles({
   bold: {
     fontWeight: 600,
   },
-  centered: {
+  centred: {
     textAlign: 'center',
   },
 })
 
 interface Props {
-  children: React.ReactNode
   /**
    * Extra classes to add in addition to those supplied by this component
    * @default undefined
@@ -44,12 +43,14 @@ interface Props {
   bold?: boolean
 }
 
-export default function Whisper({ children, className, noPadding, bold, center }: Props) {
+const Whisper: React.FC<Props> = ({ children, className, noPadding, bold, center }) => {
   const classes = useStyles()
 
   const props = {
-    className: clsx(classes.root, noPadding && classes.noPad, bold && classes.bold, center && classes.centered, className),
+    className: clsx(classes.root, noPadding && classes.noPad, bold && classes.bold, center && classes.centred, className),
   }
 
   return <p {...props}>{children}</p>
 }
+
+export default Whisper

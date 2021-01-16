@@ -22,7 +22,14 @@ const useStyles = makeStyles({
   },
 })
 
-export default function TextContainer({ children, noSpacing, className, noMaxWidth, innerClassName, ...props }) {
+interface Props {
+  className?: string
+  innerClassName?: string
+  noSpacing?: boolean
+  noMaxWidth?: boolean
+}
+
+const TextContainer: React.FC<Props> = ({ children, className, noSpacing, noMaxWidth, innerClassName, ...props }) => {
   const classes = useStyles()
 
   return (
@@ -31,3 +38,5 @@ export default function TextContainer({ children, noSpacing, className, noMaxWid
     </section>
   )
 }
+
+export default TextContainer

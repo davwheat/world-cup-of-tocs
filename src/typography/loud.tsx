@@ -20,13 +20,12 @@ const useStyles = makeStyles({
   noPad: {
     paddingBottom: 0,
   },
-  center: {
+  centred: {
     textAlign: 'center',
   },
 })
 
 interface Props {
-  children: React.ReactNode
   /**
    * Extra classes to add in addition to those supplied by this component
    * @default undefined
@@ -44,8 +43,10 @@ interface Props {
   center?: boolean
 }
 
-export default function Loud({ children, className, noPadding, center }: Props) {
+const Loud: React.FC<Props> = ({ children, className, noPadding, center }) => {
   const classes = useStyles()
 
-  return <h1 className={clsx(classes.root, noPadding && classes.noPad, center && classes.center, className)}>{children}</h1>
+  return <h1 className={clsx(classes.root, noPadding && classes.noPad, center && classes.centred, className)}>{children}</h1>
 }
+
+export default Loud

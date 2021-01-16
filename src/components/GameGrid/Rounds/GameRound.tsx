@@ -16,12 +16,12 @@ interface Props {
    * Removes the small date above the game.
    * @default false
    */
-  noDate: boolean
+  noDate?: boolean
   /**
    * Show a larger graph. Used for the active game box.
    * @default false
    */
-  large: boolean
+  large?: boolean
 }
 
 const useStyles = makeStyles({
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
  * @param {Props} props
  * @return {React.ReactNode}
  */
-export default function GameRound({ data, noDate, large }: Props) {
+const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
   const classes = useStyles()
 
   const teamInfo = {
@@ -90,3 +90,5 @@ export default function GameRound({ data, noDate, large }: Props) {
     </div>
   )
 }
+
+export default GameRound

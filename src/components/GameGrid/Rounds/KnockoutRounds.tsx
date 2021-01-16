@@ -34,16 +34,13 @@ const useStyles = makeStyles({
   },
 })
 
-interface KnockoutRoundData {
-  [key: number]: SinglePoll
-}
+type KnockoutRoundData = Record<number, SinglePoll>
 
 interface Props {
   knockoutRoundData: KnockoutRoundData
 }
 
-export default function KnockoutRounds(props: Props) {
-  const { knockoutRoundData } = props
+const KnockoutRounds: React.FC<Props> = ({ knockoutRoundData }) => {
   const classes = useStyles()
 
   if (!knockoutRoundData) return null
@@ -75,3 +72,5 @@ export default function KnockoutRounds(props: Props) {
     </>
   )
 }
+
+export default KnockoutRounds
