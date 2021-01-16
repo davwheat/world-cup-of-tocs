@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CartesianGrid, Label, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { makeStyles } from '@material-ui/styles'
 import { GetTocColor, GetTocName } from '../../data/TocData'
@@ -9,7 +9,7 @@ import { GetTocColor, GetTocName } from '../../data/TocData'
 import dayjs from 'dayjs'
 import dayjsUtc from 'dayjs/plugin/utc'
 import FormatDate from '../../functions/formatDate'
-import { AxisInterval, AxisType } from 'recharts/types/util/types'
+import { AxisInterval } from 'recharts/types/util/types'
 import { CurveType } from 'recharts/types/shape/Curve'
 
 /***************************************************
