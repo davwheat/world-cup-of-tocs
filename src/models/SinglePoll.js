@@ -1,5 +1,3 @@
-import { VoteStates } from '../components/GameGrid/Graph'
-
 export default class SinglePoll {
   /**
    * UTC midnight on day of the poll
@@ -13,7 +11,7 @@ export default class SinglePoll {
   /**
    * Describes whether the poll is yet to begin (tweet not posted), is in progress, or has closed to new votes.
    *
-   * @type {VoteStates}
+   * @type {import('../components/GameGrid/Graph').VoteStates}
    *
    * @memberof SinglePoll
    */
