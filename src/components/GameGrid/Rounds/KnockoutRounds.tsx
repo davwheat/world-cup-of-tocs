@@ -23,7 +23,10 @@ const useStyles = makeStyles({
     width: 500,
     maxWidth: '100%',
   },
-  latestGame: {},
+  latestGame: {
+    padding: 16,
+    border: '2px solid #000',
+  },
   latestGameContainer: {
     marginTop: -16,
     display: 'flex',
@@ -55,7 +58,7 @@ export default function KnockoutRounds(props: Props) {
   return (
     <>
       {latestGame && (
-        <TextContainer className={classes.latestGame}>
+        <TextContainer innerClassName={classes.latestGame}>
           <Loud center>Active game</Loud>
           <div className={classes.latestGameContainer}>
             <GameRound large noDate data={latestGame} />
