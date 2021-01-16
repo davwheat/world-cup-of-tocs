@@ -62,6 +62,8 @@ export default function KnockoutRounds(props: Props) {
           </div>
         </TextContainer>
       )}
+
+      {latestGame && <Loud center>Other games</Loud>}
       <section className={classes.knockoutRoundsContainer}>
         {Object.keys(knockoutRoundData).map(key => (
           <GameRound data={knockoutRoundData[key]} key={key} />
