@@ -1,4 +1,4 @@
-module.exports = class VotesInfo {
+export default class VotesInfo {
   /**
    * A valid TOC reporting mark.
    *

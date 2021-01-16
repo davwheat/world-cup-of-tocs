@@ -11,6 +11,7 @@ import dayjsUtc from 'dayjs/plugin/utc'
 import FormatDate from '../../functions/formatDate'
 import { AxisInterval } from 'recharts/types/util/types'
 import { CurveType } from 'recharts/types/shape/Curve'
+import SinglePoll from '../../models/SinglePoll'
 
 /***************************************************
  ***************** CONFIG SETTINGS *****************
@@ -41,7 +42,7 @@ export enum VoteStates {
 /**
  * Defines how a **single** poll should look
  */
-export interface SinglePoll {
+export interface ISinglePoll {
   /** Set to the midnight unix epoch of the day of the poll */
   scheduledStartDay: number
 
@@ -63,7 +64,7 @@ export interface SinglePoll {
     /** Two letter ToC report mark, i.e. name */
     tocReportingMark: string
     votes: number
-    /** Votes hisotory */
+    /** Votes history */
     votingHistory: {
       /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
       timestamp: number
@@ -73,25 +74,35 @@ export interface SinglePoll {
 }
 
 /** What is received from the API */
-export interface NewAPI extends GameData {
+export interface NewAPI {
   apiVersion: string
+  knockout: Record<number, ISinglePoll>
+  groupStages: Record<number, ISinglePoll>
+  quarterFinal: Record<number, ISinglePoll>
+  semiFinal: Record<number, ISinglePoll>
+  runnerUp: ISinglePoll
+  final: ISinglePoll
 }
 
 export interface GameData {
-  knockout: SinglePoll[]
-  groupStages: SinglePoll[]
-  quarterFinal: SinglePoll[]
-  semiFinal: SinglePoll[]
+  knockout: Record<number, SinglePoll>
+  groupStages: Record<number, SinglePoll>
+  quarterFinal: Record<number, SinglePoll>
+  semiFinal: Record<number, SinglePoll>
   runnerUp: SinglePoll
   final: SinglePoll
 }
 
 interface NewGraphProps {
-  /** Poll for this graph */
+  /**
+   * Poll for this graph
+   */
   poll: SinglePoll
   isClose?: boolean
-  /** Explicitly use a longer graph */
-  useLongGraph?: boolean
+  /**
+   * Use a taller graph
+   */
+  large?: boolean
 }
 
 interface CommonAxisPropsInterface {
@@ -130,8 +141,7 @@ const useStyles = makeStyles({
  * Create a single graph for one poll
  * @param props Props
  */
-const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
-  const { poll } = props
+const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
   // const poll = mockGraph
 
   if (poll.votingStatus === VoteStates.UPCOMING) {
@@ -210,7 +220,7 @@ const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
   const createArrayOfLengthAndMultiplier = (length: number, multiplier: number): number[] => [...Array(Math.ceil(length))].map((_, i) => i * multiplier)
 
   return (
-    <ResponsiveContainer width="100%" height={300} className={classes.graphContainer}>
+    <ResponsiveContainer width="100%" height={large ? 400 : 300} className={classes.graphContainer}>
       <LineChart
         throttleDelay={50} // Delays tooltip showing to prevent insane CPU usage when hovering
         data={data}
