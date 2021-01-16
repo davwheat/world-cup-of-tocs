@@ -76,7 +76,7 @@ export default function Game() {
   }
 
   if (error) {
-    let x = setTimeout(() => {
+    setTimeout(() => {
       setGameData(null)
       setError(null)
 
