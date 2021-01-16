@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     overflow: 'visible',
     /** Centre align */
     display: 'block',
-    margin: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   rect: {
     '&:hover, &:focus, &:focus-within': {

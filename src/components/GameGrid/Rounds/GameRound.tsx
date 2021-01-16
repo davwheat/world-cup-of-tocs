@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     display: 'flex',
     flexWrap: 'wrap',
     gap: 8,
-    margin: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -33,6 +34,11 @@ const useStyles = makeStyles({
   large: {
     display: 'flex',
     width: '100%',
+  },
+  vertCenter: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
 })
 
@@ -54,7 +60,7 @@ export default function GameRound(props: Props) {
           {FormatDate(data.scheduledStartDay)}
         </Whisper>
       )}
-      <div>
+      <div className={clsx(large && classes.vertCenter)}>
         {large && (
           <Paragraph bold center>
             Ending in {FormatDate.HoursMins.Long(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
