@@ -12,7 +12,15 @@ import clsx from 'clsx'
 
 interface Props {
   data: SinglePoll
+  /**
+   * Removes the small date above the game.
+   * @default false
+   */
   noDate: boolean
+  /**
+   * Show a larger graph. Used for the active game box.
+   * @default false
+   */
   large: boolean
 }
 
@@ -36,8 +44,14 @@ const useStyles = makeStyles({
   },
 })
 
-export default function GameRound(props: Props) {
-  const { data, noDate, large } = props
+/**
+ * Shows a `PollGame` and `Graph` for a specified game, provided as a `SinglePoll`.
+ *
+ * @export
+ * @param {Props} props
+ * @return {React.ReactNode}
+ */
+export default function GameRound({ data, noDate, large }: Props) {
   const classes = useStyles()
 
   const teamInfo = {
