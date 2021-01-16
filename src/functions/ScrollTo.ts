@@ -1,11 +1,19 @@
-function ScrollTo(top) {
+import { RefObject } from 'react'
+
+/**
+ * Scroll to a position on the page.
+ */
+function ScrollTo(top: number) {
   window.scroll({
-    top: top,
+    top,
     behavior: 'smooth',
   })
 }
 
-ScrollTo.ID = function ScrollToID(elementId) {
+/**
+ * Scroll to a an element, determined by a specified ID.
+ */
+ScrollTo.ID = function ScrollToID(elementId: string) {
   if (!elementId) return false
 
   const element = document.getElementById(elementId)
@@ -16,7 +24,10 @@ ScrollTo.ID = function ScrollToID(elementId) {
   return true
 }
 
-ScrollTo.Element = function ScrollToElement(element) {
+/**
+ * Scroll to a an element, determined by a reference to the element.
+ */
+ScrollTo.Element = function ScrollToElement(element: HTMLElement) {
   if (!element) return false
 
   const rect = element.getBoundingClientRect()
@@ -27,7 +38,10 @@ ScrollTo.Element = function ScrollToElement(element) {
   return true
 }
 
-ScrollTo.Ref = function ScrollToRef(ref) {
+/**
+ * Scroll to a an element, determined by a React element ref.
+ */
+ScrollTo.Ref = function ScrollToRef(ref: RefObject<HTMLElement>) {
   const element = ref.current
   if (!element) return false
 

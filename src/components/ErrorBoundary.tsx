@@ -1,9 +1,15 @@
 import React from 'react'
 
-import { withStyles } from '@material-ui/styles'
+import { withStyles, WithStyles } from '@material-ui/styles'
 
 import { Paragraph, Shout } from '../typography'
 import Link from './Link'
+
+type ErrorBoundaryState = {
+  hasError: boolean
+}
+
+type Props = {} & WithStyles<typeof useStyles>
 
 const useStyles = () => ({
   root: {
@@ -13,7 +19,7 @@ const useStyles = () => ({
   },
 })
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component<Props, ErrorBoundaryState> {
   constructor(props) {
     super(props)
     this.state = { hasError: false }

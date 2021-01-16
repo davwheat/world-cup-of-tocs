@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
-import React from 'react'
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +23,14 @@ const useStyles = makeStyles({
   },
 })
 
-export default function BodySection({ children, noSpacing, className, noMaxWidth, innerClassName, ...props }) {
+type Props = {
+  noSpacing?: boolean
+  className?: string
+  noMaxWidth?: boolean
+  innerClassName?: string
+}
+
+const BodySection: React.FC<Props> = ({ children, noSpacing, className, noMaxWidth, innerClassName, ...props }) => {
   const classes = useStyles()
 
   return (
@@ -31,3 +39,5 @@ export default function BodySection({ children, noSpacing, className, noMaxWidth
     </section>
   )
 }
+
+export default BodySection

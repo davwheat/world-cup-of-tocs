@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 })
 
-interface Props {
+type Props = {
   className?: string
   innerClassName?: string
   noSpacing?: boolean

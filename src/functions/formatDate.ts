@@ -1,14 +1,14 @@
 import dayjs from 'dayjs'
 
-function FormatDate(unixTimestamp) {
+const FormatDate = (unixTimestamp: number) => {
   return dayjs(unixTimestamp).utc().format('ddd D MMM')
 }
 
-FormatDate.HoursMins = function FormatDateToHoursMins(unixTimestamp) {
+FormatDate.HoursMins = (unixTimestamp: number) => {
   return dayjs(unixTimestamp).utc().format('H:mm')
 }
 
-FormatDate.HoursMins.Long = function FormatDateToHoursMins(unixTimestamp) {
+FormatDate.HoursMinsLong = (unixTimestamp: number) => {
   return dayjs(unixTimestamp).utc().format('H[h] mm[m]')
 }
 

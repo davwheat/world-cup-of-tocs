@@ -5,6 +5,7 @@ import { Paragraph, Shout } from '../../typography'
 import Loud from '../../typography/loud'
 import TextContainer from '../TextContainer'
 import ActiveGame from './ActiveGame'
+import { GameData } from './Graph'
 
 import KnockoutRounds from './Rounds/KnockoutRounds'
 
@@ -15,12 +16,11 @@ const useStyles = makeStyles({
   },
 })
 
-/**
- *
- * @param {object} props
- * @param {import('./Graph').GameData} props.gameData
- */
-export default function GameBoard({ gameData }) {
+type Props = {
+  gameData: GameData
+}
+
+const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
   const classes = useStyles()
 
   return (
@@ -41,3 +41,5 @@ export default function GameBoard({ gameData }) {
     </>
   )
 }
+
+export default GameBoard

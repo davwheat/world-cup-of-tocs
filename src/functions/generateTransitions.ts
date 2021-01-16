@@ -1,8 +1,8 @@
-const Durations = Object.freeze({
+const Durations = {
   long: 250,
   medium: 200,
   short: 125,
-})
+} as const
 
 const DefaultDuration = Durations['medium']
 const DefaultEasing = 'ease-in-out'
@@ -13,14 +13,12 @@ const DefaultEasing = 'ease-in-out'
  * Implement with a `...` spread operator on the function.
  *
  * @example { "myCoolClass": { ...generateTransition("color", "medium", "ease-out") } }
- *
- * @export
- * @param {string|string[]} property property/array of properties to be transitioned
- * @param {"long"|"medium"|"short"|number|Array.<"long"|"medium"|"short"|number>} [duration=medium] transition duration (if number, use ms)
- * @param {string|string[]} [easing=ease-in-out]
- * @returns {{ transition: string }}
  */
-export default function generateTransitions(property, duration, easing) {
+export default function generateTransitions(
+  property: string | string[],
+  duration: keyof typeof Durations | (keyof typeof Durations)[] = 'medium',
+  easing: string | string[] = 'ease-in-out',
+): { transition: string } {
   const propsIsArray = Array.isArray(property),
     durationIsArray = Array.isArray(duration),
     easingIsArray = Array.isArray(easing)
@@ -29,7 +27,8 @@ export default function generateTransitions(property, duration, easing) {
     // we have multiple transitions to generate
     let endTransition = { transition: '' }
 
-    property.forEach((prop, i) => {
+    // @ts-ignore This is definitely an array.
+    property.forEach((prop: string, i: string | number) => {
       let _easing = easing || DefaultEasing,
         _duration
 
@@ -45,6 +44,7 @@ export default function generateTransitions(property, duration, easing) {
         // use manual ms input, failing that use string-based values as explained above
         _duration = typeof duration[i] === 'number' ? duration[i] : Durations[duration[i]] || Durations[easing[easing.length - 1]] || DefaultDuration
       } else {
+        // @ts-ignore `duration` is definitely not an array.
         _duration = typeof duration === 'number' ? duration : Durations[duration] || DefaultDuration
       }
 
@@ -76,6 +76,7 @@ export default function generateTransitions(property, duration, easing) {
       // use manual ms input, failing that use string-based values as explained above
       _duration = typeof duration[0] === 'number' ? duration[0] : Durations[duration[0]] || DefaultDuration
     } else {
+      // @ts-ignore `duration` is definitely not an array.
       _duration = typeof duration === 'number' ? duration : Durations[duration] || DefaultDuration
     }
 

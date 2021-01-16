@@ -6,7 +6,7 @@ import GameRound from './Rounds/GameRound'
 import { makeStyles } from '@material-ui/styles'
 import getLatestActiveGame from '../../functions/getLatestActiveGame'
 
-interface Props {
+type Props = {
   data: GameData
 }
 

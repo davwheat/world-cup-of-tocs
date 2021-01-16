@@ -2,11 +2,11 @@ import React from 'react'
 
 import { makeStyles } from '@material-ui/styles'
 
-import { Paragraph, Shout } from '../typography'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import Link from '../components/Link'
-import BodySection from '../components/section'
-import SEO from '../components/seo'
+import BodySection from '../components/BodySection'
+import SEO from '../components/SEO'
+import { Paragraph, Shout } from '../typography'
 
 const useStyles = makeStyles({
   heading: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 })
 
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   const classes = useStyles()
 
   return (

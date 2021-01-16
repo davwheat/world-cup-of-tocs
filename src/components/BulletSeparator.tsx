@@ -18,15 +18,14 @@ const useStyles = makeStyles({
   },
 })
 
-/**
- *
- *
- * @export
- * @param {"light"|"dark"} {color}
- * @return {*}
- */
-export default function BulletSeparator({ color }) {
+type Props = {
+  color: 'dark' | 'light'
+}
+
+const BulletSeparator: React.FC<Props> = ({ color = 'dark' }) => {
   const classes = useStyles()
 
   return <span className={clsx(classes.separator, color === 'light' && classes.light)}>•</span>
 }
+
+export default BulletSeparator

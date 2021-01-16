@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 })
 
-interface Props {
+type Props = {
   /**
    * Extra classes to add in addition to those supplied by this component
    * @default undefined

@@ -7,11 +7,11 @@ import '@fontsource/jost/700.css'
 import '../css/baseline.less'
 
 import ErrorBoundary from './ErrorBoundary'
-import Footer from './footer'
+import Footer from './Footer'
 
 import Twemoji from 'react-twemoji'
 
-const Layout = ({ children }) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <ErrorBoundary>
       <Twemoji options={{ className: 'twemoji' }}>

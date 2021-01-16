@@ -21,18 +21,36 @@ const useStyles = makeStyles({
   padBottom: {
     marginBottom: 16,
   },
-  alternateBackground: {
-    background: Colors.primaryDark,
-  },
 })
 
-export default function AlertBanner({ title, message, noPadding, afterHeading, alternateColor, innerClassName }) {
+type Props = {
+  /**
+   * Alert title
+   */
+  title: string
+  /**
+   * Alert message
+   */
+  message: string
+  /**
+   * Remove top and bottom padding
+   */
+  noPadding?: boolean
+  /**
+   * Move slightly up to improve spacing under a heading
+   */
+  afterHeading?: boolean
+  /**
+   * Class name for the inner AlertBanner container
+   */
+  innerClassName?: string
+}
+
+const AlertBanner: React.FC<Props> = ({ title, message, noPadding = false, afterHeading = false, innerClassName }) => {
   const classes = useStyles()
 
   return (
-    <section
-      className={clsx(classes.root, !noPadding && classes.padBottom, afterHeading && classes.afterHeading, alternateColor && classes.alternateBackground)}
-    >
+    <section className={clsx(classes.root, !noPadding && classes.padBottom, afterHeading && classes.afterHeading)}>
       <div className={innerClassName}>
         <Paragraph className={classes.title} bold>
           {title}
@@ -42,3 +60,5 @@ export default function AlertBanner({ title, message, noPadding, afterHeading, a
     </section>
   )
 }
+
+export default AlertBanner

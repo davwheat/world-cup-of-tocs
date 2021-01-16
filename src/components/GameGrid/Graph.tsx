@@ -3,7 +3,7 @@ import React from 'react'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { makeStyles } from '@material-ui/styles'
-import { GetTocColor, GetTocName } from '../../data/TocData'
+import { GetTocColor, GetTocName, TOCCode } from '../../data/TocData'
 // import { mockGraph } from './Rounds/mockGraph'
 
 import dayjs from 'dayjs'
@@ -40,13 +40,13 @@ export enum VoteStates {
 }
 
 /**
- * Defines how a **single** poll should look
+ * Defines how a single poll should look
  */
-export interface ISinglePoll {
+export type ISinglePoll = {
   /** Set to the midnight unix epoch of the day of the poll */
   scheduledStartDay: number
 
-  votingStatus: VoteStates /*"UPCOMING" | "IN_PROGRESS" | "DONE";*/
+  votingStatus: VoteStates
 
   twitterInfo?: {
     /** Tweet ID (not URL) */
@@ -60,21 +60,33 @@ export interface ISinglePoll {
   }
 
   /** Actual votes for each. Index 0 is the first option, Index 1 the other, etc */
-  votesInfo: {
-    /** Two letter ToC report mark, i.e. name */
-    tocReportingMark: string
-    votes: number
-    /** Votes history */
-    votingHistory: {
-      /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
-      timestamp: number
+  votesInfo: [
+    {
+      /** Two letter ToC report mark, i.e. name */
+      tocReportingMark: TOCCode
       votes: number
-    }[]
-  }[] // As long as options
+      /** Votes history */
+      votingHistory: {
+        /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
+        timestamp: number
+        votes: number
+      }
+    },
+    {
+      /** Two letter ToC report mark, i.e. name */
+      tocReportingMark: TOCCode
+      votes: number
+      /** Votes history */
+      votingHistory: {
+        /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
+        timestamp: number
+        votes: number
+      }
+    },
+  ]
 }
 
-/** What is received from the API */
-export interface NewAPI {
+export type APIResponse = {
   apiVersion: string
   knockout: Record<number, ISinglePoll>
   groupStages: Record<number, ISinglePoll>
@@ -84,7 +96,7 @@ export interface NewAPI {
   final: ISinglePoll
 }
 
-export interface GameData {
+export type GameData = {
   knockout: Record<number, SinglePoll>
   groupStages: Record<number, SinglePoll>
   quarterFinal: Record<number, SinglePoll>
@@ -93,7 +105,7 @@ export interface GameData {
   final: SinglePoll
 }
 
-interface NewGraphProps {
+type Props = {
   /**
    * Poll for this graph
    */
@@ -105,13 +117,13 @@ interface NewGraphProps {
   large?: boolean
 }
 
-interface CommonAxisPropsInterface {
+type CommonAxisPropsInterface = {
   type: 'number' | 'category'
   fontSize: number
   interval: AxisInterval
 }
 
-interface CommonLinePropsInterface {
+type CommonLinePropsInterface = {
   dot: boolean
   type: CurveType
   strokeWidth: number
@@ -141,7 +153,7 @@ const useStyles = makeStyles({
  * Create a single graph for one poll
  * @param props Props
  */
-const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
+const Graph: React.FC<Props> = function Graph({ poll, large }) {
   // const poll = mockGraph
 
   if (poll.votingStatus === VoteStates.UPCOMING) {

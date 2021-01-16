@@ -3,7 +3,7 @@ import React from 'react'
 import { Paragraph, Whisper } from '../typography'
 import BulletSeparator from './BulletSeparator'
 import Link from './Link'
-import BodySection from './section'
+import BodySection from './BodySection'
 import { makeStyles } from '@material-ui/styles'
 
 import { version } from '../../package.json'
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Footer() {
+const Footer: React.FC = () => {
   const classes = useStyles()
 
   return (
@@ -39,7 +39,7 @@ export default function Footer() {
       <Whisper>
         Website version {version}
         <BulletSeparator />
-        <Link onClick={() => window.cookiehub.openSettings()}>Cookie settings</Link>
+        <Link onClick={() => (window as any).cookiehub.openSettings()}>Cookie settings</Link>
       </Whisper>
 
       <div className={classes.contactLinks}>
@@ -90,3 +90,5 @@ export default function Footer() {
     </BodySection>
   )
 }
+
+export default Footer

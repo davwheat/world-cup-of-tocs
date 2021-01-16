@@ -1,7 +1,7 @@
 /**
  * Defines the main color used for TOC branding, defined by their reporting mark.
  */
-const TocColors = Object.freeze({
+const TocColors: Record<TOCCode, string> = {
   vt: '#004354',
   em: '#4c2f48',
   me: '#f1bc1e',
@@ -34,12 +34,12 @@ const TocColors = Object.freeze({
   lm: '#ff8200',
   xr: '#0019a8',
   sx: '#6b717a',
-})
+} as const
 
 /**
  * Defines a list of TOC names mapped to their reporting marks.
  */
-const TocCodeToNameMap = Object.freeze({
+const TocCodeToNameMap = {
   vt: 'Avanti West Coast',
   em: 'East Midlands Railway',
   me: 'Merseyrail',
@@ -61,11 +61,7 @@ const TocCodeToNameMap = Object.freeze({
   lo: 'London Overground',
   le: 'Greater Anglia',
   gr: 'LNER',
-  // Unofficial
-  ie: 'Irish Rail',
   nt: 'Northern Trains',
-  // Unofficial
-  ni: 'Translink',
   sn: 'Southern',
   se: 'Southeastern',
   sw: 'South Western Railway',
@@ -74,7 +70,14 @@ const TocCodeToNameMap = Object.freeze({
   lm: 'West Midlands Railway',
   xr: 'TfL Rail',
   sx: 'Stansted Express',
-})
+  // Unofficial below
+  ni: 'Translink',
+  ie: 'Irish Rail',
+} as const
+
+export type TOCCode = keyof typeof TocCodeToNameMap
+export type TOCName = typeof TocCodeToNameMap[TOCCode]
+export type TOCColors = typeof TocColors[TOCCode]
 
 /**
  * Get a TOC's name from their two letter reporting mark.
@@ -82,12 +85,12 @@ const TocCodeToNameMap = Object.freeze({
  * @param {string} code
  * @returns {string}
  */
-function GetTocName(code) {
+function GetTocName(code: TOCCode): TOCName {
   let c = code.toString().toLowerCase()
   return TocCodeToNameMap[c] || 'Unknown'
 }
 
-function GetTocColor(code) {
+function GetTocColor(code: TOCCode): TOCColors {
   let c = code.toString().toLowerCase()
   return TocColors[c] || '#000'
 }

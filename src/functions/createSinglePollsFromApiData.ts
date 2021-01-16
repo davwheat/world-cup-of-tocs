@@ -1,25 +1,12 @@
-/**
- * @typedef {Object} jsonData
- *
- * @property {Number} apiVersion
- * @property {Object[]} knockout
- * @property {Object[]} groupStages
- * @property {Object[]} quarterFinal
- * @property {Object[]} semiFinal
- * @property {Object[]} runnerUp
- * @property {Object[]} final
- */
-
+import { GameData, APIResponse } from '../components/GameGrid/Graph'
 import SinglePoll from '../models/SinglePoll'
 import TwitterInfo from '../models/TwitterInfo'
 import VotesInfo from '../models/VotesInfo'
 
 /**
- * @param {jsonData} jsonData
- *
  * @returns {{ knockout: { number: SinglePoll }, groupStages: { number: SinglePoll }, quarterFinal: { number: SinglePoll }, semiFinal: { number: SinglePoll }, runnerUp: SinglePoll, final: SinglePoll }}
  **/
-export default function createSinglePollsFromApiData(jsonData) {
+export default function createSinglePollsFromApiData(jsonData: APIResponse): GameData {
   let newData = {
     knockout: {},
     groupStages: {},

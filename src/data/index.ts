@@ -1,16 +1,16 @@
-const Values = Object.freeze({
+const Values = {
   api: {
     hostname: process.env.NODE_ENV !== 'production' ? 'localhost:1234' : 'https://toc-api.davwheat.dev/',
   },
-})
+} as const
 
-const Colors = Object.freeze({
-  toryPrimary: '#0087dc',
+const Colors = {
+  primary: '#0087dc',
   dark: '#203647',
   offWhite: '#fff',
-})
+} as const
 
-const Breakpoints = Object.freeze({
+const Breakpoints = {
   upTo: {
     large: '(max-width: 767px)',
     medium: '(max-width: 579px)',
@@ -19,14 +19,14 @@ const Breakpoints = Object.freeze({
     medium: '(min-width: 768px)',
     small: '(min-width: 580px)',
   },
-})
+} as const
 
-const Sizing = Object.freeze({
+const Sizing = {
   pollGame: {
     width: 350,
     height: 65,
     barHeight: 30,
   },
-})
+} as const
 
 export { Colors, Breakpoints, Values, Sizing }

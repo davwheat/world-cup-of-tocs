@@ -11,7 +11,7 @@ import FormatDate from '../../../functions/formatDate'
 import clsx from 'clsx'
 import SinglePoll from '../../../models/SinglePoll'
 
-interface Props {
+type Props = {
   data: SinglePoll
   /**
    * Removes the small date above the game.

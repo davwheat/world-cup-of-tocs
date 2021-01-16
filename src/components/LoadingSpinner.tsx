@@ -45,8 +45,17 @@ const useStyles = makeStyles({
   },
 })
 
-export default function LoadingSpinner({ loadingText }) {
+type Props = {
+  /**
+   * Show "Loading" text under spinner
+   */
+  loadingText?: boolean
+}
+
+const LoadingSpinner: React.FC<Props> = ({ loadingText = false }) => {
   const classes = useStyles()
 
   return <div className={clsx(classes.root, loadingText && classes.showText)} />
 }
+
+export default LoadingSpinner

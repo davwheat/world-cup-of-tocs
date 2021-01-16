@@ -2,16 +2,15 @@ import React from 'react'
 
 import isSmallViewport from '../functions/isSmallViewport'
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Layout from '../components/Layout'
+import SEO from '../components/SEO'
 import AlertBanner from '../components/AlertBanner'
-import BodySection from '../components/section'
+import BodySection from '../components/BodySection'
 import NoScriptMessage from '../components/NoScriptMessage'
 import Game from '../components/GameGrid/Game'
-
 import { Megaphone, Paragraph } from '../typography'
 
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   return (
     <Layout>
       <SEO />

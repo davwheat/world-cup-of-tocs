@@ -8,54 +8,59 @@ export default class TwitterInfo {
   /**
    * ID of the poll's tweet
    *
-   * @type {string}
-   *
    * @memberof TwitterInfo
    */
-  tweetId
+  tweetId: string
 
   /**
-   * When the poll opened for votes (UTC timestamp).
-   *
-   * @type {number}
+   * When the poll opened for votes (Unix UTC timestamp).
    *
    * @memberof TwitterInfo
    */
-  startTime
+  startTime: number
 
   /**
-   * When the poll closed for new votes (UTC timestamp).
-   *
-   * @type {number}
+   * When the poll closed for new votes (Unix UTC timestamp).
    *
    * @memberof TwitterInfo
    */
-  endTime
+  endTime: number
 
   /**
    * Overall length of the poll in minutes.
    *
-   * @type {number}
-   *
    * @memberof TwitterInfo
    */
-  durationMinutes
+  durationMinutes: number
 
   /**
    * Creates an instance of TwitterInfo.
-   * @param {object} data
-   * @param {string} data.tweetId         ID of the poll's tweet
-   * @param {string} data.startTime       When the poll began accepting votes
-   * @param {string} data.endTime         When the poll stopped/will stop accepting votes
-   * @param {string} data.durationMinutes Poll duration in minutes
+   *
    * @memberof TwitterInfo
    */
-  constructor(data) {
-    const { tweetId, startTime, endTime, durationMinutes } = data
-
+  constructor({ tweetId, startTime, endTime, durationMinutes }: ConstructorArgs) {
     this.tweetId = tweetId
     this.startTime = typeof startTime === 'number' ? startTime : new Date(startTime).getTime()
     this.endTime = typeof endTime === 'number' ? endTime : new Date(endTime).getTime()
     this.durationMinutes = durationMinutes
   }
+}
+
+type ConstructorArgs = {
+  /**
+   * ID of the poll's tweet
+   */
+  tweetId: string
+  /**
+   * When the poll began accepting votes
+   */
+  startTime: number
+  /**
+   * When the poll stopped/will stop accepting votes
+   */
+  endTime: number
+  /**
+   * Poll duration in minutes
+   */
+  durationMinutes: number
 }

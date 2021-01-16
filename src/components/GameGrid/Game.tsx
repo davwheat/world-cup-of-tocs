@@ -5,18 +5,16 @@ import { Whisper } from '../../typography'
 import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
+import { GameData } from './Graph'
 
 const DataRefreshInterval = 60
 
-export default function Game() {
-  const countdownElRef = useRef(null)
-  const countdownSecsRef = useRef(DataRefreshInterval)
+const Game: R.FC = () => {
+  const countdownElRef = useRef<HTMLSpanElement>(null)
+  const countdownSecsRef = useRef<number>(DataRefreshInterval)
 
-  /**
-   * @type {[import('./Graph').GameData, function]}
-   */
-  const [gameData, setGameData] = useState(null)
-  const [error, setError] = useState(null)
+  const [gameData, setGameData] = useState<GameData>(null)
+  const [error, setError] = useState<string>(null)
 
   async function handleResponse(response) {
     const jsonData = await response.json()
@@ -24,7 +22,7 @@ export default function Game() {
     setGameData(createSinglePollsFromApiData(jsonData))
   }
 
-  function RefreshData(abortController) {
+  function RefreshData(abortController?: AbortController) {
     return new Promise((resolve, reject) =>
       fetch(`https://toc-api.davwheat.dev/v1/all_polls`, { signal: abortController && abortController.signal })
         .then(r => {
@@ -34,7 +32,7 @@ export default function Game() {
           console.error(e)
           setError("Failed to fetch poll data from the API. We'll try again in a few seconds.")
           reject()
-        })
+        }),
     )
   }
 
@@ -53,10 +51,10 @@ export default function Game() {
 
     const updateInterval = setInterval(() => {
       countdownSecsRef.current--
-      countdownElRef.current.innerText = countdownSecsRef.current
+      countdownElRef.current.innerText = countdownSecsRef.current.toString()
 
       if (countdownSecsRef.current === 0) {
-        countdownElRef.current.innerText = DataRefreshInterval
+        countdownElRef.current.innerText = DataRefreshInterval.toString()
         clearInterval(updateInterval)
         BeginTimeoutRefreshData()
         return
@@ -71,7 +69,7 @@ export default function Game() {
   function BeginTimeoutRefreshData() {
     RefreshData().then(() => {
       countdownSecsRef.current = DataRefreshInterval
-      countdownElRef.current.innerText = DataRefreshInterval
+      countdownElRef.current.innerText = DataRefreshInterval.toString()
     })
   }
 
@@ -106,3 +104,5 @@ export default function Game() {
     </article>
   )
 }
+
+export default Game

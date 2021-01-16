@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
 import generateTwitterUrl from '../../functions/generateTwitterUrl'
 import { Sizing } from '../../data'
+import { TOCColors, TOCName } from '../../data/TocData'
 
 const pollGameSizing = Sizing.pollGame
 
@@ -45,7 +46,22 @@ const useStyles = makeStyles({
   },
 })
 
-export default function PollGame({ voteInfo, teamInfo, tweetId, hasStarted }) {
+type Props = {
+  voteInfo: {
+    votes1?: number
+    votes2?: number
+  }
+  teamInfo: {
+    team1: TOCName
+    team2: TOCName
+    team1color: TOCColors
+    team2color: TOCColors
+  }
+  tweetId?: string
+  hasStarted: boolean
+}
+
+const PollGame: React.FC<Props> = ({ voteInfo, teamInfo, tweetId, hasStarted }) => {
   const classes = useStyles()
 
   const { team1, team2, team1color, team2color } = teamInfo
@@ -162,3 +178,5 @@ export default function PollGame({ voteInfo, teamInfo, tweetId, hasStarted }) {
     </svg>
   )
 }
+
+export default PollGame
