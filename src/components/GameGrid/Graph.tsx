@@ -197,18 +197,33 @@ const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
   const tooltipVoteCountFormatter = value => `${value} votes`
   const tooltipTimeElapsedFormatter = value => `${FormatDate.HoursMins.Long(value)} elapsed`
 
+  /**
+   * Creates an array with `length`, where each element is equal to its
+   * index multiplied by the `multiplier`.
+   *
+   * `length` is always rounded up, if decimal.
+   *
+   * @example createArrayOfLengthAndMultiplier(3, 2) = [0, 2, 4]
+   * @example createArrayOfLengthAndMultiplier(5, 6) = [0, 6, 12]
+   * @example createArrayOfLengthAndMultiplier(2.3, 0) = [0, 0, 0]
+   */
+  const createArrayOfLengthAndMultiplier = (length: number, multiplier: number): number[] => [...Array(Math.ceil(length))].map((_, i) => i * multiplier)
+
   return (
     <ResponsiveContainer width="100%" height={300} className={classes.graphContainer}>
-      <LineChart throttleDelay={50} data={data} margin={{ top: 5, right: 20, bottom: 12, left: 0 }}>
+      <LineChart
+        throttleDelay={50} // Delays tooltip showing to prevent insane CPU usage when hovering
+        data={data}
+        margin={{ bottom: 12 }}
+      >
         <Legend iconType="plainline" verticalAlign="top" height={24} align="center" />
 
         <CartesianGrid stroke="#bbb" strokeDasharray="2 2" />
 
         <XAxis
-          ticks={[...Array(Math.ceil((hoursElapsed + 1) / xAxisTickGap))].map((_, i) => i * 1000 * 60 * 60 * xAxisTickGap)}
+          ticks={createArrayOfLengthAndMultiplier((hoursElapsed + 1) / xAxisTickGap, 1000 * 60 * 60 * xAxisTickGap)}
           tickFormatter={(value: number) => {
-            // Convert ms to hours
-            const hour = value / 1000 / 60 / 60
+            const hour = value / 1000 / 60 / 60 // Convert ms to hours
             return `${hour}h`
           }}
           domain={[0, 'dataMax']}
@@ -218,7 +233,7 @@ const Graph: React.FunctionComponent<NewGraphProps> = function Graph(props) {
         />
 
         <YAxis
-          ticks={[...Array(Math.ceil((maxVotes + 100) / yAxisTickGap))].map((_, i) => i * yAxisTickGap)}
+          ticks={createArrayOfLengthAndMultiplier((maxVotes + 100) / yAxisTickGap, yAxisTickGap)}
           domain={[0, (dataMax: number) => Math.ceil((dataMax + 100) / yAxisTickGap) * yAxisTickGap]}
           label={{ value: 'Votes', position: 'insideLeft', angle: -90 }}
           {...commonAxisProps}
