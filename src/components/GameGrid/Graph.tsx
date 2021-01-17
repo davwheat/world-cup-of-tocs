@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { AxisInterval } from 'recharts/types/util/types'
-import { CurveType } from 'recharts/types/shape/Curve'
+import type { AxisInterval } from 'recharts/types/util/types'
+import type { CurveType } from 'recharts/types/shape/Curve'
 
 import { makeStyles } from '@material-ui/styles'
 import { GetTocColor, GetTocName } from '../../data/TocData'
