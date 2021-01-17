@@ -45,13 +45,13 @@ interface Props {
   large?: boolean
 }
 
-type CommonAxisPropsInterface = {
+interface CommonAxisPropsInterface {
   type: 'number' | 'category'
   fontSize: number
   interval: AxisInterval
 }
 
-type CommonLinePropsInterface = {
+interface CommonLinePropsInterface {
   dot: boolean
   type: CurveType
   strokeWidth: number
