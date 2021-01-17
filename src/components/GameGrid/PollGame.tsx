@@ -10,26 +10,26 @@ import { TOCColors, TOCName } from '../../data/TocData'
 
 const pollGameSizing = Sizing.pollGame
 
-type BackgroundGradientProps = {
-  teamNumber: number
-  gameData: {
-    teams: Record<number, string>
-    votes: Record<number, number>
-    votesPct: Record<number, number>
-  }
-  colors: FullColorData
-}
-
-type TeamColorData = {
+interface ITeamColorData {
   isLight: boolean
   normal: string
   alt: string
   gradientUuid: string
 }
 
-type FullColorData = {
-  0: TeamColorData
-  1: TeamColorData
+interface IFullColorData {
+  0: ITeamColorData
+  1: ITeamColorData
+}
+
+interface BackgroundGradientProps {
+  teamNumber: number
+  gameData: {
+    teams: Record<number, string>
+    votes: Record<number, number>
+    votesPct: Record<number, number>
+  }
+  colors: IFullColorData
 }
 
 /**
@@ -104,7 +104,7 @@ const PollGame: React.FC<Props> = ({ voteInfo, teamInfo, tweetId, hasStarted }) 
 
   const { team1, team2, team1color, team2color } = teamInfo
 
-  const colors: FullColorData = {
+  const colors: IFullColorData = {
     0: {
       isLight: Color(team1color).isLight(),
       normal: team1color,
