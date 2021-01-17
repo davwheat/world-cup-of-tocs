@@ -78,21 +78,64 @@ const TocCodeToNameMap = {
   '??': 'Unknown',
 } as const
 
+/**
+ * A valid TOC reporting code
+ *
+ * @example "sn" // Southern
+ * @example "tl" // Thameslink
+ */
 export type TOCCode = keyof typeof TocCodeToNameMap
+
+/**
+ * A valid TOC name
+ *
+ * @example "Southern"
+ * @example "Thameslink"
+ */
 export type TOCName = typeof TocCodeToNameMap[TOCCode]
+
+/**
+ * A valid TOC main branding colour, in hex format
+ *
+ * @example "#8cc63e" // Southern
+ */
 export type TOCColors = typeof TocColors[TOCCode]
 
 /**
- * Get a TOC's name from their two letter reporting mark.
+ * Get a TOC's name from their two letter reporting mark (case insensitive).
  *
- * @param {string} code
- * @returns {string}
+ * Returns "Unknown" if supplied an invalid mark.
+ *
+ * @example <caption>Example correct usage</caption>
+ * // returns "Southern"
+ * GetTocName("sn")
+ * @example <caption>Example using case insensitivity</caption>
+ * // returns "Thameslink"
+ * GetTocName("tL")
+ * @example <caption>Example using invalid argument</caption>
+ * // returns "Unknown"
+ * GetTocName("invalid")
  */
 function GetTocName(code: TOCCode): TOCName {
   const c = code.toString().toLowerCase()
-  return TocCodeToNameMap[c] || 'Unknown'
+  return TocCodeToNameMap[c] || TocCodeToNameMap['??']
 }
 
+/**
+ * Get a TOC's main branding color from their corresponding two letter reporting mark (case insensitive).
+ *
+ * Returns "#000" if supplied an invalid mark.
+ *
+ * @example <caption>Example correct usage</caption>
+ * // returns "#8cc63e"
+ * GetTocColor("sn")
+ * @example <caption>Example using case insensitivity</caption>
+ * // returns "#e9438d"
+ * GetTocColor("tL")
+ * @example <caption>Example using invalid argument</caption>
+ * // returns "#000"
+ * GetTocColor("invalid")
+ */
 function GetTocColor(code: TOCCode): TOCColors {
   const c = code.toString().toLowerCase()
   return TocColors[c] || '#000'
