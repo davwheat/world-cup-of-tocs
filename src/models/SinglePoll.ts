@@ -1,3 +1,4 @@
+import { VoteStates } from '../@types/enums'
 import { GetTocColor, GetTocName } from '../data/TocData'
 import TwitterInfo from './TwitterInfo'
 import VotesInfo from './VotesInfo'

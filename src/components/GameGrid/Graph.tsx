@@ -12,6 +12,7 @@ import FormatDate from '../../functions/formatDate'
 
 import dayjs from 'dayjs'
 import dayjsUtc from 'dayjs/plugin/utc'
+import { VoteStates } from '../../@types/enums'
 
 dayjs.extend(dayjsUtc)
 

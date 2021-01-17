@@ -12,12 +12,6 @@ declare global {
     }
   }
 
-  export enum VoteStates {
-    UPCOMING = 'UPCOMING',
-    IN_PROGRESS = 'IN_PROGRESS',
-    DONE = 'DONE',
-  }
-
   export interface IAPIResponse {
     apiVersion: string
     knockout: Record<number, ISinglePoll>

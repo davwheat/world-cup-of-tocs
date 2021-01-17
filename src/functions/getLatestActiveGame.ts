@@ -1,3 +1,4 @@
+import { VoteStates } from '../@types/enums'
 import SinglePoll from '../models/SinglePoll'
 
 const LatestToOldestStages: (keyof IGameData)[] = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
