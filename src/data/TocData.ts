@@ -34,6 +34,7 @@ const TocColors: Record<TOCCode, string> = {
   lm: '#ff8200',
   xr: '#0019a8',
   sx: '#6b717a',
+  '??': '#666',
 } as const
 
 /**
@@ -73,6 +74,8 @@ const TocCodeToNameMap = {
   // Unofficial below
   ni: 'Translink',
   ie: 'Irish Rail',
+  // Used if unknown
+  '??': 'Unknown',
 } as const
 
 export type TOCCode = keyof typeof TocCodeToNameMap
