@@ -20,7 +20,7 @@ export default class SinglePoll implements ISinglePoll {
   /**
    * Voting info about a poll. `null` if not started, otherwise has length of 2: `0` being the first option, and `1` being the second.
    */
-  votesInfo: VotesInfo | null
+  votesInfo: VotesInfo[] | null
 
   /**
    * Creates an instance of `SinglePoll`.
@@ -52,5 +52,5 @@ type ConstructorArgs = {
    * An array of two `VotesInfo` class instances.
    * @default null
    */
-  votesInfo?: VotesInfo
+  votesInfo?: VotesInfo[]
 }
