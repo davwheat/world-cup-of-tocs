@@ -30,46 +30,53 @@ declare global {
    * Defines how a single poll should look
    */
   export interface ISinglePoll {
-    /** Set to the midnight unix epoch of the day of the poll */
+    /**
+     * Timestamp of midnight UTC on the day of the poll */
     scheduledStartDay: number
 
     votingStatus: VoteStates
 
-    twitterInfo?: {
-      /** Tweet ID (not URL) */
-      tweetId: string
-      /** Actual UNIX epoch of poll start */
-      startTime: number
-      /** Actual UNIX epoch of poll end */
-      endTime: number
-      /** Time duration of poll */
-      durationMinutes: number
-    }
+    twitterInfo?: ITwitterInfo
 
-    /** Actual votes for each. Index 0 is the first option, Index 1 the other, etc */
-    votesInfo: [
-      {
-        /** Two letter ToC report mark, i.e. name */
-        tocReportingMark: import('../data/TocData').TOCCode
-        votes: number
-        /** Votes history */
-        votingHistory: {
-          /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
-          timestamp: number
-          votes: number
-        }
-      },
-      {
-        /** Two letter ToC report mark, i.e. name */
-        tocReportingMark: import('../data/TocData').TOCCode
-        votes: number
-        /** Votes history */
-        votingHistory: {
-          /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
-          timestamp: number
-          votes: number
-        }
-      }
-    ]
+    /**
+     * Actual votes for each TOC
+     */
+    votesInfo: IVotesInfo[]
+  }
+
+  export interface ITwitterInfo {
+    /**
+     * Tweet ID (not URL)
+     */
+    tweetId: string
+    /**
+     * Unix timestamp of poll start
+     */
+    startTime: number
+    /**
+     * Unix timestamp where poll will or did end
+     */
+    endTime: number
+    /**
+     * Duration of poll in minutes
+     */
+    durationMinutes: number
+  }
+  export interface IVotesInfo {
+    /**
+     * Two letter TOC reporting mark
+     */
+    tocReportingMark: import('../data/TocData').TOCCode
+    votes: number
+    /**
+     * Voting history
+     */
+    votingHistory: {
+      /**
+       * UNIX timestamp of time when this vote count was active
+       */
+      timestamp: number
+      votes: number
+    }[]
   }
 }
