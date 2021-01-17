@@ -1,4 +1,4 @@
-import { TOCCode } from '../data/TocData'
+import { TOCCode, TOCColors, TOCName } from '../data/TocData'
 import SinglePoll from '../models/SinglePoll'
 
 declare global {
@@ -91,5 +91,11 @@ declare global {
      */
     timestamp: number
     votes: number
+  }
+
+  export interface ITeamData {
+    name: TOCName
+    code: TOCCode
+    mainColor: TOCColors
   }
 }

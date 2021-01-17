@@ -1,3 +1,4 @@
+import { GetTocColor, GetTocName } from '../data/TocData'
 import TwitterInfo from './TwitterInfo'
 import VotesInfo from './VotesInfo'
 
@@ -30,6 +31,22 @@ export default class SinglePoll implements ISinglePoll {
     this.votingStatus = votingStatus
     this.twitterInfo = twitterInfo
     this.votesInfo = votesInfo
+  }
+
+  getTeamData(): [ITeamData, ITeamData] {
+    const team1Data: ITeamData = {
+      code: this.votesInfo[0].tocReportingMark,
+      name: GetTocName(this.votesInfo[0].tocReportingMark),
+      mainColor: GetTocColor(this.votesInfo[0].tocReportingMark),
+    }
+
+    const team2Data: ITeamData = {
+      code: this.votesInfo[1].tocReportingMark,
+      name: GetTocName(this.votesInfo[1].tocReportingMark),
+      mainColor: GetTocColor(this.votesInfo[1].tocReportingMark),
+    }
+
+    return [team1Data, team2Data]
   }
 }
 
