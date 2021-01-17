@@ -5,7 +5,7 @@ import { withStyles, WithStyles } from '@material-ui/styles'
 import { Paragraph, Shout } from '../typography'
 import Link from './Link'
 
-type ErrorBoundaryState = {
+interface ErrorBoundaryState {
   hasError: boolean
 }
 
