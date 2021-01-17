@@ -71,12 +71,14 @@ declare global {
     /**
      * Voting history
      */
-    votingHistory: {
-      /**
-       * UNIX timestamp of time when this vote count was active
-       */
-      timestamp: number
-      votes: number
-    }[]
+    votingHistory: IVotingHistoryEntry[]
+  }
+
+  export interface IVotingHistoryEntry {
+    /**
+     * UNIX timestamp of time when this vote count was active
+     */
+    timestamp: number
+    votes: number
   }
 }

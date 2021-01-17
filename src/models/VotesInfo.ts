@@ -14,7 +14,7 @@ export default class VotesInfo implements IVotesInfo {
   /**
    * Vote history over time. Usually taken every few mins, but depends on Twitter API's update rate. `null` if poll hasn't started.
    */
-  votingHistory: VotingHistoryEntry[] | null
+  votingHistory: IVotingHistoryEntry[] | null
 
   /**
    * Creates an instance of VotesInfo.
@@ -38,10 +38,5 @@ type ConstructorArgs = {
   /**
    * Vote history over time. Usually taken every few mins, but depends on Twitter API's update rate. `null` if poll hasn't started.
    */
-  votingHistory: VotingHistoryEntry[] | null
-}
-
-type VotingHistoryEntry = {
-  timestamp: number
-  votes: number
+  votingHistory: IVotingHistoryEntry[] | null
 }
