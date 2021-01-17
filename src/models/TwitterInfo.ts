@@ -4,7 +4,7 @@
  * @export
  * @class TwitterInfo
  */
-export default class TwitterInfo {
+export default class TwitterInfo implements ITwitterInfo {
   /**
    * ID of the poll's tweet
    *

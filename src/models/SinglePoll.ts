@@ -1,7 +1,7 @@
 import TwitterInfo from './TwitterInfo'
 import VotesInfo from './VotesInfo'
 
-export default class SinglePoll {
+export default class SinglePoll implements ISinglePoll {
   /**
    * UTC midnight on day of the poll
    *

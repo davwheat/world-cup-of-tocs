@@ -1,6 +1,6 @@
 import { TOCCode } from '../data/TocData'
 
-export default class VotesInfo {
+export default class VotesInfo implements IVotesInfo {
   /**
    * A valid TOC reporting mark.
    *
