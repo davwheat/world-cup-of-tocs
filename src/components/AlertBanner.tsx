@@ -33,11 +33,11 @@ interface Props {
    */
   message: string
   /**
-   * Remove top and bottom padding
+   * Removes top and bottom padding
    */
   noPadding?: boolean
   /**
-   * Move slightly up to improve spacing under a heading
+   * Moves up slightly to improve spacing under a heading
    */
   afterHeading?: boolean
   /**
