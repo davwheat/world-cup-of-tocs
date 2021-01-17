@@ -1,4 +1,5 @@
-export {}
+import { TOCCode } from '../data/TocData'
+import SinglePoll from '../models/SinglePoll'
 
 declare global {
   export enum VoteStates {
@@ -18,12 +19,12 @@ declare global {
   }
 
   export interface IGameData {
-    knockout: Record<number, import('../models/SinglePoll').default>
-    groupStages: Record<number, import('../models/SinglePoll').default>
-    quarterFinal: Record<number, import('../models/SinglePoll').default>
-    semiFinal: Record<number, import('../models/SinglePoll').default>
-    runnerUp: import('../models/SinglePoll').default
-    final: import('../models/SinglePoll').default
+    knockout: Record<number, SinglePoll>
+    groupStages: Record<number, SinglePoll>
+    quarterFinal: Record<number, SinglePoll>
+    semiFinal: Record<number, SinglePoll>
+    runnerUp: SinglePoll
+    final: SinglePoll
   }
 
   /**
@@ -66,7 +67,7 @@ declare global {
     /**
      * Two letter TOC reporting mark
      */
-    tocReportingMark: import('../data/TocData').TOCCode
+    tocReportingMark: TOCCode
     votes: number
     /**
      * Voting history
