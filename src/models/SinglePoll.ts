@@ -25,7 +25,7 @@ export default class SinglePoll implements ISinglePoll {
   /**
    * Creates an instance of `SinglePoll`.
    */
-  constructor({ scheduledStartDay, votingStatus = VoteStates.UPCOMING, twitterInfo = null, votesInfo = null }: ConstructorArgs) {
+  constructor({ scheduledStartDay, votingStatus = VoteStates.UPCOMING, twitterInfo = null, votesInfo = null }: IConstructorArgs) {
     this.scheduledStartDay = typeof scheduledStartDay === 'number' ? scheduledStartDay : new Date(scheduledStartDay).getTime()
     this.votingStatus = votingStatus
     this.twitterInfo = twitterInfo
@@ -33,7 +33,7 @@ export default class SinglePoll implements ISinglePoll {
   }
 }
 
-type ConstructorArgs = {
+interface IConstructorArgs {
   /**
    * The day that the game is scheduled to start, represented as a Unix timestamp at midnight UTC on the day, or a ISO date string.
    */

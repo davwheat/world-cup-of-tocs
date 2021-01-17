@@ -19,14 +19,14 @@ export default class VotesInfo implements IVotesInfo {
   /**
    * Creates an instance of VotesInfo.
    */
-  constructor({ tocReportingMark, votes = null, votingHistory = null }: ConstructorArgs) {
+  constructor({ tocReportingMark, votes = null, votingHistory = null }: IConstructorArgs) {
     this.tocReportingMark = tocReportingMark
     this.votes = votes
     this.votingHistory = votingHistory
   }
 }
 
-type ConstructorArgs = {
+interface IConstructorArgs {
   /**
    * A valid TOC reporting mark.
    */

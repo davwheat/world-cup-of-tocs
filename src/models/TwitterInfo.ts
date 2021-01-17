@@ -28,7 +28,7 @@ export default class TwitterInfo implements ITwitterInfo {
   /**
    * Creates an instance of TwitterInfo.
    */
-  constructor({ tweetId, startTime, endTime, durationMinutes }: ConstructorArgs) {
+  constructor({ tweetId, startTime, endTime, durationMinutes }: IConstructorArgs) {
     this.tweetId = tweetId
     this.startTime = typeof startTime === 'number' ? startTime : new Date(startTime).getTime()
     this.endTime = typeof endTime === 'number' ? endTime : new Date(endTime).getTime()
@@ -36,7 +36,7 @@ export default class TwitterInfo implements ITwitterInfo {
   }
 }
 
-type ConstructorArgs = {
+interface IConstructorArgs {
   /**
    * ID of the poll's tweet
    */
