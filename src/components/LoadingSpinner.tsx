@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
+interface Props {
   /**
    * Show "Loading" text under spinner
    */

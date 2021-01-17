@@ -1,13 +1,9 @@
-import { GameData, APIResponse } from '../components/GameGrid/Graph'
 import SinglePoll from '../models/SinglePoll'
 import TwitterInfo from '../models/TwitterInfo'
 import VotesInfo from '../models/VotesInfo'
 
-/**
- * @returns {{ knockout: { number: SinglePoll }, groupStages: { number: SinglePoll }, quarterFinal: { number: SinglePoll }, semiFinal: { number: SinglePoll }, runnerUp: SinglePoll, final: SinglePoll }}
- **/
-export default function createSinglePollsFromApiData(jsonData: APIResponse): GameData {
-  let newData = {
+export default function createSinglePollsFromApiData(jsonData: IAPIResponse): IGameData {
+  const newData = {
     knockout: {},
     groupStages: {},
     quarterFinal: {},
@@ -16,12 +12,13 @@ export default function createSinglePollsFromApiData(jsonData: APIResponse): Gam
     final: null,
   }
 
-  let { apiVersion, ...realJsonData } = jsonData
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { apiVersion, ...realJsonData } = jsonData
 
   const createAllSinglePolls = stage => key => {
     const thisJsonItem = realJsonData[stage][key]
 
-    let poll = new SinglePoll({
+    const poll = new SinglePoll({
       scheduledStartDay: thisJsonItem.scheduledStartDay,
       votingStatus: thisJsonItem.votingStatus,
       votesInfo: [

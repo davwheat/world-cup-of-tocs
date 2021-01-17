@@ -9,7 +9,7 @@ type ErrorBoundaryState = {
   hasError: boolean
 }
 
-type Props = {} & WithStyles<typeof useStyles>
+type Props = WithStyles<typeof useStyles>
 
 const useStyles = () => ({
   root: {
@@ -27,7 +27,12 @@ class ErrorBoundary extends React.Component<Props, ErrorBoundaryState> {
 
   static getDerivedStateFromError(error) {
     // Update state so the next render will show the fallback UI.
-    if (process.env.NODE_ENV !== 'development') return { hasError: true }
+
+    if (process.env.NODE_ENV !== 'development') {
+      console.error(error)
+
+      return { hasError: true }
+    }
   }
 
   // componentDidCatch(error, errorInfo) {
@@ -45,6 +50,7 @@ class ErrorBoundary extends React.Component<Props, ErrorBoundaryState> {
           <Shout>Uh oh, something went wrong.</Shout>
           <Paragraph bold>It's not you, it's us.</Paragraph>
           <Paragraph>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             Please try <Link onClick={() => window.location.reload()}>refreshing the page</Link>.
           </Paragraph>
           <Paragraph>

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
+interface Props {
   /**
    * Alert title
    */

@@ -39,7 +39,8 @@ const Footer: React.FC = () => {
       <Whisper>
         Website version {version}
         <BulletSeparator />
-        <Link onClick={() => (window as any).cookiehub.openSettings()}>Cookie settings</Link>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <Link onClick={() => window.cookiehub.openSettings()}>Cookie settings</Link>
       </Whisper>
 
       <div className={classes.contactLinks}>

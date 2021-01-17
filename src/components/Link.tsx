@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
+interface Props {
   /**
    * Is the link to another page on this site
    */

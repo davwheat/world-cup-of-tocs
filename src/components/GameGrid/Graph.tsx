@@ -1,17 +1,19 @@
 import React from 'react'
 
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { AxisInterval } from 'recharts/types/util/types'
+import { CurveType } from 'recharts/types/shape/Curve'
 
 import { makeStyles } from '@material-ui/styles'
-import { GetTocColor, GetTocName, TOCCode } from '../../data/TocData'
-// import { mockGraph } from './Rounds/mockGraph'
+import { GetTocColor, GetTocName } from '../../data/TocData'
+import SinglePoll from '../../models/SinglePoll'
+
+import FormatDate from '../../functions/formatDate'
 
 import dayjs from 'dayjs'
 import dayjsUtc from 'dayjs/plugin/utc'
-import FormatDate from '../../functions/formatDate'
-import { AxisInterval } from 'recharts/types/util/types'
-import { CurveType } from 'recharts/types/shape/Curve'
-import SinglePoll from '../../models/SinglePoll'
+
+dayjs.extend(dayjsUtc)
 
 /***************************************************
  ***************** CONFIG SETTINGS *****************
@@ -31,81 +33,7 @@ const xAxisTickGap = 1
  *************** END CONFIG SETTINGS ***************
  ***************************************************/
 
-dayjs.extend(dayjsUtc)
-
-export enum VoteStates {
-  UPCOMING = 'UPCOMING',
-  IN_PROGRESS = 'IN_PROGRESS',
-  DONE = 'DONE',
-}
-
-/**
- * Defines how a single poll should look
- */
-export type ISinglePoll = {
-  /** Set to the midnight unix epoch of the day of the poll */
-  scheduledStartDay: number
-
-  votingStatus: VoteStates
-
-  twitterInfo?: {
-    /** Tweet ID (not URL) */
-    tweetId: string
-    /** Actual UNIX epoch of poll start */
-    startTime: number
-    /** Actual UNIX epoch of poll end */
-    endTime: number
-    /** Time duration of poll */
-    durationMinutes: number
-  }
-
-  /** Actual votes for each. Index 0 is the first option, Index 1 the other, etc */
-  votesInfo: [
-    {
-      /** Two letter ToC report mark, i.e. name */
-      tocReportingMark: TOCCode
-      votes: number
-      /** Votes history */
-      votingHistory: {
-        /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
-        timestamp: number
-        votes: number
-      }
-    },
-    {
-      /** Two letter ToC report mark, i.e. name */
-      tocReportingMark: TOCCode
-      votes: number
-      /** Votes history */
-      votingHistory: {
-        /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
-        timestamp: number
-        votes: number
-      }
-    },
-  ]
-}
-
-export type APIResponse = {
-  apiVersion: string
-  knockout: Record<number, ISinglePoll>
-  groupStages: Record<number, ISinglePoll>
-  quarterFinal: Record<number, ISinglePoll>
-  semiFinal: Record<number, ISinglePoll>
-  runnerUp: ISinglePoll
-  final: ISinglePoll
-}
-
-export type GameData = {
-  knockout: Record<number, SinglePoll>
-  groupStages: Record<number, SinglePoll>
-  quarterFinal: Record<number, SinglePoll>
-  semiFinal: Record<number, SinglePoll>
-  runnerUp: SinglePoll
-  final: SinglePoll
-}
-
-type Props = {
+interface Props {
   /**
    * Poll for this graph
    */
@@ -157,8 +85,8 @@ const Graph: React.FC<Props> = function Graph({ poll, large }) {
   // const poll = mockGraph
 
   if (poll.votingStatus === VoteStates.UPCOMING) {
-    return null // As the vote is not yet open
-  }
+    return null
+  } // As the vote is not yet open
 
   const classes = useStyles()
 
@@ -201,7 +129,7 @@ const Graph: React.FC<Props> = function Graph({ poll, large }) {
     }),
   ]
 
-  let hoursElapsed = Math.floor(timeElapsed / 1000 / 60 / 60)
+  const hoursElapsed = Math.floor(timeElapsed / 1000 / 60 / 60)
 
   const commonAxisProps: CommonAxisPropsInterface = {
     type: 'number',
@@ -217,7 +145,7 @@ const Graph: React.FC<Props> = function Graph({ poll, large }) {
   }
 
   const tooltipVoteCountFormatter = value => `${value} votes`
-  const tooltipTimeElapsedFormatter = value => `${FormatDate.HoursMins.Long(value)} elapsed`
+  const tooltipTimeElapsedFormatter = value => `${FormatDate.HoursMinsLong(value)} elapsed`
 
   /**
    * Creates an array with `length`, where each element is equal to its

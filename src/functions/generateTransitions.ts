@@ -4,7 +4,7 @@ const Durations = {
   short: 125,
 } as const
 
-const DefaultDuration = Durations['medium']
+const DefaultDuration = Durations.medium
 const DefaultEasing = 'ease-in-out'
 
 /**
@@ -19,18 +19,18 @@ export default function generateTransitions(
   duration: keyof typeof Durations | (keyof typeof Durations)[] = 'medium',
   easing: string | string[] = 'ease-in-out',
 ): { transition: string } {
-  const propsIsArray = Array.isArray(property),
-    durationIsArray = Array.isArray(duration),
-    easingIsArray = Array.isArray(easing)
+  const propsIsArray = Array.isArray(property)
+  const durationIsArray = Array.isArray(duration)
+  const easingIsArray = Array.isArray(easing)
 
   if (propsIsArray) {
     // we have multiple transitions to generate
-    let endTransition = { transition: '' }
+    const endTransition = { transition: '' }
 
-    // @ts-ignore This is definitely an array.
+    // @ts-expect-error: This is definitely an array.
     property.forEach((prop: string, i: string | number) => {
-      let _easing = easing || DefaultEasing,
-        _duration
+      let _easing = easing || DefaultEasing
+      let _duration
 
       /*
         if we have multiple easing/duration values, use, in desc. order:
@@ -44,15 +44,13 @@ export default function generateTransitions(
         // use manual ms input, failing that use string-based values as explained above
         _duration = typeof duration[i] === 'number' ? duration[i] : Durations[duration[i]] || Durations[easing[easing.length - 1]] || DefaultDuration
       } else {
-        // @ts-ignore `duration` is definitely not an array.
+        // @ts-expect-error: `duration` is definitely not an array.
         _duration = typeof duration === 'number' ? duration : Durations[duration] || DefaultDuration
       }
 
-      if (easingIsArray) {
-        _easing = easing[i] || easing[easing.length - 1] || DefaultEasing
-      }
+      if (easingIsArray) _easing = easing[i] || easing[easing.length - 1] || DefaultEasing
 
-      let thisTrans = createTransitionValue(prop, _duration, _easing)
+      const thisTrans = createTransitionValue(prop, _duration, _easing)
 
       // append this transition's string value, with comma if there has been values before it
       endTransition.transition = endTransition.transition + (endTransition.transition === '' ? thisTrans : `, ${thisTrans}`)
@@ -62,8 +60,8 @@ export default function generateTransitions(
   } else {
     // only one value to transition
 
-    let _easing = easing || DefaultEasing,
-      _duration
+    let _easing = easing || DefaultEasing
+    let _duration
 
     /*
       if we have multiple easing/duration values, use, in desc. order:
@@ -76,13 +74,11 @@ export default function generateTransitions(
       // use manual ms input, failing that use string-based values as explained above
       _duration = typeof duration[0] === 'number' ? duration[0] : Durations[duration[0]] || DefaultDuration
     } else {
-      // @ts-ignore `duration` is definitely not an array.
+      // @ts-expect-error: `duration` is definitely not an array.
       _duration = typeof duration === 'number' ? duration : Durations[duration] || DefaultDuration
     }
 
-    if (easingIsArray) {
-      _easing = easing[0] || DefaultEasing
-    }
+    if (easingIsArray) _easing = easing[0] || DefaultEasing
 
     return {
       transition: createTransitionValue(property, _duration, _easing),

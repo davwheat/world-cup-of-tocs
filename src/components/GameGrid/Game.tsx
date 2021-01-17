@@ -5,15 +5,14 @@ import { Whisper } from '../../typography'
 import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
-import { GameData } from './Graph'
 
 const DataRefreshInterval = 60
 
-const Game: R.FC = () => {
+const Game: React.FC = () => {
   const countdownElRef = useRef<HTMLSpanElement>(null)
   const countdownSecsRef = useRef<number>(DataRefreshInterval)
 
-  const [gameData, setGameData] = useState<GameData>(null)
+  const [gameData, setGameData] = useState<IGameData>(null)
   const [error, setError] = useState<string>(null)
 
   async function handleResponse(response) {
@@ -41,7 +40,7 @@ const Game: R.FC = () => {
 
     if (!gameData) {
       // Fetch data
-      var controller = new AbortController()
+      const controller = new AbortController()
       RefreshData(controller)
 
       return () => {

@@ -5,7 +5,6 @@ import { Paragraph, Shout } from '../../typography'
 import Loud from '../../typography/loud'
 import TextContainer from '../TextContainer'
 import ActiveGame from './ActiveGame'
-import { GameData } from './Graph'
 
 import KnockoutRounds from './Rounds/KnockoutRounds'
 
@@ -16,8 +15,8 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
-  gameData: GameData
+interface Props {
+  gameData: IGameData
 }
 
 const GameBoard: React.FC<Props> = ({ gameData }: Props) => {

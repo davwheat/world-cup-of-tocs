@@ -11,7 +11,7 @@ import FormatDate from '../../../functions/formatDate'
 import clsx from 'clsx'
 import SinglePoll from '../../../models/SinglePoll'
 
-type Props = {
+interface Props {
   data: SinglePoll
   /**
    * Removes the small date above the game.
@@ -72,7 +72,7 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
       <div>
         {large && (
           <Paragraph bold center>
-            Ending in {FormatDate.HoursMins.Long(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
+            Ending in {FormatDate.HoursMinsLong(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
           </Paragraph>
         )}
         <PollGame

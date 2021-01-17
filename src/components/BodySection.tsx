@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
+interface Props {
   noSpacing?: boolean
   className?: string
   noMaxWidth?: boolean

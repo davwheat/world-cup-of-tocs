@@ -18,8 +18,8 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
-  color: 'dark' | 'light'
+interface Props {
+  color?: 'dark' | 'light'
 }
 
 const BulletSeparator: React.FC<Props> = ({ color = 'dark' }) => {

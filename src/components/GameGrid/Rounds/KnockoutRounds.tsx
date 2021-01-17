@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 type KnockoutRoundData = Record<number, SinglePoll>
 
-type Props = {
+interface Props {
   knockoutRoundData: KnockoutRoundData
 }
 

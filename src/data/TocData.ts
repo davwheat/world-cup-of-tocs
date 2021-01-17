@@ -86,12 +86,12 @@ export type TOCColors = typeof TocColors[TOCCode]
  * @returns {string}
  */
 function GetTocName(code: TOCCode): TOCName {
-  let c = code.toString().toLowerCase()
+  const c = code.toString().toLowerCase()
   return TocCodeToNameMap[c] || 'Unknown'
 }
 
 function GetTocColor(code: TOCCode): TOCColors {
-  let c = code.toString().toLowerCase()
+  const c = code.toString().toLowerCase()
   return TocColors[c] || '#000'
 }
 

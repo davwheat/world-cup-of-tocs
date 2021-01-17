@@ -1,4 +1,3 @@
-import { VoteStates } from '../components/GameGrid/Graph'
 import TwitterInfo from './TwitterInfo'
 import VotesInfo from './VotesInfo'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
 
-type Props = {
+interface Props {
   /**
    * Page title
    */

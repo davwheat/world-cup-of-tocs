@@ -10,6 +10,44 @@ import { TOCColors, TOCName } from '../../data/TocData'
 
 const pollGameSizing = Sizing.pollGame
 
+type BackgroundGradientProps = {
+  teamNumber: number
+  gameData: {
+    teams: Record<number, string>
+    votes: Record<number, number>
+    votesPct: Record<number, number>
+  }
+  colors: FullColorData
+}
+
+type TeamColorData = {
+  isLight: boolean
+  normal: string
+  alt: string
+  gradientUuid: string
+}
+
+type FullColorData = {
+  0: TeamColorData
+  1: TeamColorData
+}
+
+/**
+ * Used to generate the gradient used to show vote progress
+ */
+const BackgroundGradient: React.FC<BackgroundGradientProps> = ({ teamNumber, gameData, colors }) => {
+  const votePct = `${gameData.votesPct[teamNumber]}%`
+
+  return (
+    <linearGradient id={colors[teamNumber].gradientUuid}>
+      <stop offset="0%" stopColor={colors[teamNumber].alt} />
+      <stop offset={votePct} stopColor={colors[teamNumber].alt} />
+      <stop offset={votePct} stopColor={colors[teamNumber].normal} />
+      <stop offset="100%" stopColor={colors[teamNumber].normal} />
+    </linearGradient>
+  )
+}
+
 const useStyles = makeStyles({
   root: {
     overflow: 'visible',
@@ -46,7 +84,7 @@ const useStyles = makeStyles({
   },
 })
 
-type Props = {
+interface Props {
   voteInfo: {
     votes1?: number
     votes2?: number
@@ -66,16 +104,18 @@ const PollGame: React.FC<Props> = ({ voteInfo, teamInfo, tweetId, hasStarted }) 
 
   const { team1, team2, team1color, team2color } = teamInfo
 
-  const colors = {
+  const colors: FullColorData = {
     0: {
       isLight: Color(team1color).isLight(),
       normal: team1color,
       gradientUuid: uuid(),
+      alt: Color(team1color).isLight() ? Color(team1color).darken(0.2) : Color(team1color).lighten(0.2),
     },
     1: {
       isLight: Color(team2color).isLight(),
       normal: team2color,
       gradientUuid: uuid(),
+      alt: Color(team2color).isLight() ? Color(team2color).darken(0.2) : Color(team2color).lighten(0.2),
     },
   }
 
@@ -118,34 +158,17 @@ const PollGame: React.FC<Props> = ({ voteInfo, teamInfo, tweetId, hasStarted }) 
     return Math.round((votes / totalVotes) * 100 * 100) / 100
   }
 
-  function generateBackgroundGradient(index) {
-    const votePct = gameData.votesPct[index] + '%'
-
-    return (
-      <linearGradient id={colors[index].gradientUuid}>
-        <stop offset="0%" stopColor={colors[index].alt} />
-        <stop offset={votePct} stopColor={colors[index].alt} />
-        <stop offset={votePct} stopColor={colors[index].normal} />
-        <stop offset="100%" stopColor={colors[index].normal} />
-      </linearGradient>
-    )
-  }
-
   const gameData = {
     teams: { 0: team1, 1: team2 },
     votes: { 0: votes1, 1: votes2 },
     votesPct: { 0: generateVotePercentage(votes1), 1: generateVotePercentage(votes2) },
   }
 
-  // Create alt colours
-  colors[0].alt = colors[0].isLight ? Color(colors[0].normal).darken(0.2) : Color(colors[0].normal).lighten(0.2)
-  colors[1].alt = colors[1].isLight ? Color(colors[1].normal).darken(0.2) : Color(colors[1].normal).lighten(0.2)
-
   return (
     <svg viewBox={`0 0 ${pollGameSizing.width} ${pollGameSizing.height}`} width={pollGameSizing.width} className={classes.root}>
       <defs>
-        {generateBackgroundGradient(0)}
-        {generateBackgroundGradient(1)}
+        <BackgroundGradient teamNumber={0} colors={colors} gameData={gameData} />
+        <BackgroundGradient teamNumber={1} colors={colors} gameData={gameData} />
       </defs>
       <a className={classes.rect} target="_blank" href={generateTwitterUrl(tweetId)} rel="noreferrer">
         <title>{`${gameData.votes[0]} votes`}</title>

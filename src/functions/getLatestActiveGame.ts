@@ -1,17 +1,15 @@
-import { GameData, VoteStates } from '../components/GameGrid/Graph'
 import SinglePoll from '../models/SinglePoll'
-import SinglePollClass from '../models/SinglePoll'
 
-const LatestToOldestStages: (keyof GameData)[] = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
+const LatestToOldestStages: (keyof IGameData)[] = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
 
-export default function getLatestActiveGame(data: GameData): SinglePoll {
+export default function getLatestActiveGame(data: IGameData): SinglePoll {
   let returnValue = null
 
   LatestToOldestStages.every(stage => {
     const allGames = data[stage]
 
     // final and runnerUp are instances of SinglePoll
-    if (allGames instanceof SinglePollClass) {
+    if (allGames instanceof SinglePoll) {
       if (allGames.votingStatus === VoteStates.IN_PROGRESS) {
         returnValue = allGames
         return false

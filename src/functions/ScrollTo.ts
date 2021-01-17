@@ -3,7 +3,7 @@ import { RefObject } from 'react'
 /**
  * Scroll to a position on the page.
  */
-function ScrollTo(top: number) {
+function ScrollTo(top: number): void {
   window.scroll({
     top,
     behavior: 'smooth',
@@ -13,7 +13,7 @@ function ScrollTo(top: number) {
 /**
  * Scroll to a an element, determined by a specified ID.
  */
-ScrollTo.ID = function ScrollToID(elementId: string) {
+ScrollTo.ID = function ScrollToID(elementId: string): boolean {
   if (!elementId) return false
 
   const element = document.getElementById(elementId)
@@ -27,7 +27,7 @@ ScrollTo.ID = function ScrollToID(elementId: string) {
 /**
  * Scroll to a an element, determined by a reference to the element.
  */
-ScrollTo.Element = function ScrollToElement(element: HTMLElement) {
+ScrollTo.Element = function ScrollToElement(element: HTMLElement): boolean {
   if (!element) return false
 
   const rect = element.getBoundingClientRect()
@@ -41,7 +41,7 @@ ScrollTo.Element = function ScrollToElement(element: HTMLElement) {
 /**
  * Scroll to a an element, determined by a React element ref.
  */
-ScrollTo.Ref = function ScrollToRef(ref: RefObject<HTMLElement>) {
+ScrollTo.Ref = function ScrollToRef(ref: RefObject<HTMLElement>): boolean {
   const element = ref.current
   if (!element) return false
 
