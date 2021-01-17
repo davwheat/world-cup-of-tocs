@@ -17,7 +17,7 @@ const DefaultEasing = 'ease-in-out'
 export default function generateTransitions(
   property: string | string[],
   duration: keyof typeof Durations | (keyof typeof Durations)[] = 'medium',
-  easing: string | string[] = 'ease-in-out',
+  easing: string | string[] = 'ease-in-out'
 ): { transition: string } {
   const propsIsArray = Array.isArray(property)
   const durationIsArray = Array.isArray(duration)

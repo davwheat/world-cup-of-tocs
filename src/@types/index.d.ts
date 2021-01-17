@@ -69,7 +69,7 @@ declare global {
           timestamp: number
           votes: number
         }
-      },
+      }
     ]
   }
 }
