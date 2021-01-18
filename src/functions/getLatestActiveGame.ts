@@ -1,7 +1,7 @@
 import { VoteStates } from '../@types/enums'
 import SinglePoll from '../models/SinglePoll'
 
-const LatestToOldestStages: (keyof IGameData)[] = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
+const LatestToOldestStages: Array<keyof IGameData> = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
 
 export default function getLatestActiveGame(data: IGameData): SinglePoll {
   let returnValue = null
