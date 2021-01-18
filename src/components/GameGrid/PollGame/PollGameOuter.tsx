@@ -50,13 +50,13 @@ const PollGameOuter: React.FC<Props> = ({ voteInfo, teamData: oldTeamData, tweet
   teamData[0] = {
     ...teamData[0],
     gradientUuid: uuid(),
-    alt: teamData[0].isMainColorLight ? Color(teamData[0].mainColor).darken(0.2) : Color(teamData[0].mainColor).lighten(0.2),
+    altColor: teamData[0].isMainColorLight ? Color(teamData[0].mainColor).darken(0.2) : Color(teamData[0].mainColor).lighten(0.2),
   }
 
   teamData[1] = {
     ...teamData[1],
     gradientUuid: uuid(),
-    alt: teamData[1].isMainColorLight ? Color(teamData[1].mainColor).darken(0.2) : Color(teamData[1].mainColor).lighten(0.2),
+    altColor: teamData[1].isMainColorLight ? Color(teamData[1].mainColor).darken(0.2) : Color(teamData[1].mainColor).lighten(0.2),
   }
 
   const totalVotes = voteInfo.votes1 + voteInfo.votes2

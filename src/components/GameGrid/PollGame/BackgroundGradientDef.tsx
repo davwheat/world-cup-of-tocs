@@ -4,7 +4,13 @@ import generateVotePercentage from '../../../functions/generateVotePercentage'
 
 interface ITeamDataAdditions {
   isMainColorLight?: boolean
-  alt?: string
+  /**
+   * Alternate colour used for contrast on the vote "progress bar"
+   */
+  altColor?: string
+  /**
+   * Used to represent the gradient and use it as a background
+   */
   gradientUuid?: string
 }
 
@@ -24,8 +30,8 @@ const BackgroundGradientDef: React.FC<BackgroundGradientProps> = ({ teamData, vo
 
   return (
     <linearGradient id={teamData.gradientUuid}>
-      <stop offset="0%" stopColor={teamData.alt} />
-      <stop offset={votePct} stopColor={teamData.alt} />
+      <stop offset="0%" stopColor={teamData.altColor} />
+      <stop offset={votePct} stopColor={teamData.altColor} />
       <stop offset={votePct} stopColor={teamData.mainColor} />
       <stop offset="100%" stopColor={teamData.mainColor} />
     </linearGradient>
