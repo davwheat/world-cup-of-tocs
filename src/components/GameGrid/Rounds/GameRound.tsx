@@ -5,10 +5,8 @@ import PollGame from '../PollGame'
 import { Paragraph, Whisper } from '../../../typography'
 
 import { makeStyles } from '@material-ui/styles'
-
-import { GetTocColor, GetTocName } from '../../../data/TocData'
-import FormatDate from '../../../functions/formatDate'
 import clsx from 'clsx'
+import FormatDate from '../../../functions/formatDate'
 import SinglePoll from '../../../models/SinglePoll'
 
 interface Props {
@@ -47,20 +45,9 @@ const useStyles = makeStyles({
 
 /**
  * Shows a `PollGame` and `Graph` for a specified game, provided as a `SinglePoll`.
- *
- * @export
- * @param {Props} props
- * @return {React.ReactNode}
  */
 const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
   const classes = useStyles()
-
-  const teamInfo = {
-    team1: GetTocName(data.votesInfo[0].tocReportingMark),
-    team2: GetTocName(data.votesInfo[1].tocReportingMark),
-    team1color: GetTocColor(data.votesInfo[0].tocReportingMark),
-    team2color: GetTocColor(data.votesInfo[1].tocReportingMark),
-  }
 
   return (
     <div className={clsx(classes.gameContainer, large && classes.large)}>
@@ -72,11 +59,11 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
       <div>
         {large && (
           <Paragraph bold center>
-            Ending in {FormatDate.HoursMins.Long(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
+            Ending in {FormatDate.HoursMinsLong(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
           </Paragraph>
         )}
         <PollGame
-          teamInfo={teamInfo}
+          teamData={data.getTeamData()}
           hasStarted={data.votingStatus !== 'UPCOMING'}
           voteInfo={{
             votes1: data.votesInfo[0].votes,

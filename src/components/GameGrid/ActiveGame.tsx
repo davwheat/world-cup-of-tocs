@@ -1,13 +1,12 @@
 import React from 'react'
 
-import { GameData } from './Graph'
 import GameRound from './Rounds/GameRound'
 
 import { makeStyles } from '@material-ui/styles'
 import getLatestActiveGame from '../../functions/getLatestActiveGame'
 
 interface Props {
-  data: GameData
+  data: IGameData
 }
 
 const useStyles = makeStyles({

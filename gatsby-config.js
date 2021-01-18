@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const __IS_DEV__ = process.env.NODE_ENV !== 'production'
 
 // These plugins will only be used in production builds

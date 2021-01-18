@@ -1,17 +1,19 @@
 import React from 'react'
 
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import type { AxisInterval } from 'recharts/types/util/types'
+import type { CurveType } from 'recharts/types/shape/Curve'
 
 import { makeStyles } from '@material-ui/styles'
-import { GetTocColor, GetTocName } from '../../data/TocData'
-// import { mockGraph } from './Rounds/mockGraph'
+import SinglePoll from '../../models/SinglePoll'
+
+import FormatDate from '../../functions/formatDate'
 
 import dayjs from 'dayjs'
 import dayjsUtc from 'dayjs/plugin/utc'
-import FormatDate from '../../functions/formatDate'
-import { AxisInterval } from 'recharts/types/util/types'
-import { CurveType } from 'recharts/types/shape/Curve'
-import SinglePoll from '../../models/SinglePoll'
+import { VoteStates } from '../../@types/enums'
+
+dayjs.extend(dayjsUtc)
 
 /***************************************************
  ***************** CONFIG SETTINGS *****************
@@ -20,80 +22,23 @@ import SinglePoll from '../../models/SinglePoll'
 /**
  * Gap between each tick on y axis (votes)
  */
-const yAxisTickGap = 500
+const yAxisTickGap = 500 as const
 
 /**
  * Gap between each tick on x axis in hours
  */
-const xAxisTickGap = 1
+const xAxisTickGap = 1 as const
+
+/**
+ * The colour of the difference line on the graph
+ */
+const differenceColor = '#666' as const
 
 /***************************************************
  *************** END CONFIG SETTINGS ***************
  ***************************************************/
 
-dayjs.extend(dayjsUtc)
-
-export enum VoteStates {
-  UPCOMING = 'UPCOMING',
-  IN_PROGRESS = 'IN_PROGRESS',
-  DONE = 'DONE',
-}
-
-/**
- * Defines how a **single** poll should look
- */
-export interface ISinglePoll {
-  /** Set to the midnight unix epoch of the day of the poll */
-  scheduledStartDay: number
-
-  votingStatus: VoteStates /*"UPCOMING" | "IN_PROGRESS" | "DONE";*/
-
-  twitterInfo?: {
-    /** Tweet ID (not URL) */
-    tweetId: string
-    /** Actual UNIX epoch of poll start */
-    startTime: number
-    /** Actual UNIX epoch of poll end */
-    endTime: number
-    /** Time duration of poll */
-    durationMinutes: number
-  }
-
-  /** Actual votes for each. Index 0 is the first option, Index 1 the other, etc */
-  votesInfo: {
-    /** Two letter ToC report mark, i.e. name */
-    tocReportingMark: string
-    votes: number
-    /** Votes history */
-    votingHistory: {
-      /* UNIX epoch number of time when votes taken. Will be subtracted from startTime. */
-      timestamp: number
-      votes: number
-    }[]
-  }[] // As long as options
-}
-
-/** What is received from the API */
-export interface NewAPI {
-  apiVersion: string
-  knockout: Record<number, ISinglePoll>
-  groupStages: Record<number, ISinglePoll>
-  quarterFinal: Record<number, ISinglePoll>
-  semiFinal: Record<number, ISinglePoll>
-  runnerUp: ISinglePoll
-  final: ISinglePoll
-}
-
-export interface GameData {
-  knockout: Record<number, SinglePoll>
-  groupStages: Record<number, SinglePoll>
-  quarterFinal: Record<number, SinglePoll>
-  semiFinal: Record<number, SinglePoll>
-  runnerUp: SinglePoll
-  final: SinglePoll
-}
-
-interface NewGraphProps {
+interface Props {
   /**
    * Poll for this graph
    */
@@ -139,26 +84,15 @@ const useStyles = makeStyles({
 
 /**
  * Create a single graph for one poll
- * @param props Props
  */
-const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
-  // const poll = mockGraph
-
+const Graph: React.FC<Props> = ({ poll, large }) => {
   if (poll.votingStatus === VoteStates.UPCOMING) {
-    return null // As the vote is not yet open
-  }
+    return null
+  } // As the vote is not yet open
 
   const classes = useStyles()
 
-  const team1Code = poll.votesInfo[0].tocReportingMark
-  const team2Code = poll.votesInfo[1].tocReportingMark
-
-  const team1Name = GetTocName(team1Code)
-  const team2Name = GetTocName(team2Code)
-
-  const team1Color = GetTocColor(team1Code)
-  const team2Color = GetTocColor(team2Code)
-  const differenceColor = '#666'
+  const [team1Data, team2Data] = poll.getTeamData()
 
   let timeElapsed = 0
   let maxVotes = 0
@@ -189,7 +123,7 @@ const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
     }),
   ]
 
-  let hoursElapsed = Math.floor(timeElapsed / 1000 / 60 / 60)
+  const hoursElapsed = Math.floor(timeElapsed / 1000 / 60 / 60)
 
   const commonAxisProps: CommonAxisPropsInterface = {
     type: 'number',
@@ -204,8 +138,8 @@ const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
     strokeWidth: 1,
   }
 
-  const tooltipVoteCountFormatter = value => `${value} votes`
-  const tooltipTimeElapsedFormatter = value => `${FormatDate.HoursMins.Long(value)} elapsed`
+  const tooltipVoteCountFormatter = (value: number) => `${value} votes`
+  const tooltipTimeElapsedFormatter = (value: number) => `${FormatDate.HoursMinsLong(value)} elapsed`
 
   /**
    * Creates an array with `length`, where each element is equal to its
@@ -251,8 +185,8 @@ const Graph: React.FC<NewGraphProps> = function Graph({ poll, large }) {
 
         <Tooltip separator=" - " formatter={tooltipVoteCountFormatter} labelFormatter={tooltipTimeElapsedFormatter} />
 
-        <Line name={team1Name} dataKey="team1Result" stroke={team1Color} {...commonLineProps} />
-        <Line name={team2Name} dataKey="team2Result" stroke={team2Color} {...commonLineProps} />
+        <Line name={team1Data.name} dataKey="team1Result" stroke={team1Data.mainColor} {...commonLineProps} />
+        <Line name={team2Data.name} dataKey="team2Result" stroke={team2Data.mainColor} {...commonLineProps} />
         <Line name={'Difference'} dataKey="difference" stroke={differenceColor} {...commonLineProps} />
       </LineChart>
     </ResponsiveContainer>
