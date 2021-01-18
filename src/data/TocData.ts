@@ -39,6 +39,8 @@ const TocColors: Record<TOCCode, `#${string}`> = {
 
 /**
  * Defines a list of TOC names mapped to their reporting marks.
+ *
+ * This is the single source of truth for all TOCs, so do not type it using `TOCCode` and `TOCName`. Doing so means that we lose type validation.
  */
 const TocCodeToNameMap = {
   vt: 'Avanti West Coast',
