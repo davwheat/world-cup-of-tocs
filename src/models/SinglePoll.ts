@@ -7,34 +7,34 @@ export default class SinglePoll implements ISinglePoll {
   /**
    * UTC midnight on day of the poll
    */
-  scheduledStartDay: number
+  public scheduledStartDay: number
 
   /**
    * Describes whether the poll is yet to begin (tweet not posted), is in progress, or has closed to new votes.
    */
-  votingStatus: VoteStates
+  public votingStatus: VoteStates
 
   /**
    * Tweet info about a poll. `null` if not started.
    */
-  twitterInfo: TwitterInfo | null
+  public twitterInfo: TwitterInfo | null
 
   /**
    * Voting info about a poll. `null` if not started, otherwise has length of 2: `0` being the first option, and `1` being the second.
    */
-  votesInfo: VotesInfo[] | null
+  public votesInfo: VotesInfo[] | null
 
   /**
    * Creates an instance of `SinglePoll`.
    */
-  constructor({ scheduledStartDay, votingStatus = VoteStates.UPCOMING, twitterInfo = null, votesInfo = null }: IConstructorArgs) {
+  public constructor({ scheduledStartDay, votingStatus = VoteStates.UPCOMING, twitterInfo = null, votesInfo = null }: IConstructorArgs) {
     this.scheduledStartDay = typeof scheduledStartDay === 'number' ? scheduledStartDay : new Date(scheduledStartDay).getTime()
     this.votingStatus = votingStatus
     this.twitterInfo = twitterInfo
     this.votesInfo = votesInfo
   }
 
-  getTeamData(): [ITeamData, ITeamData] {
+  public getTeamData(): [ITeamData, ITeamData] {
     const team1Data: ITeamData = {
       code: this.votesInfo[0].tocReportingMark,
       name: GetTocName(this.votesInfo[0].tocReportingMark),

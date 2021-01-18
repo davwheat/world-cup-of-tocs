@@ -4,22 +4,22 @@ export default class VotesInfo implements IVotesInfo {
   /**
    * A valid TOC reporting mark.
    */
-  tocReportingMark: TOCCode
+  public tocReportingMark: TOCCode
 
   /**
    * Number of votes for this TOC. `null` if poll hasn't started.
    */
-  votes: number | null
+  public votes: number | null
 
   /**
    * Vote history over time. Usually taken every few mins, but depends on Twitter API's update rate. `null` if poll hasn't started.
    */
-  votingHistory: IVotingHistoryEntry[] | null
+  public votingHistory: IVotingHistoryEntry[] | null
 
   /**
    * Creates an instance of VotesInfo.
    */
-  constructor({ tocReportingMark, votes = null, votingHistory = null }: IConstructorArgs) {
+  public constructor({ tocReportingMark, votes = null, votingHistory = null }: IConstructorArgs) {
     this.tocReportingMark = tocReportingMark
     this.votes = votes
     this.votingHistory = votingHistory
