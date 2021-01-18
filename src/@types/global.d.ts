@@ -1,6 +1,6 @@
-import { TOCCode, TOCColors, TOCName } from '../data/TocData'
+import type { TOCCode, TOCColors, TOCName } from '../data/TocData'
 import SinglePoll from '../models/SinglePoll'
-import { VoteStates } from './enums'
+import type { VoteStates } from './enums'
 
 declare global {
   // We need this to add more properties to `window` so TS doesn't complain

@@ -1,4 +1,4 @@
-import { TOCCode } from '../data/TocData'
+import type { TOCCode } from '../data/TocData'
 
 export default class VotesInfo implements IVotesInfo {
   /**
