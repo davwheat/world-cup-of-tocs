@@ -47,20 +47,9 @@ const useStyles = makeStyles({
 
 /**
  * Shows a `PollGame` and `Graph` for a specified game, provided as a `SinglePoll`.
- *
- * @export
- * @param {Props} props
- * @return {React.ReactNode}
  */
 const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
   const classes = useStyles()
-
-  const teamInfo = {
-    team1: GetTocName(data.votesInfo[0].tocReportingMark),
-    team2: GetTocName(data.votesInfo[1].tocReportingMark),
-    team1color: GetTocColor(data.votesInfo[0].tocReportingMark),
-    team2color: GetTocColor(data.votesInfo[1].tocReportingMark),
-  }
 
   return (
     <div className={clsx(classes.gameContainer, large && classes.large)}>
@@ -76,7 +65,7 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
           </Paragraph>
         )}
         <PollGame
-          teamInfo={teamInfo}
+          teamData={data.getTeamData()}
           hasStarted={data.votingStatus !== 'UPCOMING'}
           voteInfo={{
             votes1: data.votesInfo[0].votes,

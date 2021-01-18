@@ -5,7 +5,6 @@ import type { AxisInterval } from 'recharts/types/util/types'
 import type { CurveType } from 'recharts/types/shape/Curve'
 
 import { makeStyles } from '@material-ui/styles'
-import { GetTocColor, GetTocName } from '../../data/TocData'
 import SinglePoll from '../../models/SinglePoll'
 
 import FormatDate from '../../functions/formatDate'
@@ -23,12 +22,17 @@ dayjs.extend(dayjsUtc)
 /**
  * Gap between each tick on y axis (votes)
  */
-const yAxisTickGap = 500
+const yAxisTickGap = 500 as const
 
 /**
  * Gap between each tick on x axis in hours
  */
-const xAxisTickGap = 1
+const xAxisTickGap = 1 as const
+
+/**
+ * The colour of the difference line on the graph
+ */
+const differenceColor = '#666' as const
 
 /***************************************************
  *************** END CONFIG SETTINGS ***************
@@ -80,26 +84,15 @@ const useStyles = makeStyles({
 
 /**
  * Create a single graph for one poll
- * @param props Props
  */
-const Graph: React.FC<Props> = function Graph({ poll, large }) {
-  // const poll = mockGraph
-
+const Graph: React.FC<Props> = ({ poll, large }) => {
   if (poll.votingStatus === VoteStates.UPCOMING) {
     return null
   } // As the vote is not yet open
 
   const classes = useStyles()
 
-  const team1Code = poll.votesInfo[0].tocReportingMark
-  const team2Code = poll.votesInfo[1].tocReportingMark
-
-  const team1Name = GetTocName(team1Code)
-  const team2Name = GetTocName(team2Code)
-
-  const team1Color = GetTocColor(team1Code)
-  const team2Color = GetTocColor(team2Code)
-  const differenceColor = '#666'
+  const [team1Data, team2Data] = poll.getTeamData()
 
   let timeElapsed = 0
   let maxVotes = 0
@@ -145,8 +138,8 @@ const Graph: React.FC<Props> = function Graph({ poll, large }) {
     strokeWidth: 1,
   }
 
-  const tooltipVoteCountFormatter = value => `${value} votes`
-  const tooltipTimeElapsedFormatter = value => `${FormatDate.HoursMinsLong(value)} elapsed`
+  const tooltipVoteCountFormatter = (value: number) => `${value} votes`
+  const tooltipTimeElapsedFormatter = (value: number) => `${FormatDate.HoursMinsLong(value)} elapsed`
 
   /**
    * Creates an array with `length`, where each element is equal to its
@@ -192,8 +185,8 @@ const Graph: React.FC<Props> = function Graph({ poll, large }) {
 
         <Tooltip separator=" - " formatter={tooltipVoteCountFormatter} labelFormatter={tooltipTimeElapsedFormatter} />
 
-        <Line name={team1Name} dataKey="team1Result" stroke={team1Color} {...commonLineProps} />
-        <Line name={team2Name} dataKey="team2Result" stroke={team2Color} {...commonLineProps} />
+        <Line name={team1Data.name} dataKey="team1Result" stroke={team1Data.mainColor} {...commonLineProps} />
+        <Line name={team2Data.name} dataKey="team2Result" stroke={team2Data.mainColor} {...commonLineProps} />
         <Line name={'Difference'} dataKey="difference" stroke={differenceColor} {...commonLineProps} />
       </LineChart>
     </ResponsiveContainer>
