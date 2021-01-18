@@ -1,7 +1,7 @@
 /**
  * Defines the main color used for TOC branding, defined by their reporting mark.
  */
-const TocColors: Record<TOCCode, string> = {
+const TocColors: Record<TOCCode, `#${string}`> = {
   vt: '#004354',
   em: '#4c2f48',
   me: '#f1bc1e',
