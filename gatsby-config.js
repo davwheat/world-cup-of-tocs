@@ -41,6 +41,18 @@ module.exports = {
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-head`,
     {
+      resolve: 'gatsby-plugin-eslint',
+      options: {
+        test: /\.(j|t)sx?$/,
+        exclude: /(node_modules|.cache|public)/,
+        stages: ['develop', 'build-javascript'],
+        options: {
+          emitWarning: true,
+          failOnError: true,
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `World Cup of Train Operators`,

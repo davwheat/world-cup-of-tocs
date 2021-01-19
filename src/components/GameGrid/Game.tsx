@@ -31,7 +31,7 @@ const Game: React.FC = () => {
           console.error(e)
           setError("Failed to fetch poll data from the API. We'll try again in a few seconds.")
           reject()
-        })
+        }),
     )
   }
 
