@@ -19,7 +19,7 @@ const prodPlugins = !__IS_DEV__
         },
       },
       {
-        resolve: `gatsby-plugin-google-analytics`,
+        resolve: `gatsby-plugin-google-analytics-gdpr`,
         options: {
           // The property ID; the tracking code won't be generated without it.
           trackingId: 'UA-20362245-9',
@@ -41,6 +41,18 @@ module.exports = {
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-head`,
     {
+      resolve: 'gatsby-plugin-eslint',
+      options: {
+        test: /\.(j|t)sx?$/,
+        exclude: /(node_modules|.cache|public)/,
+        stages: ['develop', 'build-javascript'],
+        options: {
+          emitWarning: true,
+          failOnError: true,
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `World Cup of Train Operators`,
@@ -49,7 +61,7 @@ module.exports = {
         background_color: `#E04303`,
         theme_color: `#E04303`,
         display: `minimal-ui`,
-        icon: `icon.png`, // This path is relative to the root of the site.
+        icon: `src/assets/icon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-less`,

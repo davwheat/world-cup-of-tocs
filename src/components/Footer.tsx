@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
       <Whisper bold>
         Made with{' '}
         <span role="img" aria-label="love">
-          ❤️
+          <img draggable="false" className="twemoji" alt="❤️" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/2764.png" />
         </span>{' '}
         by David Wheatley & Kishan Singh - &copy; {new Date().getFullYear()} All Rights Reserved
       </Whisper>
