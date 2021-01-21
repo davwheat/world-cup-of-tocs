@@ -37,7 +37,7 @@ const GroupStages: React.FC<Props> = ({ groupStageData }) => {
     <>
       <section className={classes.groupStagesContainer}>
         {Object.keys(groupStageData).map(key => (
-          <GameStage data={groupStageData[key]} key={key} />
+          <GameRound data={groupStageData[key]} key={key} />
         ))}
       </section>
     </>
