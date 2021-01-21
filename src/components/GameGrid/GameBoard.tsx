@@ -43,6 +43,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
 
       <KnockoutRounds knockoutRoundData={gameData.knockout} />
 
+      {/* NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top). */}
       <TextContainer>
         <Loud>Round of 16</Loud>
         <Paragraph>The round of 16 will begin later.</Paragraph>
