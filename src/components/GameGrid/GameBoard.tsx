@@ -38,7 +38,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
         <Shout>Other games</Shout>
 
         <Loud>Round of 32</Loud>
-        <Paragraph>Knockout rounds begin on Friday 15 January and end on Saturday 30&nbsp;January.</Paragraph>
+        <Paragraph>Knockout rounds began on Friday 15 January and end on Saturday 30&nbsp;January.</Paragraph>
       </TextContainer>
 
       <KnockoutRounds knockoutRoundData={gameData.knockout} />
@@ -46,7 +46,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
       {/* NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top). */}
       <TextContainer>
         <Loud>Round of 16</Loud>
-        <Paragraph>The round of 16 will begin later.</Paragraph>
+        <Paragraph>The round of 16 will begin after the round of 32 has concluded.</Paragraph>
       </TextContainer>
 
       <GroupStages groupStageData={gameData.groupStages} />
