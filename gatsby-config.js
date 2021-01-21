@@ -19,7 +19,7 @@ const prodPlugins = !__IS_DEV__
         },
       },
       {
-        resolve: `gatsby-plugin-google-analytics`,
+        resolve: `gatsby-plugin-google-analytics-gdpr`,
         options: {
           // The property ID; the tracking code won't be generated without it.
           trackingId: 'UA-20362245-9',
