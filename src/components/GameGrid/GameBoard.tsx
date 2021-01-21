@@ -37,20 +37,20 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
       <TextContainer>
         <Shout>Other games</Shout>
 
-        <Loud>Knockout rounds</Loud>
+        <Loud>Round of 32</Loud>
         <Paragraph>Knockout rounds begin on Friday 15 January and end on Saturday 30&nbsp;January.</Paragraph>
       </TextContainer>
 
       <KnockoutRounds knockoutRoundData={gameData.knockout} />
 
       <TextContainer>
-        <Loud>Group Stage</Loud>
+        <Loud>Round of 16</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
       <GroupStages groupStageData={gameData.groupStages} />
 
-      <TextContainer>
+/**   <TextContainer>
         <Loud>Quarter Finals</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
@@ -65,7 +65,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
       <SemiFinals semiFinalData={gameData.semiFinal} />
 
       <TextContainer>
-        <Loud>Runner Up</Loud>
+        <Loud>3rd Place</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
@@ -76,7 +76,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <Finals FinalData={gameData.final} />
+      <Finals FinalData={gameData.final} /> */
     </>
   )
 }
