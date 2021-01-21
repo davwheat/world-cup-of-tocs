@@ -7,6 +7,11 @@ import TextContainer from '../TextContainer'
 import ActiveGame from './ActiveGame'
 
 import KnockoutRounds from './Rounds/KnockoutRounds'
+import GroupStages from './Rounds/GroupStages'
+import QuarterFinals from './Rounds/QuarterFinals'
+import SemiFinals from './Rounds/SemiFinals'
+import RunnerUp from './Rounds/RunnerUp'
+import Finals from './Rounds/Finals'
 
 const useStyles = makeStyles({
   activeGame: {
@@ -37,6 +42,41 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
       </TextContainer>
 
       <KnockoutRounds knockoutRoundData={gameData.knockout} />
+
+      <TextContainer>
+        <Loud>Group Stage</Loud>
+        <Paragraph></Paragraph>
+      </TextContainer>
+
+      <GroupStages groupStageData={gameData.groupStages} />
+
+      <TextContainer>
+        <Loud>Quarter Finals</Loud>
+        <Paragraph></Paragraph>
+      </TextContainer>
+
+      <QuarterFinals quarterFinalData={gameData.quarterFinal} />
+
+      <TextContainer>
+        <Loud>Semi Finals</Loud>
+        <Paragraph></Paragraph>
+      </TextContainer>
+
+      <SemiFinals semiFinalData={gameData.semiFinal} />
+
+      <TextContainer>
+        <Loud>Runner Up</Loud>
+        <Paragraph></Paragraph>
+      </TextContainer>
+
+      <RunnerUp RunnerUpData={gameData.runnerUp} />
+
+      <TextContainer>
+        <Loud>Final</Loud>
+        <Paragraph></Paragraph>
+      </TextContainer>
+
+      <Finals FinalData={gameData.final} />
     </>
   )
 }
