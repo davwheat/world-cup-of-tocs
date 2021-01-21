@@ -38,7 +38,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
         <Shout>Other games</Shout>
 
         <Loud>Round of 32</Loud>
-        <Paragraph>Knockout rounds began on Friday 15 January and end on Saturday 30&nbsp;January.</Paragraph>
+        <Paragraph>Knockout rounds began on Friday 15 January and will end on Saturday 30&nbsp;January.</Paragraph>
       </TextContainer>
 
       <KnockoutRounds knockoutRoundData={gameData.knockout} />
