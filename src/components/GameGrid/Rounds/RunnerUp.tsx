@@ -22,7 +22,6 @@ const useStyles = makeStyles({
   },
 })
 
-
 interface Props {
   RunnerUpData: SinglePoll
 }

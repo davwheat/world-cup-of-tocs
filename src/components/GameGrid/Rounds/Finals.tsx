@@ -22,7 +22,6 @@ const useStyles = makeStyles({
   },
 })
 
-
 interface Props {
   /** Only takes a single poll */
   FinalData: SinglePoll
@@ -36,7 +35,7 @@ const Finals: React.FC<Props> = ({ FinalData }) => {
   return (
     <>
       <section className={classes.FinalsContainer}>
-        <GameRound data={FinalData}  />
+        <GameRound data={FinalData} />
       </section>
     </>
   )

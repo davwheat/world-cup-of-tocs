@@ -8,10 +8,10 @@ import ActiveGame from './ActiveGame'
 
 import KnockoutRounds from './Rounds/KnockoutRounds'
 import GroupStages from './Rounds/GroupStages'
-import QuarterFinals from './Rounds/QuarterFinals'
-import SemiFinals from './Rounds/SemiFinals'
-import RunnerUp from './Rounds/RunnerUp'
-import Finals from './Rounds/Finals'
+// import QuarterFinals from './Rounds/QuarterFinals'
+// import SemiFinals from './Rounds/SemiFinals'
+// import RunnerUp from './Rounds/RunnerUp'
+// import Finals from './Rounds/Finals'
 
 const useStyles = makeStyles({
   activeGame: {
@@ -51,7 +51,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
 
       <GroupStages groupStageData={gameData.groupStages} />
 
-{/**   <TextContainer>
+      {/**   <TextContainer>
         <Loud>Quarter Finals</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
