@@ -42,6 +42,7 @@
   "devDependencies": {
     "babel-plugin-transform-remove-console": "^6.9.4",
     "cross-env": "^7.0.3",
+    "eslint-config-react-app": "^6.0.0",
     "gh-pages": "^3.1.0",
     "prettier": "2.2.1"
   },
@@ -51,9 +52,11 @@
   "license": "MIT",
   "scripts": {
     "build": "echo 'HAVE YOU PRELOADED FONTS?' && cross-env NODE_ENV=production gatsby build",
+    "build:ci": "cross-env NODE_ENV=production gatsby build --verbose",
     "preload-fonts": "gatsby-preload-fonts",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
