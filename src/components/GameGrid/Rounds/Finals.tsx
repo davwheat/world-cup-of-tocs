@@ -22,10 +22,10 @@ const useStyles = makeStyles({
   },
 })
 
-type FinalData = Record<number, SinglePoll>
 
 interface Props {
-  FinalData: FinalData
+  /** Only takes a single poll */
+  FinalData: SinglePoll
 }
 
 const Finals: React.FC<Props> = ({ FinalData }) => {
@@ -36,9 +36,7 @@ const Finals: React.FC<Props> = ({ FinalData }) => {
   return (
     <>
       <section className={classes.FinalsContainer}>
-        {Object.keys(FinalData).map(key => (
-          <GameRound data={FinalData[key]} key={key} />
-        ))}
+        <GameRound data={FinalData}  />
       </section>
     </>
   )

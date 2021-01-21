@@ -45,12 +45,12 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
 
       <TextContainer>
         <Loud>Round of 16</Loud>
-        <Paragraph></Paragraph>
+        <Paragraph>The round of 16 will begin later.</Paragraph>
       </TextContainer>
 
       <GroupStages groupStageData={gameData.groupStages} />
 
-/**   <TextContainer>
+{/**   <TextContainer>
         <Loud>Quarter Finals</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
@@ -76,7 +76,7 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <Finals FinalData={gameData.final} /> */
+      <Finals FinalData={gameData.final} /> */}
     </>
   )
 }

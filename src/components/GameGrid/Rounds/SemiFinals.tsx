@@ -28,20 +28,20 @@ interface Props {
   knockoutRoundData: KnockoutRoundData
 }
 
-const KnockoutRounds: React.FC<Props> = ({ knockoutRoundData }) => {
+const SemiFinals: React.FC<Props> = ({ semiFinalData }) => {
   const classes = useStyles()
 
-  if (!knockoutRoundData) return null
+  if (!semiFinalData) return null
 
   return (
     <>
       <section className={classes.knockoutRoundsContainer}>
-        {Object.keys(knockoutRoundData).map(key => (
-          <GameRound data={knockoutRoundData[key]} key={key} />
+        {Object.keys(semiFinalData).map(key => (
+          <GameRound data={semiFinalData[key]} key={key} />
         ))}
       </section>
     </>
   )
 }
 
-export default KnockoutRounds
+export default SemiFinals

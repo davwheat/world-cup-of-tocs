@@ -22,10 +22,9 @@ const useStyles = makeStyles({
   },
 })
 
-type RunnerUpData = Record<number, SinglePoll>
 
 interface Props {
-  RunnerUpData: RunnerUpData
+  RunnerUpData: SinglePoll
 }
 
 const RunnerUp: React.FC<Props> = ({ RunnerUpData }) => {
