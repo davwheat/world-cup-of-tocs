@@ -9,20 +9,6 @@ import clsx from 'clsx'
 import FormatDate from '../../../functions/formatDate'
 import SinglePoll from '../../../models/SinglePoll'
 
-interface Props {
-  data: SinglePoll
-  /**
-   * Removes the small date above the game.
-   * @default false
-   */
-  noDate?: boolean
-  /**
-   * Show a larger graph. Used for the active game box.
-   * @default false
-   */
-  large?: boolean
-}
-
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
     display: 'flex',
@@ -43,6 +29,20 @@ const useStyles = makeStyles({
   },
 })
 
+interface Props {
+  data: SinglePoll
+  /**
+   * Removes the small date above the game.
+   * @default false
+   */
+  noDate?: boolean
+  /**
+   * Show a larger graph. Used for the active game box.
+   * @default false
+   */
+  large?: boolean
+}
+
 /**
  * Shows a `PollGame` and `Graph` for a specified game, provided as a `SinglePoll`.
  */
@@ -62,12 +62,14 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
             Ending in {FormatDate.HoursMinsLong(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
           </Paragraph>
         )}
-        <Paragraph center>
-          Total Votes: {data.votesInfo[0].votes + data.votesInfo[1].votes}, Δ:&nbsp;
-          {data.votesInfo[0].votes > data.votesInfo[1].votes
-            ? data.votesInfo[0].votes - data.votesInfo[1].votes
-            : data.votesInfo[1].votes - data.votesInfo[0].votes}
-        </Paragraph>
+        {data.scheduledStartDay <= Date.now() && (
+          <Paragraph center>
+            Total Votes: {data.votesInfo[0].votes + data.votesInfo[1].votes}, <abbr title="Vote difference (delta)">Δ</abbr>:&nbsp;
+            {data.votesInfo[0].votes > data.votesInfo[1].votes
+              ? data.votesInfo[0].votes - data.votesInfo[1].votes
+              : data.votesInfo[1].votes - data.votesInfo[0].votes}
+          </Paragraph>
+        )}
         <PollGame
           teamData={data.getTeamData()}
           hasStarted={data.votingStatus !== 'UPCOMING'}

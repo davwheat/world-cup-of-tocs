@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     },
   },
   gameText: {
-    fontSize: 14,
+    fontSize: 16,
     textAnchor: 'middle',
     dominantBaseline: 'middle',
     // shift down by 1px to make it look more centred
@@ -68,7 +68,12 @@ const PollGameBar: React.FC<Props> = ({ teamData, tweetId, hasStarted = true, vo
         className={clsx(classes.gameText, teamData.isMainColorLight ? classes.darkText : classes.lightText)}
       >
         <tspan className={classes.tocName}>{teamData.name}</tspan>
-        {hasStarted && <tspan> ({percentage}%)</tspan>}
+        {hasStarted && (
+          <tspan>
+            {' '}
+            ({percentage}%, {votes} votes)
+          </tspan>
+        )}
       </text>
     </a>
   )
