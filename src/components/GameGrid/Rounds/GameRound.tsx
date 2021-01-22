@@ -62,6 +62,12 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
             Ending in {FormatDate.HoursMinsLong(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
           </Paragraph>
         )}
+        <Paragraph center>
+          Total Votes: {data.votesInfo[0].votes + data.votesInfo[1].votes}, Δ:&nbsp;
+          {data.votesInfo[0].votes > data.votesInfo[1].votes
+            ? data.votesInfo[0].votes - data.votesInfo[1].votes
+            : data.votesInfo[1].votes - data.votesInfo[0].votes}
+        </Paragraph>
         <PollGame
           teamData={data.getTeamData()}
           hasStarted={data.votingStatus !== 'UPCOMING'}
