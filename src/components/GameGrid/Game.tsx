@@ -22,8 +22,8 @@ const Game: React.FC = () => {
   }
 
   function RefreshData(abortController?: AbortController) {
-    return new Promise((resolve, reject) =>
-      fetch(`https://toc-api.davwheat.dev/v1/all_polls`, { signal: abortController && abortController.signal })
+    return new Promise((resolve, reject) => {
+      fetch(`${Values.api.hostname}/v1/all_polls`, { signal: abortController && abortController.signal })
         .then(r => {
           handleResponse(r).then(resolve)
         })
@@ -31,8 +31,8 @@ const Game: React.FC = () => {
           console.error(e)
           setError("Failed to fetch poll data from the API. We'll try again in a few seconds.")
           reject()
-        }),
-    )
+        })
+    })
   }
 
   useEffect(() => {
