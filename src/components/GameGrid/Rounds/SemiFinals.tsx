@@ -26,9 +26,10 @@ type SemiFinalRoundData = Record<number, SinglePoll>
 
 interface Props {
   semiFinalData: SemiFinalRoundData
+  gameNotes: Record<number, string[] | null>
 }
 
-const SemiFinals: React.FC<Props> = ({ semiFinalData }) => {
+const SemiFinals: React.FC<Props> = ({ semiFinalData, gameNotes }) => {
   const classes = useStyles()
 
   if (!semiFinalData) return null
@@ -37,7 +38,7 @@ const SemiFinals: React.FC<Props> = ({ semiFinalData }) => {
     <>
       <section className={classes.semiFinalContainer}>
         {Object.keys(semiFinalData).map(key => (
-          <GameRound data={semiFinalData[key]} key={key} />
+          <GameRound data={semiFinalData[key]} key={key} note={gameNotes[key]} />
         ))}
       </section>
     </>

@@ -80,14 +80,14 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <RunnerUp gameNotes={gameNotes.runnerUp[0]} RunnerUpData={gameData.runnerUp} />
+      <RunnerUp gameNotes={gameNotes.runnerUp[0]} runnerUpData={gameData.runnerUp} />
 
       <TextContainer>
         <Loud>Final</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <Finals gameNotes={gameNotes.final[0]} FinalData={gameData.final} /> */}
+      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} /> */}
     </>
   )
 }

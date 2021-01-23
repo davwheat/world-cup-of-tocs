@@ -26,9 +26,10 @@ type QuarterFinalData = Record<number, SinglePoll>
 
 interface Props {
   quarterFinalData: QuarterFinalData
+  gameNotes: Record<number, string[] | null>
 }
 
-const QuarterFinals: React.FC<Props> = ({ quarterFinalData }) => {
+const QuarterFinals: React.FC<Props> = ({ quarterFinalData, gameNotes }) => {
   const classes = useStyles()
 
   if (!quarterFinalData) return null
@@ -37,7 +38,7 @@ const QuarterFinals: React.FC<Props> = ({ quarterFinalData }) => {
     <>
       <section className={classes.quarterFinalsContainer}>
         {Object.keys(quarterFinalData).map(key => (
-          <GameRound data={quarterFinalData[key]} key={key} />
+          <GameRound data={quarterFinalData[key]} key={key} note={gameNotes[key]} />
         ))}
       </section>
     </>

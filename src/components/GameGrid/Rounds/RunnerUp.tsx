@@ -23,18 +23,20 @@ const useStyles = makeStyles({
 })
 
 interface Props {
-  RunnerUpData: SinglePoll
+  /** Only takes a single poll */
+  runnerUpData: SinglePoll
+  gameNotes: string[] | null
 }
 
-const RunnerUp: React.FC<Props> = ({ RunnerUpData }) => {
+const RunnerUp: React.FC<Props> = ({ runnerUpData, gameNotes }) => {
   const classes = useStyles()
 
-  if (!RunnerUpData) return null
+  if (!runnerUpData) return null
 
   return (
     <>
       <section className={classes.RunnerUpContainer}>
-        <GameRound data={RunnerUpData} />
+        <GameRound data={runnerUpData} note={gameNotes} />
       </section>
     </>
   )
