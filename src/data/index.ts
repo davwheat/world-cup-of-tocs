@@ -1,6 +1,7 @@
 const Values = {
   api: {
-    hostname: process.env.NODE_ENV !== 'production' ? 'localhost:1234' : 'https://toc-api.davwheat.dev/',
+    // process.env.NODE_ENV !== 'production' ? 'localhost:1234' : 'https://toc-api.davwheat.dev'
+    hostname: 'https://toc-api.davwheat.dev',
   },
 } as const
 
