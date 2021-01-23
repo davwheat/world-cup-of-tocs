@@ -5,6 +5,8 @@ import { Whisper } from '../../typography'
 import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
+import { Values } from '../../data'
+import fetchGameNotes from '../../functions/fetchGameNotes'
 
 const DataRefreshInterval = 60
 
@@ -14,6 +16,9 @@ const Game: React.FC = () => {
 
   const [gameData, setGameData] = useState<IGameData>(null)
   const [error, setError] = useState<string>(null)
+  const [gameNotes, setGameNotes] = useState<IGameNotes>(null)
+
+  console.log(gameNotes)
 
   async function handleResponse(response) {
     const jsonData = await response.json()
@@ -46,6 +51,8 @@ const Game: React.FC = () => {
       return () => {
         controller.abort()
       }
+    } else if (!gameNotes) {
+      fetchGameNotes().then(data => setGameNotes(data))
     }
 
     const updateInterval = setInterval(() => {
@@ -98,7 +105,7 @@ const Game: React.FC = () => {
       </Whisper>
 
       <section id="game-board">
-        <GameBoard gameData={gameData} />
+        <GameBoard gameData={gameData} gameNotes={gameNotes} />
       </section>
     </article>
   )
