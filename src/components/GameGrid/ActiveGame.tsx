@@ -6,10 +6,6 @@ import { makeStyles } from '@material-ui/styles'
 import getLatestActiveGame from '../../functions/getLatestActiveGame'
 import { Paragraph } from '../../typography'
 
-interface Props {
-  data: IGameData
-}
-
 const useStyles = makeStyles({
   activeGameContainer: {
     marginTop: -16,
@@ -18,7 +14,12 @@ const useStyles = makeStyles({
   },
 })
 
-const ActiveGame: React.FC<Props> = ({ data }) => {
+interface Props {
+  data: IGameData
+  gameNotes: IGameNotes
+}
+
+const ActiveGame: React.FC<Props> = ({ data, gameNotes }) => {
   const classes = useStyles()
 
   if (!data) return null
@@ -33,9 +34,15 @@ const ActiveGame: React.FC<Props> = ({ data }) => {
     )
   }
 
+  let gameNote: string[] = null
+
+  if (gameNotes) {
+    gameNote = path.length > 1 ? gameNotes[path[0]][path[1]] : gameNotes[path[0]]
+  }
+
   return (
     <div className={classes.activeGameContainer}>
-      <GameRound large noDate data={activeGame} />
+      <GameRound large noDate data={activeGame} note={gameNote} />
     </div>
   )
 }

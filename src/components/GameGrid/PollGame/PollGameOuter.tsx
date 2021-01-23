@@ -28,6 +28,7 @@ interface Props {
   teamData: [ITeamData, ITeamData]
   tweetId?: string
   hasStarted: boolean
+  note?: string
 }
 
 /**
@@ -35,7 +36,7 @@ interface Props {
  *
  * Renders an SVG image with two bars, containing the team names, vote percentage, and with a background showing the proportion of votes.
  */
-const PollGameOuter: React.FC<Props> = ({ voteInfo, teamData: oldTeamData, tweetId, hasStarted }) => {
+const PollGameOuter: React.FC<Props> = ({ voteInfo, teamData: oldTeamData, tweetId, hasStarted, note }) => {
   const classes = useStyles()
 
   const teamData: [TeamData, TeamData] = oldTeamData
