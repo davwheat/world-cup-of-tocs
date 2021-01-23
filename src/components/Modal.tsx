@@ -78,6 +78,7 @@ const Modal: React.FC<Props> = ({ title, children, onClose }) => {
 
   function closeModal() {
     setModalShownState(false)
+    if (typeof onClose === 'function') onClose()
   }
 
   if (!modalShownState) return null
