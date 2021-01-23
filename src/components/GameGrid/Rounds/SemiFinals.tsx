@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles'
 import SinglePoll from '../../../models/SinglePoll'
 
 const useStyles = makeStyles({
-  knockoutRoundsContainer: {
+  semiFinalContainer: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: 8,
@@ -22,10 +22,10 @@ const useStyles = makeStyles({
   },
 })
 
-type KnockoutRoundData = Record<number, SinglePoll>
+type SemiFinalRoundData = Record<number, SinglePoll>
 
 interface Props {
-  knockoutRoundData: KnockoutRoundData
+  semiFinalData: SemiFinalRoundData
 }
 
 const SemiFinals: React.FC<Props> = ({ semiFinalData }) => {
@@ -35,7 +35,7 @@ const SemiFinals: React.FC<Props> = ({ semiFinalData }) => {
 
   return (
     <>
-      <section className={classes.knockoutRoundsContainer}>
+      <section className={classes.semiFinalContainer}>
         {Object.keys(semiFinalData).map(key => (
           <GameRound data={semiFinalData[key]} key={key} />
         ))}
