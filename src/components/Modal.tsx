@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     maxHeight: 700,
     minHeight: 400,
     border: '2px solid black',
-    padding: 16,
+    padding: '16px 24px',
     backgroundColor: '#fff',
     zIndex: 99999999999,
 
