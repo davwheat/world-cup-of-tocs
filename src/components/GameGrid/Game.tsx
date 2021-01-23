@@ -18,8 +18,6 @@ const Game: React.FC = () => {
   const [error, setError] = useState<string>(null)
   const [gameNotes, setGameNotes] = useState<IGameNotes>(null)
 
-  console.log(gameNotes)
-
   async function handleResponse(response) {
     const jsonData = await response.json()
 
