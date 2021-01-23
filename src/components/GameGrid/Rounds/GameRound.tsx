@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
 import FormatDate from '../../../functions/formatDate'
 import SinglePoll from '../../../models/SinglePoll'
+import { VoteStates } from '../../../@types/enums'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
@@ -62,7 +63,7 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
             Ending in {FormatDate.HoursMinsLong(new Date(data.twitterInfo.endTime).getTime() - new Date().getTime())}
           </Paragraph>
         )}
-        {data.scheduledStartDay <= Date.now() && (
+        {data.votingStatus !== VoteStates.UPCOMING && (
           <Paragraph center>
             Total Votes: {data.votesInfo[0].votes + data.votesInfo[1].votes}, <abbr title="Vote difference (delta)">Δ</abbr>:&nbsp;
             {data.votesInfo[0].votes > data.votesInfo[1].votes
@@ -72,7 +73,7 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
         )}
         <PollGame
           teamData={data.getTeamData()}
-          hasStarted={data.votingStatus !== 'UPCOMING'}
+          hasStarted={data.votingStatus !== VoteStates.UPCOMING}
           voteInfo={{
             votes1: data.votesInfo[0].votes,
             votes2: data.votesInfo[1].votes,
