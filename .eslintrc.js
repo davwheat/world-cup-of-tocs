@@ -45,5 +45,6 @@ module.exports = {
     indent: 'off',
     'no-duplicate-imports': 'off',
     '@typescript-eslint/no-duplicate-imports': ['error'],
+    'no-console': process.env.NODE_ENV === 'development' ? 'off' : ['error', { allow: ['error', 'warn', 'trace'] }],
   },
 }
