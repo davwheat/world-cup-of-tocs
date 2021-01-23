@@ -23,7 +23,7 @@ const ActiveGame: React.FC<Props> = ({ data }) => {
 
   if (!data) return null
 
-  const activeGame = getLatestActiveGame(data)
+  const [activeGame, path] = getLatestActiveGame(data)
 
   if (!activeGame) {
     return (
