@@ -34,9 +34,7 @@ const RunnerUp: React.FC<Props> = ({ RunnerUpData }) => {
   return (
     <>
       <section className={classes.RunnerUpContainer}>
-        {Object.keys(RunnerUpData).map(key => (
-          <GameRound data={RunnerUpData[key]} key={key} />
-        ))}
+        <GameRound data={RunnerUpData} />
       </section>
     </>
   )
