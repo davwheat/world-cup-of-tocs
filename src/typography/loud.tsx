@@ -41,6 +41,10 @@ interface Props {
    * @default false
    */
   center?: boolean
+  /**
+   * Element ID
+   */
+  id?: string
 }
 
 const Loud: React.FC<Props> = ({ children, className, noPadding, center }) => {
