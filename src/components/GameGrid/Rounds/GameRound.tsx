@@ -36,8 +36,8 @@ const useStyles = makeStyles({
     lineHeight: 1.2,
     fontSize: 16,
     margin: 'auto',
-    marginTop: 4,
-    marginBottom: 12,
+    marginTop: 7,
+    marginBottom: 8,
   },
 })
 
