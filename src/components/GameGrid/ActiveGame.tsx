@@ -28,7 +28,7 @@ const ActiveGame: React.FC<Props> = ({ data }) => {
   if (!activeGame) {
     return (
       <div className={classes.activeGameContainer}>
-        <Paragraph>No active game is in progress.</Paragraph>
+        <Paragraph>No game is currently in progress.</Paragraph>
       </div>
     )
   }
