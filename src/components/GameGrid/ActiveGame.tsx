@@ -4,6 +4,7 @@ import GameRound from './Rounds/GameRound'
 
 import { makeStyles } from '@material-ui/styles'
 import getLatestActiveGame from '../../functions/getLatestActiveGame'
+import { Paragraph } from '../../typography'
 
 interface Props {
   data: IGameData
@@ -23,6 +24,14 @@ const ActiveGame: React.FC<Props> = ({ data }) => {
   if (!data) return null
 
   const activeGame = getLatestActiveGame(data)
+
+  if (!activeGame) {
+    return (
+      <div className={classes.activeGameContainer}>
+        <Paragraph>No game is currently in progress.</Paragraph>
+      </div>
+    )
+  }
 
   return (
     <div className={classes.activeGameContainer}>
