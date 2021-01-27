@@ -18,16 +18,10 @@ const useStyles = makeStyles({
   siteNoteContainer: {
     marginTop: 16,
     background: 'rgba(128, 128, 128, 0.1)',
-    [`@media ${Breakpoints.downTo.small}`]: {
-      paddingLeft: 32,
-      paddingRight: 32,
-    },
-    [`@media ${Breakpoints.downTo.medium}`]: {
-      paddingLeft: 16,
-      paddingRight: 16,
-    },
     paddingTop: 20,
     paddingBottom: 20,
+    paddingLeft: 32,
+    paddingRight: 32,
   },
 })
 
