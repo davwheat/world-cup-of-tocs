@@ -95,6 +95,7 @@ declare global {
   }
 
   export interface IGameNotes {
+    overall: string[] | null
     knockout: Record<number, string[] | null>
     groupStages: Record<number, string[] | null>
     quarterFinal: Record<number, string[] | null>

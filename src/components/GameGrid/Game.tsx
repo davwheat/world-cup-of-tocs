@@ -1,14 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import GameBoard from './GameBoard'
-import { Whisper } from '../../typography'
+import { Paragraph, Whisper } from '../../typography'
 import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
-import { Values } from '../../data'
+import { Breakpoints, Values } from '../../data'
 import fetchGameNotes from '../../functions/fetchGameNotes'
+import Loud from '../../typography/loud'
+import TextContainer from '../TextContainer'
+import ErrorBoundary from '../ErrorBoundary'
+import { makeStyles } from '@material-ui/styles'
 
 const DataRefreshInterval = 60
+
+const useStyles = makeStyles({
+  siteNoteContainer: {
+    marginTop: 16,
+    background: 'rgba(128, 128, 128, 0.1)',
+    [`@media ${Breakpoints.downTo.small}`]: {
+      paddingLeft: 32,
+      paddingRight: 32,
+    },
+    [`@media ${Breakpoints.downTo.medium}`]: {
+      paddingLeft: 16,
+      paddingRight: 16,
+    },
+  },
+})
 
 const Game: React.FC = () => {
   const countdownElRef = useRef<HTMLSpanElement>(null)
@@ -17,6 +36,8 @@ const Game: React.FC = () => {
   const [gameData, setGameData] = useState<IGameData>(null)
   const [error, setError] = useState<string>(null)
   const [gameNotes, setGameNotes] = useState<IGameNotes>(null)
+
+  const classes = useStyles()
 
   async function handleResponse(response) {
     const jsonData = await response.json()
@@ -102,9 +123,23 @@ const Game: React.FC = () => {
         Refreshing in <span ref={countdownElRef}>{countdownSecsRef.current}</span> seconds.
       </Whisper>
 
-      <section id="game-board">
-        <GameBoard gameData={gameData} gameNotes={gameNotes} />
-      </section>
+      {gameNotes && Array.isArray(gameNotes.overall) && (
+        <TextContainer className={classes.siteNoteContainer}>
+          <Loud center>Information</Loud>
+
+          <Paragraph>
+            {gameNotes.overall.map(note => (
+              <span key={note}>{note} </span>
+            ))}
+          </Paragraph>
+        </TextContainer>
+      )}
+
+      <ErrorBoundary inline>
+        <section id="game-board">
+          <GameBoard gameData={gameData} gameNotes={gameNotes} />
+        </section>
+      </ErrorBoundary>
     </article>
   )
 }
