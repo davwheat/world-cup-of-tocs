@@ -3,6 +3,12 @@ import SinglePoll from '../models/SinglePoll'
 
 const LatestToOldestStages: Array<keyof IGameData> = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
 
+/**
+ * Returns a tuple: [0] being the active `SinglePoll`, and [1] being the path to the active game.
+ *
+ * If the active game is under `knockout[2]`, then `[1]` would be `['knockout', 2]`. If it was
+ * final`, then `[1]` would be `['final']`.
+ */
 export default function getLatestActiveGame(data: IGameData): [SinglePoll, [string, number] | [string]] {
   let returnValue: SinglePoll = null
 

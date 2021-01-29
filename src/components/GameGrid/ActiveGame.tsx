@@ -24,7 +24,7 @@ const ActiveGame: React.FC<Props> = ({ data, gameNotes }) => {
 
   if (!data) return null
 
-  const [activeGame, path] = getLatestActiveGame(data)
+  const [activeGame, keysToActiveGame] = getLatestActiveGame(data)
 
   if (!activeGame) {
     return (
@@ -36,8 +36,9 @@ const ActiveGame: React.FC<Props> = ({ data, gameNotes }) => {
 
   let gameNote: string[] = null
 
+  // Locate the game note from the path to the active game, provided by getLatestActiveGame
   if (gameNotes) {
-    gameNote = path.length > 1 ? gameNotes[path[0]][path[1]] : gameNotes[path[0]]
+    gameNote = keysToActiveGame.length > 1 ? gameNotes[keysToActiveGame[0]][keysToActiveGame[1]] : gameNotes[keysToActiveGame[0]]
   }
 
   return (
