@@ -22,16 +22,26 @@ const useStyles = makeStyles({
 
 interface Props {
   gameData: IGameData
+  gameNotes: IGameNotes
 }
 
-const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
+const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Props) => {
   const classes = useStyles()
+
+  const gameNotes = propsGameNotes || {
+    knockout: {},
+    groupStages: {},
+    quarterFinal: {},
+    semiFinal: {},
+    runnerUp: {},
+    final: {},
+  }
 
   return (
     <>
       <TextContainer innerClassName={classes.activeGame}>
         <Loud center>Active game</Loud>
-        <ActiveGame data={gameData} />
+        <ActiveGame data={gameData} gameNotes={gameNotes} />
       </TextContainer>
 
       <TextContainer>
@@ -41,43 +51,43 @@ const GameBoard: React.FC<Props> = ({ gameData }: Props) => {
         <Paragraph>Knockout rounds began on Friday 15 January and will end on Saturday 30&nbsp;January.</Paragraph>
       </TextContainer>
 
-      <KnockoutRounds knockoutRoundData={gameData.knockout} />
+      <KnockoutRounds gameNotes={gameNotes.knockout} knockoutRoundData={gameData.knockout} />
 
       {/* NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top). */}
       <TextContainer>
         <Loud>Round of 16</Loud>
-        <Paragraph>The round of 16 will begin after the round of 32 has concluded.</Paragraph>
+        <Paragraph>The round of 16 will begin on Monday 1&nbsp;February.</Paragraph>
       </TextContainer>
 
-      <GroupStages groupStageData={gameData.groupStages} />
+      <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
 
       {/**   <TextContainer>
         <Loud>Quarter Finals</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <QuarterFinals quarterFinalData={gameData.quarterFinal} />
+      <QuarterFinals gameNotes={gameNotes.quarterFinal} quarterFinalData={gameData.quarterFinal} />
 
       <TextContainer>
         <Loud>Semi Finals</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <SemiFinals semiFinalData={gameData.semiFinal} />
+      <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
 
       <TextContainer>
         <Loud>3rd Place</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <RunnerUp RunnerUpData={gameData.runnerUp} />
+      <RunnerUp gameNotes={gameNotes.runnerUp[0]} runnerUpData={gameData.runnerUp} />
 
       <TextContainer>
         <Loud>Final</Loud>
         <Paragraph></Paragraph>
       </TextContainer>
 
-      <Finals FinalData={gameData.final} /> */}
+      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} /> */}
     </>
   )
 }

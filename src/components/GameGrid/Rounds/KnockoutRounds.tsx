@@ -26,9 +26,10 @@ type KnockoutRoundData = Record<number, SinglePoll>
 
 interface Props {
   knockoutRoundData: KnockoutRoundData
+  gameNotes: Record<number, string[] | null>
 }
 
-const KnockoutRounds: React.FC<Props> = ({ knockoutRoundData }) => {
+const KnockoutRounds: React.FC<Props> = ({ knockoutRoundData, gameNotes }) => {
   const classes = useStyles()
 
   if (!knockoutRoundData) return null
@@ -37,7 +38,7 @@ const KnockoutRounds: React.FC<Props> = ({ knockoutRoundData }) => {
     <>
       <section className={classes.knockoutRoundsContainer}>
         {Object.keys(knockoutRoundData).map(key => (
-          <GameRound data={knockoutRoundData[key]} key={key} />
+          <GameRound data={knockoutRoundData[key]} key={key} note={gameNotes[key]} />
         ))}
       </section>
     </>

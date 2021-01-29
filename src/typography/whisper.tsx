@@ -41,13 +41,18 @@ interface Props {
    * @default false
    */
   bold?: boolean
+  inline?: boolean
 }
 
-const Whisper: React.FC<Props> = ({ children, className, noPadding, bold, center }) => {
+const Whisper: React.FC<Props> = ({ children, className, noPadding, bold, center, inline = false }) => {
   const classes = useStyles()
 
   const props = {
     className: clsx(classes.root, noPadding && classes.noPad, bold && classes.bold, center && classes.centred, className),
+  }
+
+  if (inline) {
+    return <span {...props}>{children}</span>
   }
 
   return <p {...props}>{children}</p>

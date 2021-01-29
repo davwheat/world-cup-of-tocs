@@ -3,11 +3,23 @@ import SinglePoll from '../models/SinglePoll'
 
 const LatestToOldestStages: Array<keyof IGameData> = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
 
-export default function getLatestActiveGame(data: IGameData): SinglePoll {
-  let returnValue = null
+/**
+ * Returns a tuple: [0] being the active `SinglePoll`, and [1] being the path to the active game.
+ *
+ * If the active game is under `knockout[2]`, then `[1]` would be `['knockout', 2]`. If it was
+ * final`, then `[1]` would be `['final']`.
+ */
+export default function getLatestActiveGame(data: IGameData): [SinglePoll, [string, number] | [string]] {
+  let returnValue: SinglePoll = null
+
+  let activeStage: string = null
+  let activeIndex: number = null
 
   LatestToOldestStages.every(stage => {
     const allGames = data[stage]
+
+    activeStage = stage
+    activeIndex = null
 
     // final and runnerUp are instances of SinglePoll
     if (allGames instanceof SinglePoll) {
@@ -22,6 +34,8 @@ export default function getLatestActiveGame(data: IGameData): SinglePoll {
       const keys: number[] = Object.keys(allGames).reduceRight((arr, thisVal) => [...arr, Number(thisVal)], [])
 
       return keys.every(key => {
+        activeIndex = key
+
         if (allGames[key].votingStatus === 'IN_PROGRESS') {
           returnValue = allGames[key]
           return false
@@ -32,5 +46,5 @@ export default function getLatestActiveGame(data: IGameData): SinglePoll {
     }
   })
 
-  return returnValue
+  return [returnValue, activeIndex ? [activeStage, activeIndex] : [activeStage]]
 }

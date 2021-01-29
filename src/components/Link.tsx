@@ -24,7 +24,7 @@ interface Props {
   internal?: boolean
   url?: string
   title?: string
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>
+  onClick?: React.MouseEventHandler<HTMLAnchorElement> | React.MouseEventHandler<HTMLButtonElement>
   className?: string
   id?: string
   target?: '_blank' | '_self' | '_parent' | '_top' | string
@@ -77,6 +77,10 @@ const Link: React.FC<Props> = ({ internal = false, url, title, onClick, classNam
         {children}
       </GatsbyLink>
     )
+  }
+
+  if (!url) {
+    return <button {...newProps}>{children}</button>
   }
 
   return <a {...newProps}>{children}</a>

@@ -26,9 +26,10 @@ type GroupStageData = Record<number, SinglePoll>
 
 interface Props {
   groupStageData: GroupStageData
+  gameNotes: Record<number, string[] | null>
 }
 
-const GroupStages: React.FC<Props> = ({ groupStageData }) => {
+const GroupStages: React.FC<Props> = ({ groupStageData, gameNotes }) => {
   const classes = useStyles()
 
   if (!groupStageData) return null
@@ -37,7 +38,7 @@ const GroupStages: React.FC<Props> = ({ groupStageData }) => {
     <>
       <section className={classes.groupStagesContainer}>
         {Object.keys(groupStageData).map(key => (
-          <GameRound data={groupStageData[key]} key={key} />
+          <GameRound data={groupStageData[key]} key={key} note={gameNotes[key]} />
         ))}
       </section>
     </>

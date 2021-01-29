@@ -2,7 +2,7 @@
   "name": "gatsby-starter-default",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": {
     "name": "David Wheatley",
     "email": "hi@davwheat.dev",
@@ -14,6 +14,7 @@
     "clsx": "^1.1.1",
     "color": "^3.1.3",
     "dayjs": "^1.10.3",
+    "focus-trap-react": "^8.4.1",
     "gatsby": "^2.31.1",
     "gatsby-plugin-cookiehub-banner": "^0.1.0",
     "gatsby-plugin-google-analytics-gdpr": "^0.0.5",
@@ -34,12 +35,14 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-head": "^3.4.0",
+    "react-portal": "^4.2.1",
     "recharts": "^2.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/color": "^3.0.1",
     "@types/material-ui": "^0.21.8",
+    "@types/react-portal": "^4.0.2",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",

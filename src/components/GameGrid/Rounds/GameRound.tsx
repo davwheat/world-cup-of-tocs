@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Graph from '../Graph'
 import PollGame from '../PollGame'
@@ -8,7 +8,10 @@ import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
 import FormatDate from '../../../functions/formatDate'
 import SinglePoll from '../../../models/SinglePoll'
+import Link from '../../Link'
+import Modal from '../../Modal'
 import { VoteStates } from '../../../@types/enums'
+import BulletListWrapper from '../../BulletListWrapper'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
@@ -28,6 +31,14 @@ const useStyles = makeStyles({
   large: {
     width: '100%',
   },
+  viewNotesButton: {
+    display: 'block',
+    lineHeight: 1.2,
+    fontSize: 16,
+    margin: 'auto',
+    marginTop: 7,
+    marginBottom: 8,
+  },
 })
 
 interface Props {
@@ -42,13 +53,15 @@ interface Props {
    * @default false
    */
   large?: boolean
+  note?: string[]
 }
 
 /**
  * Shows a `PollGame` and `Graph` for a specified game, provided as a `SinglePoll`.
  */
-const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
+const GameRound: React.FC<Props> = ({ data, noDate, large, note }) => {
   const classes = useStyles()
+  const [showNotesModal, setShowNotesModal] = useState(false)
 
   return (
     <div className={clsx(classes.gameContainer, large && classes.large)}>
@@ -80,6 +93,22 @@ const GameRound: React.FC<Props> = ({ data, noDate, large }) => {
           }}
           tweetId={data.twitterInfo && data.twitterInfo.tweetId}
         />
+        {note && (
+          // eslint-disable-next-line
+          <Link className={classes.viewNotesButton} onClick={() => setShowNotesModal(true)}>
+            View game notes
+          </Link>
+        )}
+        {showNotesModal && (
+          <Modal title="Game notes" onClose={() => setShowNotesModal(false)}>
+            <Paragraph bold>These notes explain any issues or info regarding the data from this poll.</Paragraph>
+            <BulletListWrapper>
+              {note.map((n, i) => (
+                <li key={i}>{n}</li>
+              ))}
+            </BulletListWrapper>
+          </Modal>
+        )}
       </div>
 
       {/* Don't try to SSR graph */}

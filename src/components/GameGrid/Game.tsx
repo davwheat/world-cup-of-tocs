@@ -1,12 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import GameBoard from './GameBoard'
-import { Whisper } from '../../typography'
+import { Paragraph, Whisper } from '../../typography'
 import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
+import { Breakpoints, Values } from '../../data'
+import fetchGameNotes from '../../functions/fetchGameNotes'
+import Loud from '../../typography/loud'
+import TextContainer from '../TextContainer'
+import ErrorBoundary from '../ErrorBoundary'
+import { makeStyles } from '@material-ui/styles'
 
 const DataRefreshInterval = 60
+
+const useStyles = makeStyles({
+  siteNoteContainer: {
+    marginTop: 16,
+    background: 'rgba(128, 128, 128, 0.1)',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 32,
+    paddingRight: 32,
+  },
+})
 
 const Game: React.FC = () => {
   const countdownElRef = useRef<HTMLSpanElement>(null)
@@ -14,6 +31,9 @@ const Game: React.FC = () => {
 
   const [gameData, setGameData] = useState<IGameData>(null)
   const [error, setError] = useState<string>(null)
+  const [gameNotes, setGameNotes] = useState<IGameNotes>(null)
+
+  const classes = useStyles()
 
   async function handleResponse(response) {
     const jsonData = await response.json()
@@ -22,8 +42,8 @@ const Game: React.FC = () => {
   }
 
   function RefreshData(abortController?: AbortController) {
-    return new Promise((resolve, reject) =>
-      fetch(`https://toc-api.davwheat.dev/v1/all_polls`, { signal: abortController && abortController.signal })
+    return new Promise((resolve, reject) => {
+      fetch(`${Values.api.hostname}/v1/all_polls`, { signal: abortController && abortController.signal })
         .then(r => {
           handleResponse(r).then(resolve)
         })
@@ -31,8 +51,8 @@ const Game: React.FC = () => {
           console.error(e)
           setError("Failed to fetch poll data from the API. We'll try again in a few seconds.")
           reject()
-        }),
-    )
+        })
+    })
   }
 
   useEffect(() => {
@@ -46,6 +66,8 @@ const Game: React.FC = () => {
       return () => {
         controller.abort()
       }
+    } else if (!gameNotes) {
+      fetchGameNotes().then(data => setGameNotes(data))
     }
 
     const updateInterval = setInterval(() => {
@@ -97,9 +119,23 @@ const Game: React.FC = () => {
         Refreshing in <span ref={countdownElRef}>{countdownSecsRef.current}</span> seconds.
       </Whisper>
 
-      <section id="game-board">
-        <GameBoard gameData={gameData} />
-      </section>
+      {gameNotes && Array.isArray(gameNotes.overall) && (
+        <TextContainer className={classes.siteNoteContainer}>
+          <Loud center>Information</Loud>
+
+          <Paragraph>
+            {gameNotes.overall.map(note => (
+              <span key={note}>{note} </span>
+            ))}
+          </Paragraph>
+        </TextContainer>
+      )}
+
+      <ErrorBoundary inline>
+        <section id="game-board">
+          <GameBoard gameData={gameData} gameNotes={gameNotes} />
+        </section>
+      </ErrorBoundary>
     </article>
   )
 }

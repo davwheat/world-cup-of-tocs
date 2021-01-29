@@ -93,4 +93,14 @@ declare global {
     code: TOCCode
     mainColor: TOCColors
   }
+
+  export interface IGameNotes {
+    overall: string[] | null
+    knockout: Record<number, string[] | null>
+    groupStages: Record<number, string[] | null>
+    quarterFinal: Record<number, string[] | null>
+    semiFinal: Record<number, string[] | null>
+    final: Record<number, string[] | null>
+    runnerUp: Record<number, string[] | null>
+  }
 }
