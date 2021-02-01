@@ -10,6 +10,7 @@ import Loud from '../../typography/loud'
 import TextContainer from '../TextContainer'
 import ErrorBoundary from '../ErrorBoundary'
 import { makeStyles } from '@material-ui/styles'
+import { Values } from '../../data'
 
 const DataRefreshInterval = 60
 
