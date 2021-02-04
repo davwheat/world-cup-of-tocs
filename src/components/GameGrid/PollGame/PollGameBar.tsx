@@ -57,7 +57,7 @@ const PollGameBar: React.FC<Props> = ({ teamData, tweetId, hasStarted = true, vo
   }
 
   return (
-    <a className={classes.rect} target="_blank" href={tweetId ? generateTwitterUrl(tweetId) : null} rel="noreferrer">
+    <a rel="noopener noreferrer" className={classes.rect} target="_blank" href={tweetId ? generateTwitterUrl(tweetId) : null} rel="noreferrer">
       <title>{barTooltip}</title>
       <rect
         x="0"
