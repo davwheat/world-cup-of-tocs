@@ -3,6 +3,7 @@
  */
 
 import React from 'react'
+import { description } from '../package.json'
 
 interface Props {
   htmlAttributes: Record<string, unknown>
@@ -15,7 +16,6 @@ interface Props {
 }
 
 const title = 'World Cup of TOCs'
-const description = "Track Geoff Marshall's World Cup of Train Operators live!"
 const imageUrl = 'https://toccup.davwheat.dev/social.png'
 const siteUrl = 'https://toccup.davwheat.dev/'
 

@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "world-cup-of-tocs",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "1.1.0",
+  "description": "Track Geoff Marshall's World Cup of Train Operators live!",
+  "version": "1.1.1",
   "author": {
     "name": "David Wheatley",
     "email": "hi@davwheat.dev",
