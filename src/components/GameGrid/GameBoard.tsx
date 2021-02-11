@@ -9,6 +9,7 @@ import ActiveGame from './ActiveGame'
 import KnockoutRounds from './Rounds/KnockoutRounds'
 import GroupStages from './Rounds/GroupStages'
 import QuarterFinals from './Rounds/QuarterFinals'
+import SemiFinals from './Rounds/SemiFinals'
 // import QuarterFinals from './Rounds/QuarterFinals'
 // import SemiFinals from './Rounds/SemiFinals'
 // import RunnerUp from './Rounds/RunnerUp'
@@ -49,18 +50,25 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       <TextContainer>
         <Shout>Other games</Shout>
 
-        <Loud>Round of 16</Loud>
-        <Paragraph>The round of 16 will begin on Monday 1st&nbsp;February and end on Monday 8th&nbsp;February.</Paragraph>
-      </TextContainer>
-
-      <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
-
-      <TextContainer>
         <Loud>Quarter Finals</Loud>
-        <Paragraph>Quarter Finals will begin on Wednesday 10th February and end on Saturday 13th&nbsp;February.</Paragraph>
+        <Paragraph>Quarter Finals began on Wednesday 10th February and will end on Saturday 13th&nbsp;February.</Paragraph>
       </TextContainer>
 
       <QuarterFinals gameNotes={gameNotes.quarterFinal} quarterFinalData={gameData.quarterFinal} />
+
+      <TextContainer>
+        <Loud>Semi Finals</Loud>
+        <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
+      </TextContainer>
+
+      <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
+
+      <TextContainer>
+        <Loud>Round of 16</Loud>
+        <Paragraph>The round of 16 began on Monday 1st&nbsp;February and ended on Tuesday 9th&nbsp;February.</Paragraph>
+      </TextContainer>
+
+      <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
 
       <TextContainer>
         <Loud>Round of 32</Loud>
