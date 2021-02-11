@@ -27,7 +27,8 @@ module.exports = {
   },
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 2017,
+    ecmaVersion: 2021,
+    requireConfigFile: false,
     ecmaFeatures: {
       jsx: true,
       experimentalObjectRestSpread: true,
