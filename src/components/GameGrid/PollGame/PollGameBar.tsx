@@ -49,12 +49,16 @@ interface Props {
 
 const PollGameBar: React.FC<Props> = ({ teamData, tweetId, hasStarted = true, votes = 0, totalVotes = 0, gameNumber }) => {
   const classes = useStyles()
-
   const percentage = generateVotePercentage(votes, totalVotes)
 
+  let barTooltip = 'Game not started'
+  if (hasStarted) {
+    barTooltip = `${teamData.name} - ${votes} votes`
+  }
+
   return (
-    <a className={classes.rect} target="_blank" href={tweetId ? generateTwitterUrl(tweetId) : null} rel="noreferrer">
-      {hasStarted ? <title>Game not started</title> : <title>{`${teamData.name} - ${votes} votes`}</title>}
+    <a rel="noopener noreferrer" className={classes.rect} target="_blank" href={tweetId ? generateTwitterUrl(tweetId) : null} rel="noreferrer">
+      <title>{barTooltip}</title>
       <rect
         x="0"
         y={gameNumber === 1 ? 0 : Sizing.pollGame.height - Sizing.pollGame.barHeight}

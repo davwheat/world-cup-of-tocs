@@ -5,12 +5,12 @@ import { Paragraph, Whisper } from '../../typography'
 import LoadingSpinner from '../LoadingSpinner'
 import AlertBanner from '../AlertBanner'
 import createSinglePollsFromApiData from '../../functions/createSinglePollsFromApiData'
-import { Breakpoints, Values } from '../../data'
 import fetchGameNotes from '../../functions/fetchGameNotes'
 import Loud from '../../typography/loud'
 import TextContainer from '../TextContainer'
 import ErrorBoundary from '../ErrorBoundary'
 import { makeStyles } from '@material-ui/styles'
+import { Values } from '../../data'
 
 const DataRefreshInterval = 60
 

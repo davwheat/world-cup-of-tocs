@@ -46,5 +46,5 @@ export default function getLatestActiveGame(data: IGameData): [SinglePoll, [stri
     }
   })
 
-  return [returnValue, activeIndex ? [activeStage, activeIndex] : [activeStage]]
+  return [returnValue, activeIndex !== null ? [activeStage, activeIndex] : [activeStage]]
 }

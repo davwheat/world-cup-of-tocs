@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
 
             <BulletSeparator />
 
-            <Link target="_blank" url="mailto:jaskishansaran@gmail.com">
+            <Link target="_blank" url="mailto:kishansambhi@hotmail.co.uk">
               Email
             </Link>
           </Whisper>

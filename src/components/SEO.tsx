@@ -1,5 +1,6 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
+import { description } from '../../package.json'
 
 interface Props {
   /**
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const SEO: React.FC<Props> = ({ title }) => {
-  const metaDescription = `Track Geoff Marshall's World Cup of Train Operators live!`
+  const metaDescription = description
   const siteName = 'World Cup of TOCs'
 
   if (typeof window === 'undefined') {
