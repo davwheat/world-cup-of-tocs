@@ -186,8 +186,8 @@ const Graph: React.FC<Props> = ({ poll, large }) => {
         <Tooltip separator=" - " formatter={tooltipVoteCountFormatter} labelFormatter={tooltipTimeElapsedFormatter} />
 
         <Line name={team1Data.name} dataKey="team1Result" stroke={team1Data.mainColor} {...commonLineProps} />
-        <Line name={team2Data.name} dataKey="team2Result" stroke={team2Data.mainColor} {...commonLineProps} />
-        <Line name={'Difference'} dataKey="difference" stroke={differenceColor} {...commonLineProps} />
+        <Line name={team2Data.name} dataKey="team2Result" stroke={team2Data.mainColor} {...commonLineProps} strokeDasharray="4 2" />
+        <Line name={'Difference'} dataKey="difference" stroke={differenceColor} {...commonLineProps} strokeDasharray="1 1" />
       </LineChart>
     </ResponsiveContainer>
   )
