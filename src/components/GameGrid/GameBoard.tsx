@@ -10,6 +10,8 @@ import KnockoutRounds from './Rounds/KnockoutRounds'
 import GroupStages from './Rounds/GroupStages'
 import QuarterFinals from './Rounds/QuarterFinals'
 import SemiFinals from './Rounds/SemiFinals'
+import Finals from './Rounds/Finals'
+import RunnerUp from './Rounds/RunnerUp'
 // import QuarterFinals from './Rounds/QuarterFinals'
 // import SemiFinals from './Rounds/SemiFinals'
 // import RunnerUp from './Rounds/RunnerUp'
@@ -42,6 +44,12 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
 
   return (
     <>
+      {/*
+        NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top).
+        Also ensure the "Other Games" header is included in whatever is at the top.
+        The next round should also be below the current round.
+       */}
+
       <TextContainer innerClassName={classes.activeGame}>
         <Loud center>Active game</Loud>
         <ActiveGame data={gameData} gameNotes={gameNotes} />
@@ -50,41 +58,6 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       <TextContainer>
         <Shout>Other games</Shout>
 
-        <Loud>Quarter Finals</Loud>
-        <Paragraph>Quarter Finals began on Wednesday 10th February and will end on Saturday 13th&nbsp;February.</Paragraph>
-      </TextContainer>
-
-      <QuarterFinals gameNotes={gameNotes.quarterFinal} quarterFinalData={gameData.quarterFinal} />
-
-      <TextContainer>
-        <Loud>Semi Finals</Loud>
-        <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
-      </TextContainer>
-
-      <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
-
-      <TextContainer>
-        <Loud>Round of 16</Loud>
-        <Paragraph>The round of 16 began on Monday 1st&nbsp;February and ended on Tuesday 9th&nbsp;February.</Paragraph>
-      </TextContainer>
-
-      <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
-
-      <TextContainer>
-        <Loud>Round of 32</Loud>
-        <Paragraph>Knockout rounds began on Friday 15th January and ended on Saturday 30th&nbsp;January.</Paragraph>
-      </TextContainer>
-
-      <KnockoutRounds gameNotes={gameNotes.knockout} knockoutRoundData={gameData.knockout} />
-
-      {/*
-        NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top).
-        Also ensure the "Other Games" header is included in whatever is at the top.
-        The next round should also be below the current round.
-       */}
-
-      {/**
-      <TextContainer>
         <Loud>Semi Finals</Loud>
         <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
       </TextContainer>
@@ -103,7 +76,28 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
         <Paragraph>The Final occurs on Friday 19th&nbsp;February.</Paragraph>
       </TextContainer>
 
-      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} /> */}
+      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} />
+
+      <TextContainer>
+        <Loud>Quarter Finals</Loud>
+        <Paragraph>Quarter Finals began on Wednesday 10th February and will end on Saturday 13th&nbsp;February.</Paragraph>
+      </TextContainer>
+
+      <QuarterFinals gameNotes={gameNotes.quarterFinal} quarterFinalData={gameData.quarterFinal} />
+
+      <TextContainer>
+        <Loud>Round of 16</Loud>
+        <Paragraph>The round of 16 began on Monday 1st&nbsp;February and ended on Tuesday 9th&nbsp;February.</Paragraph>
+      </TextContainer>
+
+      <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
+
+      <TextContainer>
+        <Loud>Round of 32</Loud>
+        <Paragraph>Knockout rounds began on Friday 15th January and ended on Saturday 30th&nbsp;January.</Paragraph>
+      </TextContainer>
+
+      <KnockoutRounds gameNotes={gameNotes.knockout} knockoutRoundData={gameData.knockout} />
     </>
   )
 }
