@@ -44,6 +44,12 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
 
   return (
     <>
+      {/*
+        NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top).
+        Also ensure the "Other Games" header is included in whatever is at the top.
+        The next round should also be below the current round.
+       */}
+
       <TextContainer innerClassName={classes.activeGame}>
         <Loud center>Active game</Loud>
         <ActiveGame data={gameData} gameNotes={gameNotes} />
@@ -92,28 +98,6 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       </TextContainer>
 
       <KnockoutRounds gameNotes={gameNotes.knockout} knockoutRoundData={gameData.knockout} />
-
-      {/*
-        NOTE: Move active rounds to the top when they start, but only once they start (so that the current round is always at the top).
-        Also ensure the "Other Games" header is included in whatever is at the top.
-        The next round should also be below the current round.
-       */}
-
-      {/**
-
-      <TextContainer>
-        <Loud>3rd/4th Playoff</Loud>
-        <Paragraph>The 3rd/4th Play Playoff occurs on Thursday 18th&nbsp;February.</Paragraph>
-      </TextContainer>
-
-      <RunnerUp gameNotes={gameNotes.runnerUp[0]} runnerUpData={gameData.runnerUp} />
-
-      <TextContainer>
-        <Loud>Final</Loud>
-        <Paragraph>The Final occurs on Friday 19th&nbsp;February.</Paragraph>
-      </TextContainer>
-
-      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} /> */}
     </>
   )
 }
