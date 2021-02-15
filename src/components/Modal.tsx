@@ -110,7 +110,7 @@ const Modal: React.FC<Props> = ({ title, children, onClose }) => {
   return (
     <Portal>
       <FocusTrap>
-        <>
+        <div>
           <div tabIndex={-1} aria-hidden className={classes.backdrop} onClick={closeModal} />
           <div className={classes.root} role="dialog" aria-modal="true" aria-labelledby={headingId}>
             <header className={classes.header}>
@@ -128,7 +128,7 @@ const Modal: React.FC<Props> = ({ title, children, onClose }) => {
             </header>
             <article>{children}</article>
           </div>
-        </>
+        </div>
       </FocusTrap>
     </Portal>
   )
