@@ -58,11 +58,11 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       <TextContainer>
         <Shout>Other games</Shout>
 
-        <Loud>Semi Finals</Loud>
-        <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
+        <Loud>Final</Loud>
+        <Paragraph>The Final occurs on Friday 19th&nbsp;February.</Paragraph>
       </TextContainer>
 
-      <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
+      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} />
 
       <TextContainer>
         <Loud>3rd/4th Playoff</Loud>
@@ -72,11 +72,11 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       <RunnerUp gameNotes={gameNotes.runnerUp[0]} runnerUpData={gameData.runnerUp} />
 
       <TextContainer>
-        <Loud>Final</Loud>
-        <Paragraph>The Final occurs on Friday 19th&nbsp;February.</Paragraph>
+        <Loud>Semi Finals</Loud>
+        <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
       </TextContainer>
 
-      <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} />
+      <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
 
       <TextContainer>
         <Loud>Quarter Finals</Loud>
