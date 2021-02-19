@@ -2,16 +2,17 @@ import React, { useState } from 'react'
 
 import Graph from '../Graph'
 import PollGame from '../PollGame'
+import Link from '../../Link'
+import Modal from '../../Modal'
+import BulletListWrapper from '../../BulletListWrapper'
 import { Paragraph, Whisper } from '../../../typography'
+import Linkify from 'react-linkify'
 
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
 import FormatDate from '../../../functions/formatDate'
 import SinglePoll from '../../../models/SinglePoll'
-import Link from '../../Link'
-import Modal from '../../Modal'
 import { VoteStates } from '../../../@types/enums'
-import BulletListWrapper from '../../BulletListWrapper'
 
 const useStyles = makeStyles({
   knockoutRoundsContainer: {
@@ -104,7 +105,11 @@ const GameRound: React.FC<Props> = ({ data, noDate, large, note }) => {
             <Paragraph bold>These notes explain any issues or info regarding the data from this poll.</Paragraph>
             <BulletListWrapper>
               {note.map((n, i) => (
-                <li key={i}>{n}</li>
+                <li key={i}>
+                  <Linkify component={Link} properties={{ target: '_blank', url: Linkify.MATCH }}>
+                    {n}
+                  </Linkify>
+                </li>
               ))}
             </BulletListWrapper>
           </Modal>
