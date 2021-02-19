@@ -41,6 +41,6 @@ FormatDate.HoursMinsLong = (unixTimestamp: number): string => {
 
   // eslint-disable-next-line no-bitwise
   return `${Math.floor(inHours)}hr ${Math.floor((inHours - Math.floor(inHours)) * 60)}m`
-} 
+}
 
 export default FormatDate
