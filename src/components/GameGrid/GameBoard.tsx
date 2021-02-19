@@ -57,7 +57,8 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       </TextContainer>
 
       <TextContainer>
-        <Shout>Rankings</Shout>
+        <Shout>{gameData.final.twitterInfo.endTime < Date.now() ? 'Final Rankings' : 'Current Rankings'}</Shout>
+        {gameData.final.twitterInfo.endTime > Date.now() && <Paragraph>(These may change as the polls progress)</Paragraph>}
         <RankTable final={gameData.final} runoff={gameData.runnerUp} />
       </TextContainer>
 
