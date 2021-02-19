@@ -1,35 +1,58 @@
 /**
  * Rank table for rankings
  */
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles, withStyles } from '@material-ui/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
 import React, { useEffect, useState } from 'react'
-import { GetTocName } from '../../data/TocData'
+import { GetTocColor, GetTocName, TOCCode } from '../../data/TocData'
 import SinglePoll from '../../models/SinglePoll'
 import VotesInfo from '../../models/VotesInfo'
+import { Paper } from '@material-ui/core'
 
 interface TableEntryProps {
   rank: number
-  toc: string
+  toc: TOCCode
   votes: number
   percent: number
 }
 
 const tableStyles = makeStyles({
-  tableBase: {
-    border: '1px solid black',
-    borderCollapse: 'collapse',
+  tableCell: {
+    color: '#fff',
+    fontWeight: 600,
   },
 })
+
+const StyledTableCell = withStyles(() => ({
+  body: {
+    color: '#fff',
+    fontWeight: 600,
+    fontFamily: 'inherit',
+  },
+}))(TableCell)
 
 const RankTableEntry: React.FC<TableEntryProps> = props => {
   const classes = tableStyles()
   return (
-    <tr>
-      <td>{props.rank + 1}</td>
-      <td>{props.toc}</td>
-      <td>{props.votes}</td>
-      <td>{(props.percent * 100).toFixed(2)}%</td>
-    </tr>
+    <TableRow style={{ backgroundColor: GetTocColor(props.toc) as string }}>
+      <StyledTableCell className={classes.tableCell} align="center">
+        {props.rank + 1}
+      </StyledTableCell>
+      <StyledTableCell className={classes.tableCell} align="center">
+        {GetTocName(props.toc)}
+      </StyledTableCell>
+      <StyledTableCell className={classes.tableCell} align="center">
+        {props.votes}
+      </StyledTableCell>
+      <StyledTableCell className={classes.tableCell} align="center">
+        {(props.percent * 100).toFixed(2)}%
+      </StyledTableCell>
+    </TableRow>
   )
 }
 
@@ -51,7 +74,6 @@ type TheState = Array<IVotesInfoExtended>
 
 const RankTable: React.FC<TableProps> = props => {
   const [ranks, setranks] = useState<TheState>([])
-  const classes = tableStyles()
 
   /** Create ranks */
   useEffect(() => {
@@ -89,19 +111,23 @@ const RankTable: React.FC<TableProps> = props => {
   }, [props])
 
   return (
-    <table>
-      <thead>
-        <tr>Rank</tr>
-        <tr>TOC</tr>
-        <tr>Votes</tr>
-        <tr>%</tr>
-      </thead>
-      <tbody>
-        {ranks.map((match, index) => {
-          return <RankTableEntry rank={index} toc={GetTocName(match.tocReportingMark)} votes={match.votes} percent={match.percentage} />
-        })}
-      </tbody>
-    </table>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <StyledTableCell align="center">Rank</StyledTableCell>
+            <StyledTableCell align="center">TOC</StyledTableCell>
+            <StyledTableCell align="center">Votes</StyledTableCell>
+            <StyledTableCell align="center">%</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {ranks.map((match, index) => {
+            return <RankTableEntry rank={index} toc={match.tocReportingMark} votes={match.votes} percent={match.percentage} />
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 }
 
