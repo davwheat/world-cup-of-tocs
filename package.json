@@ -2,7 +2,7 @@
   "name": "world-cup-of-tocs",
   "private": true,
   "description": "Track Geoff Marshall's World Cup of Train Operators live!",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "author": {
     "name": "David Wheatley",
     "email": "hi@davwheat.dev",
@@ -36,6 +36,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-head": "^3.4.0",
+    "react-linkify": "^1.0.0-alpha",
     "react-portal": "^4.2.1",
     "recharts": "^2.0.6",
     "uuid": "^8.3.2"
