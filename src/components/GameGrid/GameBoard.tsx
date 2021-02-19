@@ -12,6 +12,7 @@ import QuarterFinals from './Rounds/QuarterFinals'
 import SemiFinals from './Rounds/SemiFinals'
 import Finals from './Rounds/Finals'
 import RunnerUp from './Rounds/RunnerUp'
+import RankTable from './RankTable'
 // import QuarterFinals from './Rounds/QuarterFinals'
 // import SemiFinals from './Rounds/SemiFinals'
 // import RunnerUp from './Rounds/RunnerUp'
@@ -53,6 +54,12 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
       <TextContainer innerClassName={classes.activeGame}>
         <Loud center>Active game</Loud>
         <ActiveGame data={gameData} gameNotes={gameNotes} />
+      </TextContainer>
+
+      <TextContainer>
+        <Shout>{gameData.final.twitterInfo.endTime < Date.now() ? 'Final Rankings' : 'Current Rankings'}</Shout>
+        {gameData.final.twitterInfo.endTime > Date.now() && <Paragraph>(These may change as the polls progress)</Paragraph>}
+        <RankTable final={gameData.final} runoff={gameData.runnerUp} />
       </TextContainer>
 
       <TextContainer>

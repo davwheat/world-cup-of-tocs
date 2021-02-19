@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/jost": "^4.2.1",
+    "@material-ui/core": "^4.11.3",
     "@material-ui/styles": "^4.11.3",
     "clsx": "^1.1.1",
     "color": "^3.1.3",
