@@ -38,7 +38,7 @@ const ActiveGame: React.FC<Props> = ({ data, gameNotes }) => {
 
   // Locate the game note from the path to the active game, provided by getLatestActiveGame
   if (gameNotes) {
-    gameNote = keysToActiveGame.length > 1 ? gameNotes[keysToActiveGame[0]][keysToActiveGame[1]] : gameNotes[keysToActiveGame[0]]
+    gameNote = keysToActiveGame.length > 1 ? gameNotes[keysToActiveGame[0]][keysToActiveGame[1]] : gameNotes[keysToActiveGame[0]][0]
   }
 
   return (
