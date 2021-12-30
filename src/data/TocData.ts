@@ -40,7 +40,7 @@ const TocColors: Record<TOCCode, `#${string}`> = {
   no: '#000000',
   tf: '#0019A8',
   ju: '#42474b',
-  ce: '#0019A8',
+  ce: '#dc241f',
   di: '#007D32',
   ci: '#FFD329',
   hc: '#F4A9BE',

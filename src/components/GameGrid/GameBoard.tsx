@@ -30,6 +30,8 @@ interface Props {
   gameData: IGameData
   gameNotes: IGameNotes
   pastGame?: boolean
+  /** What to put as the description under each round */
+  matchDescriptions: Record<keyof Omit<IGameNotes, 'overall'>, string>
 }
 
 /** Checks if all matches have completed */
@@ -51,7 +53,7 @@ function checkIfCompleted(matches: Record<number, SinglePoll>) {
   }
 }
 
-const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastGame }: Props) => {
+const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastGame, matchDescriptions }: Props) => {
   const classes = useStyles()
 
   const gameNotes: IGameNotes = propsGameNotes || {
@@ -64,7 +66,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
     overall: null,
   }
 
-  const didComplete = {
+  const didComplete: Record<keyof Omit<IGameNotes, 'overall' | 'knockout'>, boolean> = {
     groupStages: checkIfCompleted(gameData.groupStages),
     quarterFinal: checkIfCompleted(gameData.quarterFinal),
     semiFinal: checkIfCompleted(gameData.semiFinal),
@@ -100,7 +102,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Round of 16</Loud>
-            <Paragraph>The round of 16 began on Monday 1st&nbsp;February and ended on Tuesday 9th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.groupStages}</Paragraph>
           </TextContainer>
           <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
         </>
@@ -110,7 +112,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Quarter Finals</Loud>
-            <Paragraph>Quarter Finals began on Wednesday 10th February and will end on Saturday 13th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.quarterFinal}</Paragraph>
           </TextContainer>
 
           <QuarterFinals gameNotes={gameNotes.quarterFinal} quarterFinalData={gameData.quarterFinal} />
@@ -121,7 +123,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Semi Finals</Loud>
-            <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.semiFinal}</Paragraph>
           </TextContainer>
 
           <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
@@ -132,7 +134,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>3rd/4th Playoff</Loud>
-            <Paragraph>The 3rd/4th Play Playoff occurs on Thursday 18th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.runnerUp}</Paragraph>
           </TextContainer>
 
           <RunnerUp gameNotes={gameNotes.runnerUp[0]} runnerUpData={gameData.runnerUp} />
@@ -143,7 +145,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Final</Loud>
-            <Paragraph>The Final occurs on Friday 19th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.final}</Paragraph>
           </TextContainer>
 
           <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} />
@@ -155,7 +157,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Final</Loud>
-            <Paragraph>The Final occurs on Friday 19th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.final}</Paragraph>
           </TextContainer>
 
           <Finals gameNotes={gameNotes.final[0]} finalData={gameData.final} />
@@ -166,7 +168,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>3rd/4th Playoff</Loud>
-            <Paragraph>The 3rd/4th Play Playoff occurs on Thursday 18th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.runnerUp}</Paragraph>
           </TextContainer>
 
           <RunnerUp gameNotes={gameNotes.runnerUp[0]} runnerUpData={gameData.runnerUp} />
@@ -177,7 +179,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Semi Finals</Loud>
-            <Paragraph>Semi Finals will begin on Monday 15th February and end on Tuesday 16th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.semiFinal}</Paragraph>
           </TextContainer>
 
           <SemiFinals gameNotes={gameNotes.semiFinal} semiFinalData={gameData.semiFinal} />
@@ -188,7 +190,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Quarter Finals</Loud>
-            <Paragraph>Quarter Finals began on Wednesday 10th February and will end on Saturday 13th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.quarterFinal}</Paragraph>
           </TextContainer>
 
           <QuarterFinals gameNotes={gameNotes.quarterFinal} quarterFinalData={gameData.quarterFinal} />
@@ -199,7 +201,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Round of 16</Loud>
-            <Paragraph>The round of 16 began on Monday 1st&nbsp;February and ended on Tuesday 9th&nbsp;February.</Paragraph>
+            <Paragraph>{matchDescriptions.groupStages}</Paragraph>
           </TextContainer>
           <GroupStages gameNotes={gameNotes.groupStages} groupStageData={gameData.groupStages} />
         </>
@@ -209,7 +211,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
         <>
           <TextContainer>
             <Loud>Round of 32</Loud>
-            <Paragraph>Knockout rounds began on Friday 15th January and ended on Saturday 30th&nbsp;January.</Paragraph>
+            <Paragraph>{matchDescriptions.knockout}</Paragraph>
           </TextContainer>
           <KnockoutRounds gameNotes={gameNotes.knockout} knockoutRoundData={gameData.knockout} />
         </>
