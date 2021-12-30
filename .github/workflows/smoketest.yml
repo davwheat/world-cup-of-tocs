@@ -38,11 +38,11 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies on cache miss
-        run: yarn install --immutable
+        run: yarn install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
 
       - name: Install project dependencies from cache
-        run: yarn --prefer-offline --immutable
+        run: yarn --prefer-offline
         if: steps.yarn-cache.outputs.cache-hit == 'true'
 
       - name: Cache node_modules for other runs
