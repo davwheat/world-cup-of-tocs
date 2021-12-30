@@ -16,8 +16,8 @@ const IndexPage: React.FC = () => {
       <SEO />
 
       <BodySection>
-        <Megaphone>World Cup of Train Operators</Megaphone>
-        <Paragraph>Watch the results for Geoff Marshall's World Cup of Train Operators in real time.</Paragraph>
+        <Megaphone>World Cups of Train Operators and lines on the TfL Map</Megaphone>
+        <Paragraph>Watch the results for Geoff Marshall's World Cups in real time.</Paragraph>
 
         <NoScriptMessage />
 

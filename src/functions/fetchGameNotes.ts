@@ -1,8 +1,8 @@
 import { Values } from '../data'
 
-export default async function fetchGameNotes(): Promise<IGameNotes> {
+export default async function fetchGameNotes(notesUrl: string): Promise<IGameNotes> {
   try {
-    const response = await fetch(`${Values.api.hostname}/v1/game_notes`)
+    const response = await fetch(notesUrl)
     const jsonData = await response.json()
     return jsonData
   } catch {
