@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 const useStylesWrapper = makeStyles({
   wrapperDescription: {
-    paddingBottom: 20,
+    // paddingBottom: 20,
   },
 })
 
@@ -168,7 +168,7 @@ const Game: React.FC<IGame> = props => {
 
       <ErrorBoundary inline>
         <section id="game-board">
-          <GameBoard gameData={gameData} gameNotes={gameNotes} />
+          <GameBoard pastGame={props.pastGame} gameData={gameData} gameNotes={gameNotes} />
         </section>
       </ErrorBoundary>
     </article>

@@ -28,9 +28,10 @@ const useStyles = makeStyles({
 interface Props {
   gameData: IGameData
   gameNotes: IGameNotes
+  pastGame?: boolean
 }
 
-const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Props) => {
+const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastGame }: Props) => {
   const classes = useStyles()
 
   const gameNotes: IGameNotes = propsGameNotes || {
@@ -51,10 +52,12 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes }: Pro
         The next round should also be below the current round.
        */}
 
-      <TextContainer innerClassName={classes.activeGame}>
-        <Loud center>Active game</Loud>
-        <ActiveGame data={gameData} gameNotes={gameNotes} />
-      </TextContainer>
+      {pastGame !== true && (
+        <TextContainer innerClassName={classes.activeGame}>
+          <Loud center>Active game</Loud>
+          <ActiveGame data={gameData} gameNotes={gameNotes} />
+        </TextContainer>
+      )}
 
       <TextContainer>
         <Shout>{gameData.final.twitterInfo.endTime < Date.now() ? 'Final Rankings' : 'Current Rankings'}</Shout>
