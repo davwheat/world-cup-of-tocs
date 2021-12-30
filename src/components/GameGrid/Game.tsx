@@ -59,13 +59,18 @@ const GameWrapper: React.FC = () => {
         <Shout>2021 Tube World Cup Express Edition</Shout>
         <Paragraph className={classes.wrapperDescription}>Results from the 2021 Tube World Cup, held on Friday 31st December 2021</Paragraph>
       </TextContainer>
-      {/* <Game showRefreshIndicator dataURL={`${Values.api.hostname}/v1/all_polls`} notesURL={`${Values.api.hostname}/v1/game_notes`} /> */}
       <Game
+        matchDescriptions={matchDescriptions2021Tube}
+        showRefreshIndicator
+        dataURL={`${Values.api.hostname}/v1/all_polls`}
+        notesURL={`${Values.api.hostname}/v1/game_notes`}
+      />
+      {/* <Game
         matchDescriptions={matchDescriptions2021Tube}
         showRefreshIndicator
         dataURL={`http://localhost:2678/v1/all_polls`}
         notesURL={`http://localhost:2678/v1/game_notes`}
-      />
+      /> */}
 
       <TextContainer>
         <Shout>2021 TOC Cup</Shout>
