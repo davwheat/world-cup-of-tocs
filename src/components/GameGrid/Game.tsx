@@ -23,6 +23,9 @@ const useStyles = makeStyles({
     paddingLeft: 32,
     paddingRight: 32,
   },
+  displayNone: {
+    display: 'none',
+  },
 })
 
 const useStylesWrapper = makeStyles({
@@ -39,7 +42,8 @@ const GameWrapper: React.FC = () => {
         <Shout>2021 Tube World Cup Express Edition</Shout>
         <Paragraph className={classes.wrapperDescription}>Results from the 2021 Tube World Cup, held on Friday 31st December 2021</Paragraph>
       </TextContainer>
-      <Game showRefreshIndicator dataURL={`${Values.api.hostname}/v1/all_polls`} notesURL={`${Values.api.hostname}/v1/game_notes`} />
+      {/* <Game showRefreshIndicator dataURL={`${Values.api.hostname}/v1/all_polls`} notesURL={`${Values.api.hostname}/v1/game_notes`} /> */}
+      <Game showRefreshIndicator dataURL={`http://localhost:2678/v1/all_polls`} notesURL={`http://localhost:2678/v1/game_notes`} />
 
       <TextContainer>
         <Shout>2021 TOC Cup</Shout>
@@ -148,11 +152,9 @@ const Game: React.FC<IGame> = props => {
 
   return (
     <article>
-      {props.showRefreshIndicator === true && (
-        <Whisper center bold>
-          Refreshing in <span ref={countdownElRef}>{countdownSecsRef.current}</span> seconds.
-        </Whisper>
-      )}
+      <Whisper center bold className={props.showRefreshIndicator !== true ? classes.displayNone : null}>
+        Refreshing in <span ref={countdownElRef}>{countdownSecsRef.current}</span> seconds.
+      </Whisper>
 
       {gameNotes && Array.isArray(gameNotes.overall) && (
         <TextContainer className={classes.siteNoteContainer}>
