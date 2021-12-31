@@ -6,7 +6,9 @@ import Link from './Link'
 import BodySection from './BodySection'
 import { makeStyles } from '@material-ui/styles'
 
-import { version } from '../../package.json'
+import packageJson from '../../package.json'
+
+const { version } = packageJson
 
 const useStyles = makeStyles({
   contactLinks: {

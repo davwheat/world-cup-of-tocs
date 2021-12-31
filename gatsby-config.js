@@ -35,10 +35,6 @@ const prodPlugins = !__IS_DEV__
   : []
 
 module.exports = {
-  flags: {
-    FAST_DEV: true,
-    FAST_REFRESH: true,
-  },
   siteMetadata: {},
   plugins: [
     ...prodPlugins,
@@ -47,13 +43,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-eslint',
       options: {
-        test: /\.(j|t)sx?$/,
-        exclude: /(node_modules|.cache|public)/,
+        extensions: ['js', 'jsx', 'ts', 'tsx'],
+        exclude: ['node_modules', '.cache', 'public'],
         stages: ['develop', 'build-javascript'],
-        options: {
-          emitWarning: true,
-          failOnError: true,
-        },
+        emitWarning: true,
+        failOnError: true,
       },
     },
     {
@@ -65,15 +59,12 @@ module.exports = {
         background_color: `#E04303`,
         theme_color: `#E04303`,
         display: `minimal-ui`,
-        icon: `src/assets/icon.png`, // This path is relative to the root of the site.
+        icon: `src/assets/icon.png`,
       },
     },
     `gatsby-plugin-less`,
     `gatsby-plugin-webpack-bundle-analyser-v2`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-material-ui`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

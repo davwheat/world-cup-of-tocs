@@ -3,7 +3,8 @@
  */
 
 import React from 'react'
-import { description } from '../package.json'
+import packageJson from '../package.json'
+const { description } = packageJson
 
 interface Props {
   htmlAttributes: Record<string, unknown>
