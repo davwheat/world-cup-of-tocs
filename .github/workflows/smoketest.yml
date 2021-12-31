@@ -153,8 +153,8 @@ jobs:
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
-        ### REMOVE BEFORE MERGING!!!!!!!!
-        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        ### COMMENT BACK IN BEFORE MERGING!!!!!!!!
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: prod
