@@ -69,7 +69,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-less`,
-    `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-webpack-bundle-analyser-v2`,
     `gatsby-plugin-webpack-size`,
     `gatsby-plugin-material-ui`,
