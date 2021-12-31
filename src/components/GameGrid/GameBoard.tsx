@@ -85,7 +85,7 @@ const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastG
 
       {pastGame !== true && (
         <TextContainer innerClassName={classes.activeGame}>
-          <Loud center>Active game</Loud>
+          <Loud center>Active games</Loud>
           <ActiveGame data={gameData} gameNotes={gameNotes} />
         </TextContainer>
       )}
