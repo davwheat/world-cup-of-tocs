@@ -47,10 +47,11 @@ function checkIfCompleted(matches: Record<number, SinglePoll>) {
 
       // then check end time
       if (match.twitterInfo?.endTime >= Date.now()) {
-        return true // end time in front of us, and we know the teams, so round not yet done
+        return false // end time in front of us, and we know the teams, so round not yet done
       }
     }
   }
+  return true
 }
 
 const GameBoard: React.FC<Props> = ({ gameData, gameNotes: propsGameNotes, pastGame, matchDescriptions }: Props) => {

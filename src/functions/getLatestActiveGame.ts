@@ -4,13 +4,14 @@ import SinglePoll from '../models/SinglePoll'
 const LatestToOldestStages: Array<keyof IGameData> = ['final', 'runnerUp', 'semiFinal', 'quarterFinal', 'groupStages', 'knockout']
 
 /**
- * Returns a tuple: [0] being the active `SinglePoll`, and [1] being the path to the active game.
+ * Returns a array of tuples, with each array element an active game.
+ * In each tuple, [0] is the active `SinglePoll`, and [1] being the path to the active game.
  *
  * If the active game is under `knockout[2]`, then `[1]` would be `['knockout', 2]`. If it was
  * final`, then `[1]` would be `['final']`.
  */
-export default function getLatestActiveGame(data: IGameData): [SinglePoll, [string, number] | [string]] {
-  let returnValue: SinglePoll = null
+export default function getLatestActiveGame(data: IGameData): Array<[SinglePoll, [string, number] | [string]]> {
+  const returnValues: Array<[SinglePoll, [string, number] | [string]]> = []
 
   let activeStage: string = null
   let activeIndex: number = null
@@ -24,8 +25,8 @@ export default function getLatestActiveGame(data: IGameData): [SinglePoll, [stri
     // final and runnerUp are instances of SinglePoll
     if (allGames instanceof SinglePoll) {
       if (allGames.votingStatus === VoteStates.IN_PROGRESS) {
-        returnValue = allGames
-        return false
+        returnValues.push([allGames, [activeStage]])
+        // return false
       }
 
       return true
@@ -37,8 +38,8 @@ export default function getLatestActiveGame(data: IGameData): [SinglePoll, [stri
         activeIndex = key
 
         if (allGames[key].votingStatus === 'IN_PROGRESS') {
-          returnValue = allGames[key]
-          return false
+          returnValues.push([allGames[key], [activeStage, activeIndex]])
+          // eturn false
         }
 
         return true
@@ -46,5 +47,5 @@ export default function getLatestActiveGame(data: IGameData): [SinglePoll, [stri
     }
   })
 
-  return [returnValue, activeIndex !== null ? [activeStage, activeIndex] : [activeStage]]
+  return returnValues
 }
