@@ -47,7 +47,7 @@ const matchDescriptions2021Tube: Record<keyof Omit<IGameNotes, 'overall'>, strin
   quarterFinal: 'Quarter Finals will begin at 2pm and last until 4pm.',
   semiFinal: 'Semi Finals will begin at 4pm and last until 5pm.',
   runnerUp: 'The 3rd/4th Play Playoff occurs at 5pm until 6pm.',
-  final: 'The Final occurs at 5pm until 6pm.',
+  final: 'The Final occurs at 6pm until 7pm.',
   knockout: 'No knockout rounds',
 }
 
