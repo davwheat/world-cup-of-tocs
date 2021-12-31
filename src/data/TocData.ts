@@ -34,6 +34,24 @@ const TocColors: Record<TOCCode, `#${string}`> = {
   lm: '#ff8200',
   xr: '#0019a8',
   sx: '#6b717a',
+
+  // Tube lines
+  ba: '#B36305',
+  no: '#000000',
+  tf: '#0019A8',
+  ju: '#42474b',
+  ce: '#dc241f',
+  di: '#007D32',
+  ci: '#FFD329',
+  hc: '#F4A9BE',
+  vi: '#0098d8',
+  mt: '#9b0058',
+  tr: '#00bd19',
+  ov: '#ef7b10',
+  dl: '#00afad',
+  pi: '#0019a8',
+  wc: '#95CDBA',
+  ca: '#E21836',
   '??': '#666',
 } as const
 
@@ -76,6 +94,24 @@ const TocCodeToNameMap = {
   // Unofficial below
   ni: 'Translink',
   ie: 'Irish Rail',
+
+  // Tube lines
+  ju: 'Jubilee',
+  tr: 'Trams',
+  ba: 'Bakerloo',
+  dl: 'DLR',
+  ci: 'Circle',
+  hc: 'Hammersmith & City',
+  wc: 'Waterloo & City',
+  pi: 'Piccadilly',
+  mt: 'Metropolitan',
+  no: 'Northern',
+  ce: 'Central',
+  vi: 'Victoria',
+  di: 'District',
+  ov: 'Overground',
+  tf: 'TfL Rail',
+  ca: 'Cable Car',
   // Used if unknown
   '??': 'Unknown',
 } as const
