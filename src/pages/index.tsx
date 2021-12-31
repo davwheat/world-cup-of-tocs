@@ -9,6 +9,7 @@ import BodySection from '../components/BodySection'
 import NoScriptMessage from '../components/NoScriptMessage'
 import Game from '../components/GameGrid/Game'
 import { Megaphone, Paragraph } from '../typography'
+import { NoSsr } from '@material-ui/core'
 
 const IndexPage: React.FC = () => {
   return (
@@ -21,10 +22,12 @@ const IndexPage: React.FC = () => {
 
         <NoScriptMessage />
 
-        {isSmallViewport() && <AlertBanner title="Warning" message="This page is best viewed on a larger device." />}
+        <NoSsr>{isSmallViewport() && <AlertBanner title="Warning" message="This page is best viewed on a larger device." />}</NoSsr>
       </BodySection>
 
-      <Game />
+      <NoSsr>
+        <Game />
+      </NoSsr>
     </Layout>
   )
 }
