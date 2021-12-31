@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import GameRound from './Rounds/GameRound'
 
@@ -11,6 +11,8 @@ const useStyles = makeStyles({
     marginTop: -16,
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'column',
+    gap: 15,
   },
 })
 
@@ -24,9 +26,9 @@ const ActiveGame: React.FC<Props> = ({ data, gameNotes }) => {
 
   if (!data) return null
 
-  const [activeGame, keysToActiveGame] = getLatestActiveGame(data)
+  const activeGames = getLatestActiveGame(data)
 
-  if (!activeGame) {
+  if (activeGames.length === 0) {
     return (
       <div className={classes.activeGameContainer}>
         <Paragraph>No game is currently in progress.</Paragraph>
@@ -34,16 +36,24 @@ const ActiveGame: React.FC<Props> = ({ data, gameNotes }) => {
     )
   }
 
-  let gameNote: string[] = null
+  const gameNote: string[] = null
 
   // Locate the game note from the path to the active game, provided by getLatestActiveGame
-  if (gameNotes) {
-    gameNote = keysToActiveGame.length > 1 ? gameNotes[keysToActiveGame[0]][keysToActiveGame[1]] : gameNotes[keysToActiveGame[0]][0]
-  }
-
+  const getGameNote = useCallback(
+    keysToActiveGame => {
+      if (gameNotes) {
+        return keysToActiveGame.length > 1 ? gameNotes[keysToActiveGame[0]][keysToActiveGame[1]] : gameNotes[keysToActiveGame[0]][0]
+      } else {
+        return null
+      }
+    },
+    [gameNotes],
+  )
   return (
     <div className={classes.activeGameContainer}>
-      <GameRound large noDate data={activeGame} note={gameNote} />
+      {activeGames.map(([theGame, keysToActiveGame]) => (
+        <GameRound large noDate data={theGame} note={getGameNote(keysToActiveGame)} />
+      ))}
     </div>
   )
 }
