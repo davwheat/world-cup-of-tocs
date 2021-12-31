@@ -45,7 +45,7 @@ const matchDescriptions2021Tocs: Record<keyof Omit<IGameNotes, 'overall'>, strin
 const matchDescriptions2021Tube: Record<keyof Omit<IGameNotes, 'overall'>, string> = {
   groupStages: 'The round of 16 will begin at 9am and last until 1pm.',
   quarterFinal: 'Quarter Finals will begin at 2pm and last until 4pm.',
-  semiFinal: 'Semi Finals will begin at 4pm and last until 4pm.',
+  semiFinal: 'Semi Finals will begin at 4pm and last until 5pm.',
   runnerUp: 'The 3rd/4th Play Playoff occurs at 5pm until 6pm.',
   final: 'The Final occurs at 5pm until 6pm.',
   knockout: 'No knockout rounds',
