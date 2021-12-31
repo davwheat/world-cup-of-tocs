@@ -5,18 +5,16 @@
 */
 
 /*!
-* focus-trap 6.3.0
+* focus-trap 6.7.1
 * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
 */
 
 /*!
-* tabbable 5.1.5
+* tabbable 5.2.1
 * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
 */
 
 /*! Conditions:: INITIAL */
-
-/*! Production::    $accept : expression $end */
 
 /*! Production::    css_value : ANGLE */
 
@@ -155,7 +153,5 @@
 /*! Rule::       \+ */
 
 /*! Rule::       \/ */
-
-/*! Rule::       \s+ */
 
 /*! decimal.js-light v2.5.1 https://github.com/MikeMcl/decimal.js-light/LICENCE */
