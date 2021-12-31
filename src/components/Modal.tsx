@@ -111,13 +111,13 @@ const Modal: React.FC<Props> = ({ title, children, onClose }) => {
     <Portal>
       <FocusTrap>
         <div>
-          <div tabIndex={-1} aria-hidden className={classes.backdrop} onClick={closeModal} />
+          <div tabIndex={-1} aria-hidden className={classes.backdrop} onClick={() => closeModal()} />
           <div className={classes.root} role="dialog" aria-modal="true" aria-labelledby={headingId}>
             <header className={classes.header}>
               <Loud id={headingId} className={classes.heading}>
                 {title}
               </Loud>
-              <button title="Close dialog" aria-label="Close dialog" className={classes.closeButton} onClick={closeModal}>
+              <button title="Close dialog" aria-label="Close dialog" className={classes.closeButton} onClick={() => closeModal()}>
                 <svg width={32} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path
                     // eslint-disable-next-line

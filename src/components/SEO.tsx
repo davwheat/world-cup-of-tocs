@@ -1,6 +1,7 @@
 import React from 'react'
 import { Meta, Title } from 'react-head'
 import packageJson from '../../package.json'
+
 const { description } = packageJson
 
 interface Props {

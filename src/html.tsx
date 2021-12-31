@@ -4,6 +4,7 @@
 
 import React from 'react'
 import packageJson from '../package.json'
+
 const { description } = packageJson
 
 interface Props {

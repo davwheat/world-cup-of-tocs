@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { withStyles, WithStyles } from '@material-ui/styles'
+import { withStyles } from '@material-ui/styles'
+import type { WithStyles } from '@material-ui/styles'
 
 import { Paragraph, Shout, Whisper } from '../typography'
 import Link from './Link'
