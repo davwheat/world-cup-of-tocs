@@ -42,7 +42,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
 
       - name: Install project dependencies from cache
-        run: yarn --cached
+        run: yarn
         if: steps.yarn-cache.outputs.cache-hit == 'true'
 
       - name: Cache node_modules for other runs
